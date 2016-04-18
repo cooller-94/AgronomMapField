@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="c62eaf6ad6c64119877f852d2b2a2511" Name="Diagram1">
+        <EntityTypeShape EntityType="DB_AGRModel.AgrField" Width="1.5" PointX="5.25" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_AGRModel.AgrFieldLocation" Width="1.5" PointX="7.5" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_AGRModel.City" Width="1.5" PointX="0.75" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_AGRModel.PropertyType" Width="1.5" PointX="3" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_AGRModel.Purpose" Width="1.5" PointX="3" PointY="11.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_AGRModel.Region" Width="1.5" PointX="3" PointY="8.125" IsExpanded="true" />
+        <AssociationConnector Association="DB_AGRModel.fk_cityId_cityId" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_AGRModel.fk_fieldId_fieldDetailId" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_AGRModel.fk_properyId_propertyId" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_AGRModel.fk_purposeId_purposeId" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_AGRModel.fk_regionId_regionId" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_AGRModel.fk_cityId_regionid" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

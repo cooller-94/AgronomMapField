@@ -1,0 +1,508 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{327F4980-B607-478A-AE5A-641B49388F97}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>GoogleMaps</RootNamespace>
+    <AssemblyName>GoogleMaps</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <IgnoreDeployManagedRuntimeVersion>True</IgnoreDeployManagedRuntimeVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="JQ.Net, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\JQ.NET.1.0.4\lib\JQ.Net.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <Private>True</Private>
+      <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Owin">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Owin.2.2.1\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.1\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Owin">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin">
+      <HintPath>..\packages\Microsoft.Owin.3.0.1\lib\net45\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb">
+      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.3.0.1\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security">
+      <HintPath>..\packages\Microsoft.Owin.Security.3.0.1\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Facebook">
+      <HintPath>..\packages\Microsoft.Owin.Security.Facebook.3.0.1\lib\net45\Microsoft.Owin.Security.Facebook.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Cookies">
+      <HintPath>..\packages\Microsoft.Owin.Security.Cookies.3.0.1\lib\net45\Microsoft.Owin.Security.Cookies.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.OAuth">
+      <HintPath>..\packages\Microsoft.Owin.Security.OAuth.3.0.1\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Google">
+      <HintPath>..\packages\Microsoft.Owin.Security.Google.3.0.1\lib\net45\Microsoft.Owin.Security.Google.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Twitter">
+      <HintPath>..\packages\Microsoft.Owin.Security.Twitter.3.0.1\lib\net45\Microsoft.Owin.Security.Twitter.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.MicrosoftAccount">
+      <HintPath>..\packages\Microsoft.Owin.Security.MicrosoftAccount.3.0.1\lib\net45\Microsoft.Owin.Security.MicrosoftAccount.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\AgrDB.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AgrDB.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="App_Start\AgrDB.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AgrDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="App_Start\AgrDB.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AgrDB.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="App_Start\AgrField.cs">
+      <DependentUpon>AgrDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="App_Start\AgrFieldLocation.cs">
+      <DependentUpon>AgrDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\City.cs">
+      <DependentUpon>AgrDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\IdentityConfig.cs" />
+    <Compile Include="App_Start\PropertyType.cs">
+      <DependentUpon>AgrDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="App_Start\Purpose.cs">
+      <DependentUpon>AgrDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="App_Start\Region.cs">
+      <DependentUpon>AgrDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\GoogleMapController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="HelperClasses\Point.cs" />
+    <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\FieldModel.cs" />
+    <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="obj\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
+    <Compile Include="obj\Debug\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
+    <Compile Include="obj\Debug\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
+    <Compile Include="obj\Release\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
+    <Compile Include="obj\Release\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
+    <Compile Include="obj\Release\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\FieldRepository.cs" />
+    <Compile Include="Services\FieldService.cs" />
+    <Compile Include="Services\IFieldService.cs" />
+    <Compile Include="Startup.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_Start\AgrDB.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>AgrDB.edmx</DependentUpon>
+      <LastGenOutput>AgrDB.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="App_Start\AgrDB.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>AgrDB.edmx</DependentUpon>
+      <LastGenOutput>AgrDB.cs</LastGenOutput>
+    </Content>
+    <Content Include="bin\Antlr3.Runtime.dll" />
+    <Content Include="bin\EntityFramework.dll" />
+    <Content Include="bin\EntityFramework.SqlServer.dll" />
+    <Content Include="bin\JQ.Net.dll" />
+    <Content Include="bin\Microsoft.AspNet.Identity.Core.dll" />
+    <Content Include="bin\Microsoft.AspNet.Identity.EntityFramework.dll" />
+    <Content Include="bin\Microsoft.AspNet.Identity.Owin.dll" />
+    <Content Include="bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll" />
+    <Content Include="bin\Microsoft.Owin.dll" />
+    <Content Include="bin\Microsoft.Owin.Host.SystemWeb.dll" />
+    <Content Include="bin\Microsoft.Owin.Security.Cookies.dll" />
+    <Content Include="bin\Microsoft.Owin.Security.dll" />
+    <Content Include="bin\Microsoft.Owin.Security.Facebook.dll" />
+    <Content Include="bin\Microsoft.Owin.Security.Google.dll" />
+    <Content Include="bin\Microsoft.Owin.Security.MicrosoftAccount.dll" />
+    <Content Include="bin\Microsoft.Owin.Security.OAuth.dll" />
+    <Content Include="bin\Microsoft.Owin.Security.Twitter.dll" />
+    <Content Include="bin\Microsoft.Web.Infrastructure.dll" />
+    <Content Include="bin\Newtonsoft.Json.dll" />
+    <Content Include="bin\Owin.dll" />
+    <Content Include="bin\System.Web.Helpers.dll" />
+    <Content Include="bin\System.Web.Mvc.dll" />
+    <Content Include="bin\System.Web.Optimization.dll" />
+    <Content Include="bin\System.Web.Razor.dll" />
+    <Content Include="bin\System.Web.WebPages.Deployment.dll" />
+    <Content Include="bin\System.Web.WebPages.dll" />
+    <Content Include="bin\System.Web.WebPages.Razor.dll" />
+    <Content Include="bin\WebGrease.dll" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="favicon.ico" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Global.asax" />
+    <Content Include="Content\Site.css" />
+    <Content Include="obj\Release\TempPE\App_Start.AgrDB.cs.dll" />
+    <Content Include="obj\Release\TempPE\App_Start.AgrDB.Designer.cs.dll" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="App_Start\AgrDB.edmx.diagram">
+      <DependentUpon>AgrDB.edmx</DependentUpon>
+    </Content>
+    <Content Include="obj\Release\DesignTimeResolveAssemblyReferencesInput.cache" />
+    <None Include="Properties\PublishProfiles\AgrGoogleMaps.pubxml" />
+    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\CadastreUA\click-carousel.js" />
+    <Content Include="Scripts\CadastreUA\config.js" />
+    <Content Include="Scripts\CadastreUA\index.js" />
+    <Content Include="Scripts\CadastreUA\jq.js" />
+    <Content Include="Scripts\CadastreUA\OpenLayers.js" />
+    <Content Include="Scripts\CadastreUA\proj4js-combined.js" />
+    <Content Include="Scripts\CadastreUA\region_cities.js" />
+    <Content Include="Scripts\CadastreUA\system.js" />
+    <Content Include="Scripts\GoogleMap\GoogleActions.js" />
+    <Content Include="Scripts\GoogleMap\InitializeGoogleMapAPI.js" />
+    <Content Include="Scripts\jquery-1.10.2.js" />
+    <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\LeoManager\components\bootstrap.dropdownform\bootstrap.dropdownform.css" />
+    <Content Include="Scripts\LeoManager\components\bootstrap.dropdownform\bootstrap.dropdownform.js" />
+    <Content Include="Scripts\LeoManager\components\bootstrap\css\bootstrap-responsive.css" />
+    <Content Include="Scripts\LeoManager\components\bootstrap\css\bootstrap-responsive.min.css" />
+    <Content Include="Scripts\LeoManager\components\bootstrap\css\bootstrap.css" />
+    <Content Include="Scripts\LeoManager\components\bootstrap\css\bootstrap.min.css" />
+    <Content Include="Scripts\LeoManager\components\bootstrap\img\glyphicons-halflings-white.png" />
+    <Content Include="Scripts\LeoManager\components\bootstrap\img\glyphicons-halflings.png" />
+    <Content Include="Scripts\LeoManager\components\bootstrap\js\bootstrap.js" />
+    <Content Include="Scripts\LeoManager\components\bootstrap\js\bootstrap.min.js" />
+    <Content Include="Scripts\LeoManager\components\date.format\date.format.js" />
+    <Content Include="Scripts\LeoManager\components\jquery.select2\select2-bootstrap.css" />
+    <Content Include="Scripts\LeoManager\components\jquery.select2\select2.css" />
+    <Content Include="Scripts\LeoManager\components\jquery.select2\select2.js" />
+    <Content Include="Scripts\LeoManager\components\jquery.select2\select2.min.js" />
+    <Content Include="Scripts\LeoManager\components\jquery.select2\select2.png" />
+    <Content Include="Scripts\LeoManager\components\jquery.select2\select2x2.png" />
+    <Content Include="Scripts\LeoManager\components\jquery.select2\spinner.gif" />
+    <Content Include="Scripts\LeoManager\components\jquery.ui\jquery.ui.core.min.js" />
+    <Content Include="Scripts\LeoManager\components\jquery.ui\jquery.ui.draggable.min.js" />
+    <Content Include="Scripts\LeoManager\components\jquery.ui\jquery.ui.droppable.min.js" />
+    <Content Include="Scripts\LeoManager\components\jquery.ui\jquery.ui.js" />
+    <Content Include="Scripts\LeoManager\components\jquery.ui\jquery.ui.sortable.min.js" />
+    <Content Include="Scripts\LeoManager\components\jquery\jquery.min.js" />
+    <Content Include="Scripts\LeoManager\components\leaflet.geomanager\img\1x1.png" />
+    <Content Include="Scripts\LeoManager\components\leaflet.geomanager\img\bing-aerial.png" />
+    <Content Include="Scripts\LeoManager\components\leaflet.geomanager\img\bing-hybrid.png" />
+    <Content Include="Scripts\LeoManager\components\leaflet.geomanager\img\bing.png" />
+    <Content Include="Scripts\LeoManager\components\leaflet.geomanager\img\esri-imagery.png" />
+    <Content Include="Scripts\LeoManager\components\leaflet.geomanager\img\esri-topo.png" />
+    <Content Include="Scripts\LeoManager\components\leaflet.geomanager\img\esri.png" />
+    <Content Include="Scripts\LeoManager\components\leaflet.geomanager\img\google-hybrid.png" />
+    <Content Include="Scripts\LeoManager\components\leaflet.geomanager\img\google-satellite.png" />
+    <Content Include="Scripts\LeoManager\components\leaflet.geomanager\img\google-terrain.png" />
+    <Content Include="Scripts\LeoManager\components\leaflet.geomanager\img\google.png" />
+    <Content Include="Scripts\LeoManager\components\leaflet.geomanager\img\mapquest-aerial.png" />
+    <Content Include="Scripts\LeoManager\components\leaflet.geomanager\img\mapquest.png" />
+    <Content Include="Scripts\LeoManager\components\leaflet.geomanager\img\natgeo.jpg" />
+    <Content Include="Scripts\LeoManager\components\leaflet.geomanager\img\opencyclemap-landscape.png" />
+    <Content Include="Scripts\LeoManager\components\leaflet.geomanager\img\opencyclemap-transport.png" />
+    <Content Include="Scripts\LeoManager\components\leaflet.geomanager\img\opencyclemap.png" />
+    <Content Include="Scripts\LeoManager\components\leaflet.geomanager\img\osm.png" />
+    <Content Include="Scripts\LeoManager\components\leaflet.geomanager\img\osmbw.png" />
+    <Content Include="Scripts\LeoManager\components\leaflet.geomanager\img\rucadastre.png" />
+    <Content Include="Scripts\LeoManager\components\leaflet.geomanager\img\stamen-terrain.png" />
+    <Content Include="Scripts\LeoManager\components\leaflet.geomanager\img\stamen-toner.png" />
+    <Content Include="Scripts\LeoManager\components\leaflet.geomanager\img\stamen-watercolor.png" />
+    <Content Include="Scripts\LeoManager\components\leaflet.geomanager\img\wikimapia-hybrid.png" />
+    <Content Include="Scripts\LeoManager\components\leaflet.geomanager\img\wikimapia.png" />
+    <Content Include="Scripts\LeoManager\components\leaflet.geomanager\img\yandex-hybrid.png" />
+    <Content Include="Scripts\LeoManager\components\leaflet.geomanager\img\yandex-publicmap-hybrid.png" />
+    <Content Include="Scripts\LeoManager\components\leaflet.geomanager\img\yandex-publicmap.png" />
+    <Content Include="Scripts\LeoManager\components\leaflet.geomanager\img\yandex-satellite.png" />
+    <Content Include="Scripts\LeoManager\components\leaflet.geomanager\img\yandex.png" />
+    <Content Include="Scripts\LeoManager\components\leaflet.geomanager\layers\arcgis.js" />
+    <Content Include="Scripts\LeoManager\components\leaflet.geomanager\layers\bing.js" />
+    <Content Include="Scripts\LeoManager\components\leaflet.geomanager\layers\google.js" />
+    <Content Include="Scripts\LeoManager\components\leaflet.geomanager\layers\rucadastre.js" />
+    <Content Include="Scripts\LeoManager\components\leaflet.geomanager\layers\wikimapia.js" />
+    <Content Include="Scripts\LeoManager\components\leaflet.geomanager\layers\yandex.js" />
+    <Content Include="Scripts\LeoManager\components\leaflet.geomanager\leaflet.geomanager.css" />
+    <Content Include="Scripts\LeoManager\components\leaflet.geomanager\leaflet.geomanager.js" />
+    <Content Include="Scripts\LeoManager\components\leaflet.geomanager\providers\common.js" />
+    <Content Include="Scripts\LeoManager\components\leaflet.geomanager\providers\rucadastre.js" />
+    <Content Include="Scripts\LeoManager\components\leaflet.geomanager\providers\uacadastre.js" />
+    <Content Include="Scripts\LeoManager\components\leaflet.label\leaflet.label-src.js" />
+    <Content Include="Scripts\LeoManager\components\leaflet.proj4\proj4-compressed.js" />
+    <Content Include="Scripts\LeoManager\components\leaflet.proj4\proj4.js" />
+    <Content Include="Scripts\LeoManager\components\leaflet.proj4\proj4leaflet.js" />
+    <Content Include="Scripts\LeoManager\components\leaflet\blank.gif" />
+    <Content Include="Scripts\LeoManager\components\leaflet\layers-2x.png" />
+    <Content Include="Scripts\LeoManager\components\leaflet\layers.png" />
+    <Content Include="Scripts\LeoManager\components\leaflet\leaflet-providers-0.0.2.js" />
+    <Content Include="Scripts\LeoManager\components\leaflet\leaflet-src.js" />
+    <Content Include="Scripts\LeoManager\components\leaflet\leaflet.Bing.js" />
+    <Content Include="Scripts\LeoManager\components\leaflet\leaflet.css" />
+    <Content Include="Scripts\LeoManager\components\leaflet\leaflet.Google.js" />
+    <Content Include="Scripts\LeoManager\components\leaflet\leaflet.ie.css" />
+    <Content Include="Scripts\LeoManager\components\leaflet\leaflet.Yandex.js" />
+    <Content Include="Scripts\LeoManager\components\leaflet\marker-icon%402x.png" />
+    <Content Include="Scripts\LeoManager\components\leaflet\marker-icon-2x.png" />
+    <Content Include="Scripts\LeoManager\components\leaflet\marker-icon.png" />
+    <Content Include="Scripts\LeoManager\components\leaflet\marker-shadow.png" />
+    <Content Include="Scripts\LeoManager\components\leaflet\markercluster.css" />
+    <Content Include="Scripts\LeoManager\components\prettify\prettify.css" />
+    <Content Include="Scripts\LeoManager\components\prettify\prettify.js" />
+    <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\noty\jquery.noty.js" />
+    <Content Include="Scripts\noty\layouts\bottom.js" />
+    <Content Include="Scripts\noty\layouts\bottomCenter.js" />
+    <Content Include="Scripts\noty\layouts\bottomLeft.js" />
+    <Content Include="Scripts\noty\layouts\bottomRight.js" />
+    <Content Include="Scripts\noty\layouts\center.js" />
+    <Content Include="Scripts\noty\layouts\centerLeft.js" />
+    <Content Include="Scripts\noty\layouts\centerRight.js" />
+    <Content Include="Scripts\noty\layouts\inline.js" />
+    <Content Include="Scripts\noty\layouts\top.js" />
+    <Content Include="Scripts\noty\layouts\topCenter.js" />
+    <Content Include="Scripts\noty\layouts\topLeft.js" />
+    <Content Include="Scripts\noty\layouts\topRight.js" />
+    <Content Include="Scripts\noty\themes\bootstrap.js" />
+    <Content Include="Scripts\noty\themes\default.js" />
+    <Content Include="Scripts\noty\themes\relax.js" />
+    <Content Include="Scripts\respond.js" />
+    <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\Utils\Utils.js" />
+    <Content Include="Scripts\_references.js" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Home\Contact.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
+    <Content Include="Views\Account\ConfirmEmail.cshtml" />
+    <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
+    <Content Include="Views\Account\ExternalLoginFailure.cshtml" />
+    <Content Include="Views\Account\ForgotPassword.cshtml" />
+    <Content Include="Views\Account\ForgotPasswordConfirmation.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\Account\ResetPassword.cshtml" />
+    <Content Include="Views\Account\ResetPasswordConfirmation.cshtml" />
+    <Content Include="Views\Account\SendCode.cshtml" />
+    <Content Include="Views\Account\VerifyCode.cshtml" />
+    <Content Include="Views\Manage\AddPhoneNumber.cshtml" />
+    <Content Include="Views\Manage\ChangePassword.cshtml" />
+    <Content Include="Views\Manage\Index.cshtml" />
+    <Content Include="Views\Manage\ManageLogins.cshtml" />
+    <Content Include="Views\Manage\SetPassword.cshtml" />
+    <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
+    <Content Include="Views\Shared\Lockout.cshtml" />
+    <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\GoogleMap\Index.cshtml" />
+    <Content Include="Scripts\LeoManager\components\jquery.select2\LICENSE" />
+    <Content Include="Scripts\LeoManager\components\jquery.select2\README.md" />
+    <Content Include="Scripts\LeoManager\components\jquery.select2\release.sh" />
+    <Content Include="Scripts\LeoManager\components\leaflet.geomanager\layers\bing-google-yandex.LICENSE" />
+    <Content Include="Views\GoogleMap\FieldInfo.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="DAL\DBModel\" />
+    <Folder Include="Scripts\LeoManager\NewFolder1\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="packages.config" />
+    <None Include="Project_Readme.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>65332</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:65332/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>
