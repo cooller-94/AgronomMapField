@@ -1,0 +1,185 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DB_AGRModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="AgrField">
+    <Key>
+      <PropertyRef Name="FieldId" />
+    </Key>
+    <Property Name="FieldId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Title" Type="nvarchar(max)" />
+    <Property Name="Description" Type="nvarchar(max)" />
+    <Property Name="CadastrNumber" Type="nvarchar(max)" />
+    <Property Name="PropertyTypeId" Type="int" Nullable="false" />
+    <Property Name="Area" Type="real" Nullable="false" />
+    <Property Name="PurposeId" Type="int" />
+    <Property Name="CityId" Type="int" />
+    <Property Name="RegionId" Type="int" />
+    <Property Name="COATAU" Type="int" />
+    <Property Name="CultureId" Type="int" />
+  </EntityType>
+  <EntityType Name="AgrFieldLocation">
+    <Key>
+      <PropertyRef Name="AgrFieldLocationId" />
+    </Key>
+    <Property Name="AgrFieldLocationId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FieldId" Type="int" Nullable="false" />
+    <Property Name="lat" Type="float" Nullable="false" />
+    <Property Name="lng" Type="float" Nullable="false" />
+  </EntityType>
+  <EntityType Name="City">
+    <Key>
+      <PropertyRef Name="CityId" />
+    </Key>
+    <Property Name="CityId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Title" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="Culture">
+    <Key>
+      <PropertyRef Name="CultureId" />
+    </Key>
+    <Property Name="CultureId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="PropertyType">
+    <Key>
+      <PropertyRef Name="PropertyTypeId" />
+    </Key>
+    <Property Name="PropertyTypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Title" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="Purpose">
+    <Key>
+      <PropertyRef Name="PurposeId" />
+    </Key>
+    <Property Name="PurposeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Title" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="Region">
+    <Key>
+      <PropertyRef Name="RegionId" />
+    </Key>
+    <Property Name="RegionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Title" Type="nvarchar(max)" />
+    <Property Name="CityId" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="field_id_culture_id">
+    <End Role="Culture" Type="Self.Culture" Multiplicity="0..1" />
+    <End Role="AgrField" Type="Self.AgrField" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Culture">
+        <PropertyRef Name="CultureId" />
+      </Principal>
+      <Dependent Role="AgrField">
+        <PropertyRef Name="CultureId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_cityId_cityId">
+    <End Role="City" Type="Self.City" Multiplicity="0..1" />
+    <End Role="AgrField" Type="Self.AgrField" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="City">
+        <PropertyRef Name="CityId" />
+      </Principal>
+      <Dependent Role="AgrField">
+        <PropertyRef Name="CityId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_cityId_regionid">
+    <End Role="City" Type="Self.City" Multiplicity="1" />
+    <End Role="Region" Type="Self.Region" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="City">
+        <PropertyRef Name="CityId" />
+      </Principal>
+      <Dependent Role="Region">
+        <PropertyRef Name="CityId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_fieldId_fieldDetailId">
+    <End Role="AgrField" Type="Self.AgrField" Multiplicity="1" />
+    <End Role="AgrFieldLocation" Type="Self.AgrFieldLocation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AgrField">
+        <PropertyRef Name="FieldId" />
+      </Principal>
+      <Dependent Role="AgrFieldLocation">
+        <PropertyRef Name="FieldId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_properyId_propertyId">
+    <End Role="PropertyType" Type="Self.PropertyType" Multiplicity="1" />
+    <End Role="AgrField" Type="Self.AgrField" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PropertyType">
+        <PropertyRef Name="PropertyTypeId" />
+      </Principal>
+      <Dependent Role="AgrField">
+        <PropertyRef Name="PropertyTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_purposeId_purposeId">
+    <End Role="Purpose" Type="Self.Purpose" Multiplicity="0..1" />
+    <End Role="AgrField" Type="Self.AgrField" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Purpose">
+        <PropertyRef Name="PurposeId" />
+      </Principal>
+      <Dependent Role="AgrField">
+        <PropertyRef Name="PurposeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_regionId_regionId">
+    <End Role="Region" Type="Self.Region" Multiplicity="0..1" />
+    <End Role="AgrField" Type="Self.AgrField" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Region">
+        <PropertyRef Name="RegionId" />
+      </Principal>
+      <Dependent Role="AgrField">
+        <PropertyRef Name="RegionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="DB_AGRModelStoreContainer">
+    <EntitySet Name="AgrField" EntityType="Self.AgrField" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AgrFieldLocation" EntityType="Self.AgrFieldLocation" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="City" EntityType="Self.City" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Culture" EntityType="Self.Culture" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PropertyType" EntityType="Self.PropertyType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Purpose" EntityType="Self.Purpose" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Region" EntityType="Self.Region" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="field_id_culture_id" Association="Self.field_id_culture_id">
+      <End Role="Culture" EntitySet="Culture" />
+      <End Role="AgrField" EntitySet="AgrField" />
+    </AssociationSet>
+    <AssociationSet Name="fk_cityId_cityId" Association="Self.fk_cityId_cityId">
+      <End Role="City" EntitySet="City" />
+      <End Role="AgrField" EntitySet="AgrField" />
+    </AssociationSet>
+    <AssociationSet Name="fk_cityId_regionid" Association="Self.fk_cityId_regionid">
+      <End Role="City" EntitySet="City" />
+      <End Role="Region" EntitySet="Region" />
+    </AssociationSet>
+    <AssociationSet Name="fk_fieldId_fieldDetailId" Association="Self.fk_fieldId_fieldDetailId">
+      <End Role="AgrField" EntitySet="AgrField" />
+      <End Role="AgrFieldLocation" EntitySet="AgrFieldLocation" />
+    </AssociationSet>
+    <AssociationSet Name="fk_properyId_propertyId" Association="Self.fk_properyId_propertyId">
+      <End Role="PropertyType" EntitySet="PropertyType" />
+      <End Role="AgrField" EntitySet="AgrField" />
+    </AssociationSet>
+    <AssociationSet Name="fk_purposeId_purposeId" Association="Self.fk_purposeId_purposeId">
+      <End Role="Purpose" EntitySet="Purpose" />
+      <End Role="AgrField" EntitySet="AgrField" />
+    </AssociationSet>
+    <AssociationSet Name="fk_regionId_regionId" Association="Self.fk_regionId_regionId">
+      <End Role="Region" EntitySet="Region" />
+      <End Role="AgrField" EntitySet="AgrField" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

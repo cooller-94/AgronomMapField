@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="DB_AGRModelStoreContainer" CdmEntityContainer="DBAgrField">
+    <EntitySetMapping Name="AgrFields">
+      <EntityTypeMapping TypeName="DB_AGRModel.AgrField">
+        <MappingFragment StoreEntitySet="AgrField">
+          <ScalarProperty Name="FieldId" ColumnName="FieldId" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="CadastrNumber" ColumnName="CadastrNumber" />
+          <ScalarProperty Name="PropertyTypeId" ColumnName="PropertyTypeId" />
+          <ScalarProperty Name="Area" ColumnName="Area" />
+          <ScalarProperty Name="PurposeId" ColumnName="PurposeId" />
+          <ScalarProperty Name="CityId" ColumnName="CityId" />
+          <ScalarProperty Name="RegionId" ColumnName="RegionId" />
+          <ScalarProperty Name="COATAU" ColumnName="COATAU" />
+          <ScalarProperty Name="CultureId" ColumnName="CultureId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AgrFieldLocations">
+      <EntityTypeMapping TypeName="DB_AGRModel.AgrFieldLocation">
+        <MappingFragment StoreEntitySet="AgrFieldLocation">
+          <ScalarProperty Name="AgrFieldLocationId" ColumnName="AgrFieldLocationId" />
+          <ScalarProperty Name="FieldId" ColumnName="FieldId" />
+          <ScalarProperty Name="lat" ColumnName="lat" />
+          <ScalarProperty Name="lng" ColumnName="lng" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Cities">
+      <EntityTypeMapping TypeName="DB_AGRModel.City">
+        <MappingFragment StoreEntitySet="City">
+          <ScalarProperty Name="CityId" ColumnName="CityId" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Cultures">
+      <EntityTypeMapping TypeName="DB_AGRModel.Culture">
+        <MappingFragment StoreEntitySet="Culture">
+          <ScalarProperty Name="CultureId" ColumnName="CultureId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PropertyTypes">
+      <EntityTypeMapping TypeName="DB_AGRModel.PropertyType">
+        <MappingFragment StoreEntitySet="PropertyType">
+          <ScalarProperty Name="PropertyTypeId" ColumnName="PropertyTypeId" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Purposes">
+      <EntityTypeMapping TypeName="DB_AGRModel.Purpose">
+        <MappingFragment StoreEntitySet="Purpose">
+          <ScalarProperty Name="PurposeId" ColumnName="PurposeId" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Regions">
+      <EntityTypeMapping TypeName="DB_AGRModel.Region">
+        <MappingFragment StoreEntitySet="Region">
+          <ScalarProperty Name="RegionId" ColumnName="RegionId" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="CityId" ColumnName="CityId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

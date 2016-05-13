@@ -1,0 +1,116 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="JobAccauntingDBModelStoreContainer" CdmEntityContainer="JobAccauntingDB">
+    <EntitySetMapping Name="C__MigrationHistory">
+      <EntityTypeMapping TypeName="JobAccauntingDBModel.C__MigrationHistory">
+        <MappingFragment StoreEntitySet="__MigrationHistory">
+          <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
+          <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
+          <ScalarProperty Name="Model" ColumnName="Model" />
+          <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ChemicalGroups">
+      <EntityTypeMapping TypeName="JobAccauntingDBModel.ChemicalGroup">
+        <MappingFragment StoreEntitySet="ChemicalGroups">
+          <ScalarProperty Name="ChemicalGroupID" ColumnName="ChemicalGroupID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Property" ColumnName="Property" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Cultures">
+      <EntityTypeMapping TypeName="JobAccauntingDBModel.Culture">
+        <MappingFragment StoreEntitySet="Cultures">
+          <ScalarProperty Name="CultureID" ColumnName="CultureID" />
+          <ScalarProperty Name="CultureName" ColumnName="CultureName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FertilizerGroups">
+      <EntityTypeMapping TypeName="JobAccauntingDBModel.FertilizerGroup">
+        <MappingFragment StoreEntitySet="FertilizerGroups">
+          <ScalarProperty Name="FertilizerGroupID" ColumnName="FertilizerGroupID" />
+          <ScalarProperty Name="FertGroupName" ColumnName="FertGroupName" />
+          <ScalarProperty Name="Property" ColumnName="Property" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Fertilizers">
+      <EntityTypeMapping TypeName="JobAccauntingDBModel.Fertilizer">
+        <MappingFragment StoreEntitySet="Fertilizers">
+          <ScalarProperty Name="FertilizerID" ColumnName="FertilizerID" />
+          <ScalarProperty Name="FertilizerGroupID" ColumnName="FertilizerGroupID" />
+          <ScalarProperty Name="FertilizerName" ColumnName="FertilizerName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Fields">
+      <EntityTypeMapping TypeName="JobAccauntingDBModel.Field">
+        <MappingFragment StoreEntitySet="Fields">
+          <ScalarProperty Name="FieldID" ColumnName="FieldID" />
+          <ScalarProperty Name="FieldName" ColumnName="FieldName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Grades">
+      <EntityTypeMapping TypeName="JobAccauntingDBModel.Grade">
+        <MappingFragment StoreEntitySet="Grades">
+          <ScalarProperty Name="GradeID" ColumnName="GradeID" />
+          <ScalarProperty Name="GradeName" ColumnName="GradeName" />
+          <ScalarProperty Name="CultureID" ColumnName="CultureID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="JobsAccauntings">
+      <EntityTypeMapping TypeName="JobAccauntingDBModel.JobsAccaunting">
+        <MappingFragment StoreEntitySet="JobsAccauntings">
+          <ScalarProperty Name="JobID" ColumnName="JobID" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="Square" ColumnName="Square" />
+          <ScalarProperty Name="FieldID" ColumnName="FieldID" />
+          <ScalarProperty Name="WorkKindID" ColumnName="WorkKindID" />
+          <ScalarProperty Name="WorkTypeID" ColumnName="WorkTypeID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Pesticides">
+      <EntityTypeMapping TypeName="JobAccauntingDBModel.Pesticide">
+        <MappingFragment StoreEntitySet="Pesticides">
+          <ScalarProperty Name="PesticideID" ColumnName="PesticideID" />
+          <ScalarProperty Name="PesticideName" ColumnName="PesticideName" />
+          <ScalarProperty Name="ActiveSubstance" ColumnName="ActiveSubstance" />
+          <ScalarProperty Name="RegistrationDate" ColumnName="RegistrationDate" />
+          <ScalarProperty Name="ChemicalGroupID" ColumnName="ChemicalGroupID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Tillages">
+      <EntityTypeMapping TypeName="JobAccauntingDBModel.Tillage">
+        <MappingFragment StoreEntitySet="Tillages">
+          <ScalarProperty Name="TillageID" ColumnName="TillageID" />
+          <ScalarProperty Name="TillageType" ColumnName="TillageType" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="WorkKinds">
+      <EntityTypeMapping TypeName="JobAccauntingDBModel.WorkKind">
+        <MappingFragment StoreEntitySet="WorkKinds">
+          <ScalarProperty Name="WorkKindID" ColumnName="WorkKindID" />
+          <ScalarProperty Name="KindOfWork" ColumnName="KindOfWork" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="WorkTypes">
+      <EntityTypeMapping TypeName="JobAccauntingDBModel.WorkType">
+        <MappingFragment StoreEntitySet="WorkTypes">
+          <ScalarProperty Name="WorkTypeID" ColumnName="WorkTypeID" />
+          <ScalarProperty Name="WorkKindID" ColumnName="WorkKindID" />
+          <ScalarProperty Name="TypeOfWork" ColumnName="TypeOfWork" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

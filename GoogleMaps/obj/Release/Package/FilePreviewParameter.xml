@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="IIS Web Application Name" description="" value="AgrGoogleMaps" tags="IisApp">
+    <parameterEntry kind="ProviderPath" scope="IisApp" match="^C:\\Диплом\\GoogleMaps\\GoogleMaps\\obj\\Release\\Package\\PackageTmp$" />
+    <parameterEntry kind="ProviderPath" scope="setAcl" match="^C:\\Диплом\\GoogleMaps\\GoogleMaps\\obj\\Release\\Package\\PackageTmp$" />
+  </parameter>
+  <parameter name="AgrDB-Web.config Connection String" description="" value="Data Source=tcp:dbagr.database.windows.net,1433;Initial Catalog=DB_AGR;User ID=cooller@dbagr;Password=vova-0394;Connect Timeout=30;Encrypt=True;TrustServerCertificate=False" tags="">
+    <parameterEntry kind="XmlFile" scope="C:\\Диплом\\GoogleMaps\\GoogleMaps\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='AgrDB']/@connectionString" />
+  </parameter>
+  <parameter name="DBAgrField-Web.config Connection String" description="" value="metadata=res://*/DAL.DBModel.DbAgrField.csdl|res://*/DAL.DBModel.DbAgrField.ssdl|res://*/DAL.DBModel.DbAgrField.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=dbagr.database.windows.net;initial catalog=DB_AGR;user id=cooller;Password=vova-0394;MultipleActiveResultSets=True;App=EntityFramework&quot;" tags="">
+    <parameterEntry kind="XmlFile" scope="C:\\Диплом\\GoogleMaps\\GoogleMaps\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='DBAgrField']/@connectionString" />
+  </parameter>
+  <parameter name="DefaultConnection-Web.config Connection String" description="" value="Data Source=tcp:dbagr.database.windows.net,1433;Initial Catalog=DB_AGR;User ID=cooller@dbagr;Password=vova-0394;Connect Timeout=30;Encrypt=True;TrustServerCertificate=False" tags="">
+    <parameterEntry kind="XmlFile" scope="C:\\Диплом\\GoogleMaps\\GoogleMaps\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='DefaultConnection']/@connectionString" />
+  </parameter>
+</parameters>

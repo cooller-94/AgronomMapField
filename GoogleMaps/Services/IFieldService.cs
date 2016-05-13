@@ -1,4 +1,6 @@
-﻿using GoogleMaps.App_Start;
+﻿using GoogleMaps.DAL.DBModel;
+using GoogleMaps.DAL.DBModel.JobAccauntingModels;
+using GoogleMaps.HelperClasses;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +11,10 @@ namespace GoogleMaps.Services
 {
     public interface IFieldService
     {
-        void Create(AgrField field);
-        List<AgrField> GetFields();
+        //Boolean Create(AgrField field, out Int32? fieldId);
+        Boolean Create(Field field, out Int32? fieldId);
+        Boolean AddLocation(Int32 fieldId, List<Point> polygon);
+        //List<AgrField> GetFields();
+        //AgrField GetField(Int32 id);
     }
 }

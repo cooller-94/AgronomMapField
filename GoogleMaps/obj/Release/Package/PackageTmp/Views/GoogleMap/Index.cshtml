@@ -1,0 +1,170 @@
+﻿@{
+    Layout = null;
+}
+
+
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/bootstrap")
+@Scripts.Render("~/bundles/Utils")
+@Styles.Render("~/Content/css")
+
+<link href="~/Content/Site.css" rel="stylesheet" />
+<script src="~/Scripts/GoogleMap/InitializeGoogleMapAPI.js"></script>
+<script src="~/Scripts/GoogleMap/GoogleActions.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD6RXBQJirPU3UyvggVbl82r1KKvzxCng4&libraries=drawing&callback=InitializeGoogleMapAPI.Init"
+        async defer></script>
+@section Styles {
+    html { height: 100% }
+    body { height: 100%; margin: 0px; padding: 0px }
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-2">
+            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#fillFieldModal">
+                Добавить поле
+            </button>
+        </div>
+        <div class="col-lg-10">
+            <span class="fieldInfo" id="fieldInfo"></span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-2">
+            <div class="accordion" id="accordion-menu">
+                <div class="accordion-group">
+                    <div class="accordion-heading text-center btn-link">
+                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion-menu" href="#collapseFields">
+                            Все поля
+                        </a>
+                    </div>
+                    <div id="collapseFields" class="accordion-body collapse in">
+                        <div class="accordion-inner">
+                            <div class="fieldsList">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-10">
+            <div id="windowInfo" class="info">
+            </div>
+            <div id="map_canvas" class="map_canvas"></div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-2 text-left ">
+            <div class="search-form" style="display:none">
+                <select id="id_region" name="id_region" class="filter_select">
+                    <option>Выберите область</option>
+                    <option rel="2600000000" value="1">Івано-франківська</option>
+                    <option rel="100000000" value="2">Авт.республіка крим</option>
+                    <option rel="500000000" value="3">Вінницька</option>
+                    <option rel="700000000" value="4">Волинська</option>
+                    <option rel="1200000000" value="5">Дніпропетровська</option>
+                    <option rel="1400000000" value="6">Донецька</option>
+                    <option rel="1800000000" value="7">Житомирська</option>
+                    <option rel="2100000000" value="8">Закарпатська</option>
+                    <option rel="2300000000" value="9">Запорізька</option>
+                    <option rel="3500000000" value="10">Кіровоградська</option>
+                    <option rel="8000000000" value="26">Київ</option>
+                    <option rel="3200000000" value="11">Київська</option>
+                    <option rel="4400000000" value="12">Луганська</option>
+                    <option rel="4600000000" value="13">Львівська</option>
+                    <option rel="4800000000" value="14">Миколаївська</option>
+                    <option rel="5100000000" value="15">Одеська</option>
+                    <option rel="5300000000" value="16">Полтавська</option>
+                    <option rel="5600000000" value="17">Рівненська</option>
+                    <option rel="8500000000" value="27">Севастополь</option>
+                    <option rel="5900000000" value="18">Сумська</option>
+                    <option rel="6100000000" value="21">Тернопільська</option>
+                    <option rel="6300000000" value="19">Харківська</option>
+                    <option rel="6500000000" value="20">Херсонська</option>
+                    <option rel="6800000000" value="22">Хмельницька</option>
+                    <option rel="7100000000" value="23">Черкаська</option>
+                    <option rel="7300000000" value="24">Чернівецька</option>
+                    <option rel="7400000000" value="25">Чернігівська</option>
+                </select>
+                <select disabled="true" id="id_district" namd="id_district" class="filter_select">
+                    <option>Выберите район</option>
+                </select>
+                <select disabled="true" id="id_city" namd="id_city" class="filter_select">
+                    <option>Выберите город</option>
+                </select>
+            </div>
+            <div class="help-block text-center navbar-fixed-bottom">
+                Для выбора нужного поля, необходимо нажать на все углы поля
+            </div>
+        </div>
+       
+    </div>
+</div>
+
+ <!-- Modal -->
+
+<!--Model for select field-->>
+<div class="modal fade" id="selectFieldModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-lg select-field" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Выбор поля</h4>
+            </div>
+            <div class="modal-body">
+                <div class="map">
+                    <div class="map-wrap olMap" id="map">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Отмена</button>
+                <button type="button" class="btn btn-primary" id="saveMap">Сохранить</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--Model for fill information about field-->>
+<div class="modal fade" id="fillFieldModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Редактирование поля</h4>
+            </div>
+            <div class="modal-body">
+                @{Html.RenderPartial("~/Views/GoogleMap/FieldInfo.cshtml");}
+            </div>
+        </div>
+    </div>
+</div>
+
+@Scripts.Render("~/bundles/cadastre_ua")
+<script type="text/javascript">
+    $(document).ready(function () {
+        GoogleActions.Init('@Url.Action("Index", "GoogleMap")')
+    });
+</script>
+
+<script type="text/x-jquery-tmpl" id="targetListFields">
+    <table class="table table-hover table-sm">
+        <thead>
+            <tr>
+                <th>Поля</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{each fields}}
+            <tr class="field-item">
+                <td>
+                    <input type="hidden" value="${Id}"/>
+                    ${FieldTitle}
+                </td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</script>

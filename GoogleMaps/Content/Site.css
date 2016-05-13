@@ -28,9 +28,44 @@ textarea {
 }
 
 .map_canvas, .map {
-    height: 50%;
+    height: 100%;
 }
 
 .filter_select {
     width: 100%;
+}
+
+.select-field {
+    height: 650px;
+}
+
+#accordion-menu {
+    margin-top: 15px;
+}
+
+.field-buttons-actions {
+    float: right;
+    margin: 4px;
+}
+
+.dashboard-info {
+    padding-left: 1px;
+    padding-right: 1px;
+}
+
+.fieldsList {
+    padding: 1px;
+    padding-top: 15px;
+}
+
+#btnAdd{
+    margin-top: 2px;
+}
+
+.active-item{
+    border-color:blue;
+}
+
+#home .row{
+    margin-right: 0px;
 }

@@ -1,0 +1,237 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="JobAccauntingDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="C__MigrationHistory">
+    <Key>
+      <PropertyRef Name="MigrationId" />
+      <PropertyRef Name="ContextKey" />
+    </Key>
+    <Property Name="MigrationId" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ContextKey" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Model" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+    <Property Name="ProductVersion" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ChemicalGroup">
+    <Key>
+      <PropertyRef Name="ChemicalGroupID" />
+    </Key>
+    <Property Name="ChemicalGroupID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Property" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Pesticides" Relationship="Self.FK_dbo_Pesticides_dbo_ChemicalGroups_ChemicalGroupID" FromRole="ChemicalGroups" ToRole="Pesticides" />
+  </EntityType>
+  <EntityType Name="Culture">
+    <Key>
+      <PropertyRef Name="CultureID" />
+    </Key>
+    <Property Name="CultureID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CultureName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Grades" Relationship="Self.FK_dbo_Grades_dbo_Cultures_CultureID" FromRole="Cultures" ToRole="Grades" />
+  </EntityType>
+  <EntityType Name="FertilizerGroup">
+    <Key>
+      <PropertyRef Name="FertilizerGroupID" />
+    </Key>
+    <Property Name="FertilizerGroupID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FertGroupName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Property" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Fertilizers" Relationship="Self.FK_dbo_Fertilizers_dbo_FertilizerGroups_FertilizerGroupID" FromRole="FertilizerGroups" ToRole="Fertilizers" />
+  </EntityType>
+  <EntityType Name="Fertilizer">
+    <Key>
+      <PropertyRef Name="FertilizerID" />
+    </Key>
+    <Property Name="FertilizerID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FertilizerGroupID" Type="Int32" Nullable="false" />
+    <Property Name="FertilizerName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="FertilizerGroup" Relationship="Self.FK_dbo_Fertilizers_dbo_FertilizerGroups_FertilizerGroupID" FromRole="Fertilizers" ToRole="FertilizerGroups" />
+  </EntityType>
+  <EntityType Name="Field">
+    <Key>
+      <PropertyRef Name="FieldID" />
+    </Key>
+    <Property Name="FieldID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FieldName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="JobsAccauntings" Relationship="Self.FK_dbo_JobsAccauntings_dbo_Fields_FieldID" FromRole="Fields" ToRole="JobsAccauntings" />
+  </EntityType>
+  <EntityType Name="Grade">
+    <Key>
+      <PropertyRef Name="GradeID" />
+    </Key>
+    <Property Name="GradeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="GradeName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CultureID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Culture" Relationship="Self.FK_dbo_Grades_dbo_Cultures_CultureID" FromRole="Grades" ToRole="Cultures" />
+  </EntityType>
+  <EntityType Name="JobsAccaunting">
+    <Key>
+      <PropertyRef Name="JobID" />
+    </Key>
+    <Property Name="JobID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Quantity" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="Square" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="FieldID" Type="Int32" Nullable="false" />
+    <Property Name="WorkKindID" Type="Int32" Nullable="false" />
+    <Property Name="WorkTypeID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Field" Relationship="Self.FK_dbo_JobsAccauntings_dbo_Fields_FieldID" FromRole="JobsAccauntings" ToRole="Fields" />
+    <NavigationProperty Name="WorkType" Relationship="Self.FK_dbo_JobsAccauntings_dbo_WorkTypes_WorkTypeID" FromRole="JobsAccauntings" ToRole="WorkTypes" />
+  </EntityType>
+  <EntityType Name="Pesticide">
+    <Key>
+      <PropertyRef Name="PesticideID" />
+    </Key>
+    <Property Name="PesticideID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PesticideName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ActiveSubstance" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="RegistrationDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ChemicalGroupID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="ChemicalGroup" Relationship="Self.FK_dbo_Pesticides_dbo_ChemicalGroups_ChemicalGroupID" FromRole="Pesticides" ToRole="ChemicalGroups" />
+  </EntityType>
+  <EntityType Name="Tillage">
+    <Key>
+      <PropertyRef Name="TillageID" />
+    </Key>
+    <Property Name="TillageID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TillageType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+  </EntityType>
+  <EntityType Name="WorkKind">
+    <Key>
+      <PropertyRef Name="WorkKindID" />
+    </Key>
+    <Property Name="WorkKindID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="KindOfWork" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="WorkTypes" Relationship="Self.FK_dbo_WorkTypes_dbo_WorkKinds_WorkKindID" FromRole="WorkKinds" ToRole="WorkTypes" />
+  </EntityType>
+  <EntityType Name="WorkType">
+    <Key>
+      <PropertyRef Name="WorkTypeID" />
+    </Key>
+    <Property Name="WorkTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="WorkKindID" Type="Int32" Nullable="false" />
+    <Property Name="TypeOfWork" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="JobsAccauntings" Relationship="Self.FK_dbo_JobsAccauntings_dbo_WorkTypes_WorkTypeID" FromRole="WorkTypes" ToRole="JobsAccauntings" />
+    <NavigationProperty Name="WorkKind" Relationship="Self.FK_dbo_WorkTypes_dbo_WorkKinds_WorkKindID" FromRole="WorkTypes" ToRole="WorkKinds" />
+  </EntityType>
+  <Association Name="FK_dbo_Pesticides_dbo_ChemicalGroups_ChemicalGroupID">
+    <End Role="ChemicalGroups" Type="Self.ChemicalGroup" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Pesticides" Type="Self.Pesticide" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ChemicalGroups">
+        <PropertyRef Name="ChemicalGroupID" />
+      </Principal>
+      <Dependent Role="Pesticides">
+        <PropertyRef Name="ChemicalGroupID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Grades_dbo_Cultures_CultureID">
+    <End Role="Cultures" Type="Self.Culture" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Grades" Type="Self.Grade" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cultures">
+        <PropertyRef Name="CultureID" />
+      </Principal>
+      <Dependent Role="Grades">
+        <PropertyRef Name="CultureID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Fertilizers_dbo_FertilizerGroups_FertilizerGroupID">
+    <End Role="FertilizerGroups" Type="Self.FertilizerGroup" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Fertilizers" Type="Self.Fertilizer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FertilizerGroups">
+        <PropertyRef Name="FertilizerGroupID" />
+      </Principal>
+      <Dependent Role="Fertilizers">
+        <PropertyRef Name="FertilizerGroupID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_JobsAccauntings_dbo_Fields_FieldID">
+    <End Role="Fields" Type="Self.Field" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="JobsAccauntings" Type="Self.JobsAccaunting" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Fields">
+        <PropertyRef Name="FieldID" />
+      </Principal>
+      <Dependent Role="JobsAccauntings">
+        <PropertyRef Name="FieldID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_JobsAccauntings_dbo_WorkTypes_WorkTypeID">
+    <End Role="WorkTypes" Type="Self.WorkType" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="JobsAccauntings" Type="Self.JobsAccaunting" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="WorkTypes">
+        <PropertyRef Name="WorkTypeID" />
+      </Principal>
+      <Dependent Role="JobsAccauntings">
+        <PropertyRef Name="WorkTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_WorkTypes_dbo_WorkKinds_WorkKindID">
+    <End Role="WorkKinds" Type="Self.WorkKind" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="WorkTypes" Type="Self.WorkType" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="WorkKinds">
+        <PropertyRef Name="WorkKindID" />
+      </Principal>
+      <Dependent Role="WorkTypes">
+        <PropertyRef Name="WorkKindID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="JobAccauntingDB" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="C__MigrationHistory" EntityType="Self.C__MigrationHistory" />
+    <EntitySet Name="ChemicalGroups" EntityType="Self.ChemicalGroup" />
+    <EntitySet Name="Cultures" EntityType="Self.Culture" />
+    <EntitySet Name="FertilizerGroups" EntityType="Self.FertilizerGroup" />
+    <EntitySet Name="Fertilizers" EntityType="Self.Fertilizer" />
+    <EntitySet Name="Fields" EntityType="Self.Field" />
+    <EntitySet Name="Grades" EntityType="Self.Grade" />
+    <EntitySet Name="JobsAccauntings" EntityType="Self.JobsAccaunting" />
+    <EntitySet Name="Pesticides" EntityType="Self.Pesticide" />
+    <EntitySet Name="Tillages" EntityType="Self.Tillage" />
+    <EntitySet Name="WorkKinds" EntityType="Self.WorkKind" />
+    <EntitySet Name="WorkTypes" EntityType="Self.WorkType" />
+    <AssociationSet Name="FK_dbo_Pesticides_dbo_ChemicalGroups_ChemicalGroupID" Association="Self.FK_dbo_Pesticides_dbo_ChemicalGroups_ChemicalGroupID">
+      <End Role="ChemicalGroups" EntitySet="ChemicalGroups" />
+      <End Role="Pesticides" EntitySet="Pesticides" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Grades_dbo_Cultures_CultureID" Association="Self.FK_dbo_Grades_dbo_Cultures_CultureID">
+      <End Role="Cultures" EntitySet="Cultures" />
+      <End Role="Grades" EntitySet="Grades" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Fertilizers_dbo_FertilizerGroups_FertilizerGroupID" Association="Self.FK_dbo_Fertilizers_dbo_FertilizerGroups_FertilizerGroupID">
+      <End Role="FertilizerGroups" EntitySet="FertilizerGroups" />
+      <End Role="Fertilizers" EntitySet="Fertilizers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_JobsAccauntings_dbo_Fields_FieldID" Association="Self.FK_dbo_JobsAccauntings_dbo_Fields_FieldID">
+      <End Role="Fields" EntitySet="Fields" />
+      <End Role="JobsAccauntings" EntitySet="JobsAccauntings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_JobsAccauntings_dbo_WorkTypes_WorkTypeID" Association="Self.FK_dbo_JobsAccauntings_dbo_WorkTypes_WorkTypeID">
+      <End Role="WorkTypes" EntitySet="WorkTypes" />
+      <End Role="JobsAccauntings" EntitySet="JobsAccauntings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_WorkTypes_dbo_WorkKinds_WorkKindID" Association="Self.FK_dbo_WorkTypes_dbo_WorkKinds_WorkKindID">
+      <End Role="WorkKinds" EntitySet="WorkKinds" />
+      <End Role="WorkTypes" EntitySet="WorkTypes" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

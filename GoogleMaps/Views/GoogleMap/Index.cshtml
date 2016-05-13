@@ -4,14 +4,18 @@
 
 
 @Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/bootstrap")
 @Scripts.Render("~/bundles/Utils")
+@Scripts.Render("~/bundles/WeatherLib")
 @Styles.Render("~/Content/css")
 
 <link href="~/Content/Site.css" rel="stylesheet" />
 <script src="~/Scripts/GoogleMap/InitializeGoogleMapAPI.js"></script>
 <script src="~/Scripts/GoogleMap/GoogleActions.js"></script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD6RXBQJirPU3UyvggVbl82r1KKvzxCng4&libraries=drawing&callback=InitializeGoogleMapAPI.Init"
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD6RXBQJirPU3UyvggVbl82r1KKvzxCng4&libraries=drawing,weather&callback=InitializeGoogleMapAPI.Init"
         async defer></script>
+@*<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3&sensor=false&libraries=weather">
+</script>*@
 @section Styles {
     html { height: 100% }
     body { height: 100%; margin: 0px; padding: 0px }
@@ -19,14 +23,68 @@
 
 <div class="container-fluid">
     <div class="row">
-        <div id="windowInfo" class="info">
+        <div class="col-lg-3">
+            <h3 style="margin-top:2px">Агроном. Карты полей</h3>
         </div>
-        <div id="map_canvas" class="map_canvas"></div>
+        <div class="col-lg-3">
+            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#fillFieldModal" id="btnAdd">
+                Добавить поле
+            </button>
+        </div>
+        <div class="col-lg-3"></div>
+
+        <div class="col-lg-3">
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="Введите название поля или местоположение">
+                <span class="input-group-btn">
+                    <button class="btn btn-default" type="button">Найти</button>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-3 dashboard-info">
+            <div class="panel-group" id="accordion">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseFields">
+                                Поля
+                            </a><i class="indicator glyphicon glyphicon-chevron-down  pull-right"></i>
+                        </h4>
+                    </div>
+                    <div id="collapseFields" class="panel-collapse collapse in">
+                        <div class="panel-body fieldsList">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseActions">
+                                Действия
+                            </a><i class="indicator glyphicon glyphicon-chevron-down  pull-right"></i>
+                        </h4>
+                    </div>
+                    <div id="collapseActions" class="panel-collapse collapse in">
+                        <div class="panel-body">
+                            TODO
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-9 dashboard-info">
+            <div id="windowInfo" class="info">
+            </div>
+            <div id="map_canvas" class="map_canvas"></div>
+        </div>
     </div>
 
     <div class="row">
-        <div class="col-lg-2 text-left ">
-            <div class="search-form">
+        <div class="col-lg-3 text-left ">
+            <div class="search-form" style="display:none">
                 <select id="id_region" name="id_region" class="filter_select">
                     <option>Выберите область</option>
                     <option rel="2600000000" value="1">Івано-франківська</option>
@@ -64,27 +122,95 @@
                     <option>Выберите город</option>
                 </select>
             </div>
-            <div class="help-block text-center navbar-fixed-bottom">
-                Для выбора нужного поля, необходимо нажать на все углы поля
-            </div>
         </div>
-        <div class="col-md-10 text-right">
-            <div class="map">
-                <div id="permalink" style="display:none">
-                    <a href="http://map.land.gov.ua/kadastrova-karta?zoom=6&amp;lat=47.78&amp;lon=29.91&amp;layers=TB00FTFFT">Постоянная ссылка</a>
+
+    </div>
+</div>
+
+<!-- Modal -->
+<!--Model for select field-->>
+<div class="modal fade" id="selectFieldModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-lg select-field" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Выбор поля</h4>
+            </div>
+            <div class="modal-body">
+                <div class="input-group search">
+                    <input type="text" class="form-control" id="map_search" name="map_search"  rel="cad_num_mask" placeholder="Введите кадастровый номер. Например: 3221655100:01:047:0052">
+                    <input type="hidden" name="get_serach_cadnum" value="" id="get_serach_cadnum">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" type="button" id="map_search_btn">Найти</button>
+                    </span>
                 </div>
-                <div class="map-wrap olMap" id="map">
+                <div class="map">
+                    <div class="map-wrap olMap" id="map">
+                    </div>
                 </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Отмена</button>
+                <button type="button" class="btn btn-primary" id="saveMap">Сохранить</button>
             </div>
         </div>
     </div>
 </div>
 
 
-<div id="dialogId"></div>
+<!--Model for  add new fields-->
+<div class="modal fade" id="fillFieldModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Добавление поля</h4>
+            </div>
+            <div class="modal-body">
+                @{Html.RenderPartial("~/Views/GoogleMap/FieldInfo.cshtml");}
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Model for full screen information about field-->
+<div class="modal fade" id="fullScreenInfoModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body" id="fullScreenInfoBody">
+            </div>
+        </div>
+    </div>
+</div>
+
 @Scripts.Render("~/bundles/cadastre_ua")
 <script type="text/javascript">
     $(document).ready(function () {
         GoogleActions.Init('@Url.Action("Index", "GoogleMap")')
     });
+</script>
+
+<script type="text/x-jquery-tmpl" id="targetListFields">
+    {{each fields}}
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">
+                ${FieldTitle}
+                <a id="deleteLocationField" href="#" class="field-buttons-actions">
+                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                </a>
+                <a id="editLocationField" href="#" class="field-buttons-actions">
+                    <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                </a>
+            </h3>
+        </div>
+        <div class="panel-body field-item">
+            <input type="hidden" value="${Id}" />
+        </div>
+    </div>
+    {{/each}}
 </script>

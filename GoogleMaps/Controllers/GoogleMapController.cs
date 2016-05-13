@@ -1,4 +1,5 @@
-﻿using GoogleMaps.App_Start;
+﻿using GoogleMaps.DAL.DBModel;
+using GoogleMaps.DAL.DBModel.JobAccauntingModels;
 using GoogleMaps.HelperClasses;
 using GoogleMaps.Models;
 using GoogleMaps.Repository;
@@ -9,11 +10,14 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
+using System.Web.Services;
 
 namespace GoogleMaps.Controllers
 {
+    [Authorize]
     public class GoogleMapController : Controller
     {
+        private FieldService fieldService = new FieldService();
         // GET: GoogleMap
         public ActionResult Index()
         {
@@ -25,7 +29,7 @@ namespace GoogleMaps.Controllers
                 new SelectListItem() {Selected = false, Text = "Винницкая", Value =  "500000000"},
                 new SelectListItem() {Selected = false, Text = "Волынская", Value =  "700000000"},
                 new SelectListItem() {Selected = false, Text = "Днепропетровская", Value =  "1200000000"},
-            },"Value","Text");
+            }, "Value", "Text");
 
             ViewBag.Cities = Cities;
 
@@ -35,16 +39,26 @@ namespace GoogleMaps.Controllers
         [HttpPost]
         public JsonResult AddNewField(FormCollection fieldModel)
         {
-            try
+            Int32? fieldId = 0;
+            Field field = FieldRepository.GetFieldFromModel(fieldModel);
+
+            if (fieldService.Create(field, out fieldId))
             {
-                AgrField field = FieldRepository.GetFieldFromModel(fieldModel);
-                new FieldService().Create(field);
-                return this.GenerateJson(new { IsSuccess = true });
+                return this.GenerateJson(new { IsSuccess = true, FieldId = fieldId });
             }
-            catch (Exception)
+
+            return this.GenerateJson(new { IsSuccess = false });
+        }
+
+        [HttpPost]
+        public JsonResult AddFieldLocation(Int32 fieldId, List<Point> polygon)
+        {
+            if (polygon == null || polygon.Count == 0)
             {
-                return this.GenerateJson(new { IsSuccess = false });
+                return this.GenerateJson(new { IsSuccess = false, ErrorMessage = "Произошла ошибка. Неверный данные" });
             }
+
+            return this.GenerateJson(new { IsSuccess = fieldService.AddLocation(fieldId, polygon) });
         }
 
         public ActionResult GetFieldInfo(Int32? fieldId)
@@ -60,7 +74,7 @@ namespace GoogleMaps.Controllers
         public JsonResult LoadFields()
         {
 
-            List<FieldModel> result = FieldRepository.GetFieldModelsFromField(new FieldService().GetFields());
+            List<FieldModel> result = FieldRepository.GetFieldModelsFromField(fieldService.GetFields());
 
             if (result != null)
             {
@@ -79,6 +93,27 @@ namespace GoogleMaps.Controllers
             }
         }
 
+        public JsonResult LoadField(Int32? id)
+        {
+            FieldModel model = FieldRepository.GetModelFromField(fieldService.GetField(id.Value));
+            return model != null ? Json(new { IsSuccess = true, Field = model }, JsonRequestBehavior.AllowGet) : Json(new { IsSuccess = true }, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult GetWindowInfo(Int32? fieldId)
+        {
+            JobModel model = new JobModel();
+            Field field = fieldService.GetField(fieldId.Value);
+
+            if (field == null)
+            {
+                return this.GenerateJson(new { IsSuccess = false, Message = "Для данного поля нет данных" });
+            }
+
+            model = JobAccountingRepository.GetJobModelFromFromField(field);
+
+            return PartialView("~/Views/GoogleMap/WindowInfo.cshtml", model);
+        }
+
         private JsonResult GenerateJson(Object data)
         {
             return Json(new
@@ -86,5 +121,6 @@ namespace GoogleMaps.Controllers
                 data
             }, JsonRequestBehavior.AllowGet);
         }
+
     }
 }

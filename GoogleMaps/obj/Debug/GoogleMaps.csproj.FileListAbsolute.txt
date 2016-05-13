@@ -1,0 +1,178 @@
+C:\Users\Vladimir\Desktop\GoogleMaps-2016-04-18 (1)\GoogleMaps\GoogleMaps\bin\roslyn\csc.exe
+C:\Users\Vladimir\Desktop\GoogleMaps-2016-04-18 (1)\GoogleMaps\GoogleMaps\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+C:\Users\Vladimir\Desktop\GoogleMaps-2016-04-18 (1)\GoogleMaps\GoogleMaps\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+C:\Users\Vladimir\Desktop\GoogleMaps-2016-04-18 (1)\GoogleMaps\GoogleMaps\bin\roslyn\Microsoft.CodeAnalysis.dll
+C:\Users\Vladimir\Desktop\GoogleMaps-2016-04-18 (1)\GoogleMaps\GoogleMaps\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+C:\Users\Vladimir\Desktop\GoogleMaps-2016-04-18 (1)\GoogleMaps\GoogleMaps\bin\roslyn\Microsoft.CSharp.Core.targets
+C:\Users\Vladimir\Desktop\GoogleMaps-2016-04-18 (1)\GoogleMaps\GoogleMaps\bin\roslyn\Microsoft.VisualBasic.Core.targets
+C:\Users\Vladimir\Desktop\GoogleMaps-2016-04-18 (1)\GoogleMaps\GoogleMaps\bin\roslyn\System.Collections.Immutable.dll
+C:\Users\Vladimir\Desktop\GoogleMaps-2016-04-18 (1)\GoogleMaps\GoogleMaps\bin\roslyn\System.Reflection.Metadata.dll
+C:\Users\Vladimir\Desktop\GoogleMaps-2016-04-18 (1)\GoogleMaps\GoogleMaps\bin\roslyn\vbc.exe
+C:\Users\Vladimir\Desktop\GoogleMaps-2016-04-18 (1)\GoogleMaps\GoogleMaps\bin\roslyn\VBCSCompiler.exe
+C:\Users\Vladimir\Desktop\GoogleMaps-2016-04-18 (1)\GoogleMaps\GoogleMaps\bin\roslyn\VBCSCompiler.exe.config
+C:\Users\Vladimir\Desktop\GoogleMaps-2016-04-18 (1)\GoogleMaps\GoogleMaps\bin\GoogleMaps.dll
+C:\Users\Vladimir\Desktop\GoogleMaps-2016-04-18 (1)\GoogleMaps\GoogleMaps\bin\GoogleMaps.pdb
+C:\Users\Vladimir\Desktop\GoogleMaps-2016-04-18 (1)\GoogleMaps\GoogleMaps\obj\Debug\GoogleMaps.csprojResolveAssemblyReference.cache
+C:\Users\Vladimir\Desktop\GoogleMaps-2016-04-18 (1)\GoogleMaps\GoogleMaps\obj\Debug\GoogleMaps.dll
+C:\Users\Vladimir\Desktop\GoogleMaps-2016-04-18 (1)\GoogleMaps\GoogleMaps\obj\Debug\GoogleMaps.pdb
+C:\Users\Vladimir\Desktop\GoogleMaps-2016-04-18 (1)\GoogleMaps\GoogleMaps\bin\GoogleMaps.dll.config
+C:\Диплом\GoogleMaps\GoogleMaps\bin\roslyn\csc.exe
+C:\Диплом\GoogleMaps\GoogleMaps\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+C:\Диплом\GoogleMaps\GoogleMaps\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+C:\Диплом\GoogleMaps\GoogleMaps\bin\roslyn\Microsoft.CodeAnalysis.dll
+C:\Диплом\GoogleMaps\GoogleMaps\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+C:\Диплом\GoogleMaps\GoogleMaps\bin\roslyn\Microsoft.CSharp.Core.targets
+C:\Диплом\GoogleMaps\GoogleMaps\bin\roslyn\Microsoft.VisualBasic.Core.targets
+C:\Диплом\GoogleMaps\GoogleMaps\bin\roslyn\System.Collections.Immutable.dll
+C:\Диплом\GoogleMaps\GoogleMaps\bin\roslyn\System.Reflection.Metadata.dll
+C:\Диплом\GoogleMaps\GoogleMaps\bin\roslyn\vbc.exe
+C:\Диплом\GoogleMaps\GoogleMaps\bin\roslyn\VBCSCompiler.exe
+C:\Диплом\GoogleMaps\GoogleMaps\bin\roslyn\VBCSCompiler.exe.config
+C:\Диплом\GoogleMaps\GoogleMaps\bin\GoogleMaps.dll.config
+C:\Диплом\GoogleMaps\GoogleMaps\bin\GoogleMaps.dll
+C:\Диплом\GoogleMaps\GoogleMaps\bin\GoogleMaps.pdb
+C:\Диплом\GoogleMaps\GoogleMaps\obj\Debug\GoogleMaps.dll
+C:\Диплом\GoogleMaps\GoogleMaps\obj\Debug\GoogleMaps.pdb
+C:\Диплом\GoogleMaps\GoogleMaps\obj\Debug\GoogleMaps.csprojResolveAssemblyReference.cache
+C:\Диплом\GoogleMaps\GoogleMaps\bin\jQueryTmpl.dll
+C:\Диплом\GoogleMaps\GoogleMaps\bin\jQueryTmpl.Mvc.dll
+C:\Диплом\GoogleMaps\GoogleMaps\bin\jQueryTmpl.xml
+C:\Диплом\GoogleMaps\GoogleMaps\bin\jQueryTmpl.Mvc.xml
+C:\Users\Vladimir\Desktop\Диплом\GoogleMaps\GoogleMaps\bin\roslyn\csc.exe
+C:\Users\Vladimir\Desktop\Диплом\GoogleMaps\GoogleMaps\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+C:\Users\Vladimir\Desktop\Диплом\GoogleMaps\GoogleMaps\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+C:\Users\Vladimir\Desktop\Диплом\GoogleMaps\GoogleMaps\bin\roslyn\Microsoft.CodeAnalysis.dll
+C:\Users\Vladimir\Desktop\Диплом\GoogleMaps\GoogleMaps\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+C:\Users\Vladimir\Desktop\Диплом\GoogleMaps\GoogleMaps\bin\roslyn\Microsoft.CSharp.Core.targets
+C:\Users\Vladimir\Desktop\Диплом\GoogleMaps\GoogleMaps\bin\roslyn\Microsoft.VisualBasic.Core.targets
+C:\Users\Vladimir\Desktop\Диплом\GoogleMaps\GoogleMaps\bin\roslyn\System.Collections.Immutable.dll
+C:\Users\Vladimir\Desktop\Диплом\GoogleMaps\GoogleMaps\bin\roslyn\System.Reflection.Metadata.dll
+C:\Users\Vladimir\Desktop\Диплом\GoogleMaps\GoogleMaps\bin\roslyn\vbc.exe
+C:\Users\Vladimir\Desktop\Диплом\GoogleMaps\GoogleMaps\bin\roslyn\VBCSCompiler.exe
+C:\Users\Vladimir\Desktop\Диплом\GoogleMaps\GoogleMaps\bin\roslyn\VBCSCompiler.exe.config
+C:\Users\Vladimir\Desktop\Диплом\GoogleMaps\GoogleMaps\bin\GoogleMaps.dll.config
+C:\Users\Vladimir\Desktop\Диплом\GoogleMaps\GoogleMaps\bin\GoogleMaps.dll
+C:\Users\Vladimir\Desktop\Диплом\GoogleMaps\GoogleMaps\bin\GoogleMaps.pdb
+C:\Users\Vladimir\Desktop\Диплом\GoogleMaps\GoogleMaps\bin\jQueryTmpl.dll
+C:\Users\Vladimir\Desktop\Диплом\GoogleMaps\GoogleMaps\bin\jQueryTmpl.Mvc.dll
+C:\Users\Vladimir\Desktop\Диплом\GoogleMaps\GoogleMaps\bin\jQueryTmpl.xml
+C:\Users\Vladimir\Desktop\Диплом\GoogleMaps\GoogleMaps\bin\jQueryTmpl.Mvc.xml
+C:\Users\Vladimir\Desktop\Диплом\GoogleMaps\GoogleMaps\obj\Debug\GoogleMaps.dll
+C:\Users\Vladimir\Desktop\Диплом\GoogleMaps\GoogleMaps\obj\Debug\GoogleMaps.pdb
+C:\Users\Vladimir\Desktop\Диплом\GoogleMaps\GoogleMaps\obj\Debug\GoogleMaps.csprojResolveAssemblyReference.cache
+C:\Users\Vladimir\Desktop\Диплом\GoogleMaps\GoogleMaps\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+E:\Диплом\Диплом\GoogleMaps\GoogleMaps\bin\roslyn\csc.exe
+E:\Диплом\Диплом\GoogleMaps\GoogleMaps\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+E:\Диплом\Диплом\GoogleMaps\GoogleMaps\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+E:\Диплом\Диплом\GoogleMaps\GoogleMaps\bin\roslyn\Microsoft.CodeAnalysis.dll
+E:\Диплом\Диплом\GoogleMaps\GoogleMaps\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+E:\Диплом\Диплом\GoogleMaps\GoogleMaps\bin\roslyn\Microsoft.CSharp.Core.targets
+E:\Диплом\Диплом\GoogleMaps\GoogleMaps\bin\roslyn\Microsoft.VisualBasic.Core.targets
+E:\Диплом\Диплом\GoogleMaps\GoogleMaps\bin\roslyn\System.Collections.Immutable.dll
+E:\Диплом\Диплом\GoogleMaps\GoogleMaps\bin\roslyn\System.Reflection.Metadata.dll
+E:\Диплом\Диплом\GoogleMaps\GoogleMaps\bin\roslyn\vbc.exe
+E:\Диплом\Диплом\GoogleMaps\GoogleMaps\bin\roslyn\VBCSCompiler.exe
+E:\Диплом\Диплом\GoogleMaps\GoogleMaps\bin\roslyn\VBCSCompiler.exe.config
+E:\Диплом\Диплом\GoogleMaps\GoogleMaps\bin\GoogleMaps.dll.config
+E:\Диплом\Диплом\GoogleMaps\GoogleMaps\bin\GoogleMaps.dll
+E:\Диплом\Диплом\GoogleMaps\GoogleMaps\bin\GoogleMaps.pdb
+E:\Диплом\Диплом\GoogleMaps\GoogleMaps\bin\jQueryTmpl.dll
+E:\Диплом\Диплом\GoogleMaps\GoogleMaps\bin\jQueryTmpl.Mvc.dll
+E:\Диплом\Диплом\GoogleMaps\GoogleMaps\bin\jQueryTmpl.xml
+E:\Диплом\Диплом\GoogleMaps\GoogleMaps\bin\jQueryTmpl.Mvc.xml
+E:\Диплом\Диплом\GoogleMaps\GoogleMaps\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+E:\Диплом\Диплом\GoogleMaps\GoogleMaps\obj\Debug\GoogleMaps.csprojResolveAssemblyReference.cache
+E:\Диплом\Диплом\GoogleMaps\GoogleMaps\obj\Debug\GoogleMaps.dll
+E:\Диплом\Диплом\GoogleMaps\GoogleMaps\obj\Debug\GoogleMaps.pdb
+C:\Users\LocalAdmin\Desktop\GoogleMaps\GoogleMaps\bin\roslyn\csc.exe
+C:\Users\LocalAdmin\Desktop\GoogleMaps\GoogleMaps\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+C:\Users\LocalAdmin\Desktop\GoogleMaps\GoogleMaps\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+C:\Users\LocalAdmin\Desktop\GoogleMaps\GoogleMaps\bin\roslyn\Microsoft.CodeAnalysis.dll
+C:\Users\LocalAdmin\Desktop\GoogleMaps\GoogleMaps\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+C:\Users\LocalAdmin\Desktop\GoogleMaps\GoogleMaps\bin\roslyn\Microsoft.CSharp.Core.targets
+C:\Users\LocalAdmin\Desktop\GoogleMaps\GoogleMaps\bin\roslyn\Microsoft.VisualBasic.Core.targets
+C:\Users\LocalAdmin\Desktop\GoogleMaps\GoogleMaps\bin\roslyn\System.Collections.Immutable.dll
+C:\Users\LocalAdmin\Desktop\GoogleMaps\GoogleMaps\bin\roslyn\System.Reflection.Metadata.dll
+C:\Users\LocalAdmin\Desktop\GoogleMaps\GoogleMaps\bin\roslyn\vbc.exe
+C:\Users\LocalAdmin\Desktop\GoogleMaps\GoogleMaps\bin\roslyn\VBCSCompiler.exe
+C:\Users\LocalAdmin\Desktop\GoogleMaps\GoogleMaps\bin\roslyn\VBCSCompiler.exe.config
+C:\Users\LocalAdmin\Desktop\GoogleMaps\GoogleMaps\bin\GoogleMaps.dll.config
+C:\Users\LocalAdmin\Desktop\GoogleMaps\GoogleMaps\bin\GoogleMaps.dll
+C:\Users\LocalAdmin\Desktop\GoogleMaps\GoogleMaps\bin\GoogleMaps.pdb
+C:\Users\LocalAdmin\Desktop\GoogleMaps\GoogleMaps\bin\jQueryTmpl.dll
+C:\Users\LocalAdmin\Desktop\GoogleMaps\GoogleMaps\bin\jQueryTmpl.Mvc.dll
+C:\Users\LocalAdmin\Desktop\GoogleMaps\GoogleMaps\bin\jQueryTmpl.xml
+C:\Users\LocalAdmin\Desktop\GoogleMaps\GoogleMaps\bin\jQueryTmpl.Mvc.xml
+C:\Users\LocalAdmin\Desktop\GoogleMaps\GoogleMaps\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\LocalAdmin\Desktop\GoogleMaps\GoogleMaps\obj\Debug\GoogleMaps.csprojResolveAssemblyReference.cache
+C:\Users\LocalAdmin\Desktop\GoogleMaps\GoogleMaps\obj\Debug\GoogleMaps.dll
+C:\Users\LocalAdmin\Desktop\GoogleMaps\GoogleMaps\obj\Debug\GoogleMaps.pdb
+E:\GoogleMaps\GoogleMaps\bin\roslyn\csc.exe
+E:\GoogleMaps\GoogleMaps\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+E:\GoogleMaps\GoogleMaps\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+E:\GoogleMaps\GoogleMaps\bin\roslyn\Microsoft.CodeAnalysis.dll
+E:\GoogleMaps\GoogleMaps\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+E:\GoogleMaps\GoogleMaps\bin\roslyn\Microsoft.CSharp.Core.targets
+E:\GoogleMaps\GoogleMaps\bin\roslyn\Microsoft.VisualBasic.Core.targets
+E:\GoogleMaps\GoogleMaps\bin\roslyn\System.Collections.Immutable.dll
+E:\GoogleMaps\GoogleMaps\bin\roslyn\System.Reflection.Metadata.dll
+E:\GoogleMaps\GoogleMaps\bin\roslyn\vbc.exe
+E:\GoogleMaps\GoogleMaps\bin\roslyn\VBCSCompiler.exe
+E:\GoogleMaps\GoogleMaps\bin\roslyn\VBCSCompiler.exe.config
+E:\GoogleMaps\GoogleMaps\bin\GoogleMaps.dll.config
+E:\GoogleMaps\GoogleMaps\bin\GoogleMaps.dll
+E:\GoogleMaps\GoogleMaps\bin\GoogleMaps.pdb
+E:\GoogleMaps\GoogleMaps\bin\jQueryTmpl.dll
+E:\GoogleMaps\GoogleMaps\bin\jQueryTmpl.Mvc.dll
+E:\GoogleMaps\GoogleMaps\bin\jQueryTmpl.xml
+E:\GoogleMaps\GoogleMaps\bin\jQueryTmpl.Mvc.xml
+E:\GoogleMaps\GoogleMaps\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+E:\GoogleMaps\GoogleMaps\obj\Debug\GoogleMaps.csprojResolveAssemblyReference.cache
+E:\GoogleMaps\GoogleMaps\obj\Debug\GoogleMaps.dll
+E:\GoogleMaps\GoogleMaps\obj\Debug\GoogleMaps.pdb
+C:\Users\Vladimir\Desktop\GoogleMaps\GoogleMaps\obj\Debug\GoogleMaps.csprojResolveAssemblyReference.cache
+C:\Users\Vladimir\Desktop\GoogleMaps\GoogleMaps\obj\Debug\GoogleMaps.dll
+C:\Users\Vladimir\Desktop\GoogleMaps\GoogleMaps\obj\Debug\GoogleMaps.pdb
+C:\Users\Vladimir\Desktop\GoogleMaps\GoogleMaps\bin\roslyn\csc.exe
+C:\Users\Vladimir\Desktop\GoogleMaps\GoogleMaps\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+C:\Users\Vladimir\Desktop\GoogleMaps\GoogleMaps\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+C:\Users\Vladimir\Desktop\GoogleMaps\GoogleMaps\bin\roslyn\Microsoft.CodeAnalysis.dll
+C:\Users\Vladimir\Desktop\GoogleMaps\GoogleMaps\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+C:\Users\Vladimir\Desktop\GoogleMaps\GoogleMaps\bin\roslyn\Microsoft.CSharp.Core.targets
+C:\Users\Vladimir\Desktop\GoogleMaps\GoogleMaps\bin\roslyn\Microsoft.VisualBasic.Core.targets
+C:\Users\Vladimir\Desktop\GoogleMaps\GoogleMaps\bin\roslyn\System.Collections.Immutable.dll
+C:\Users\Vladimir\Desktop\GoogleMaps\GoogleMaps\bin\roslyn\System.Reflection.Metadata.dll
+C:\Users\Vladimir\Desktop\GoogleMaps\GoogleMaps\bin\roslyn\vbc.exe
+C:\Users\Vladimir\Desktop\GoogleMaps\GoogleMaps\bin\roslyn\VBCSCompiler.exe
+C:\Users\Vladimir\Desktop\GoogleMaps\GoogleMaps\bin\roslyn\VBCSCompiler.exe.config
+C:\Users\Vladimir\Desktop\GoogleMaps\GoogleMaps\bin\GoogleMaps.dll.config
+C:\Users\Vladimir\Desktop\GoogleMaps\GoogleMaps\bin\GoogleMaps.dll
+C:\Users\Vladimir\Desktop\GoogleMaps\GoogleMaps\bin\GoogleMaps.pdb
+C:\Users\Vladimir\Desktop\GoogleMaps\GoogleMaps\bin\jQueryTmpl.dll
+C:\Users\Vladimir\Desktop\GoogleMaps\GoogleMaps\bin\jQueryTmpl.Mvc.dll
+C:\Users\Vladimir\Desktop\GoogleMaps\GoogleMaps\bin\jQueryTmpl.xml
+C:\Users\Vladimir\Desktop\GoogleMaps\GoogleMaps\bin\jQueryTmpl.Mvc.xml
+C:\Users\Vladimir\Desktop\GoogleMaps\GoogleMaps\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\Vladimir\Desktop\GoogleMaps_new\GoogleMaps\bin\roslyn\csc.exe
+C:\Users\Vladimir\Desktop\GoogleMaps_new\GoogleMaps\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+C:\Users\Vladimir\Desktop\GoogleMaps_new\GoogleMaps\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+C:\Users\Vladimir\Desktop\GoogleMaps_new\GoogleMaps\bin\roslyn\Microsoft.CodeAnalysis.dll
+C:\Users\Vladimir\Desktop\GoogleMaps_new\GoogleMaps\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+C:\Users\Vladimir\Desktop\GoogleMaps_new\GoogleMaps\bin\roslyn\Microsoft.CSharp.Core.targets
+C:\Users\Vladimir\Desktop\GoogleMaps_new\GoogleMaps\bin\roslyn\Microsoft.VisualBasic.Core.targets
+C:\Users\Vladimir\Desktop\GoogleMaps_new\GoogleMaps\bin\roslyn\System.Collections.Immutable.dll
+C:\Users\Vladimir\Desktop\GoogleMaps_new\GoogleMaps\bin\roslyn\System.Reflection.Metadata.dll
+C:\Users\Vladimir\Desktop\GoogleMaps_new\GoogleMaps\bin\roslyn\vbc.exe
+C:\Users\Vladimir\Desktop\GoogleMaps_new\GoogleMaps\bin\roslyn\VBCSCompiler.exe
+C:\Users\Vladimir\Desktop\GoogleMaps_new\GoogleMaps\bin\roslyn\VBCSCompiler.exe.config
+C:\Users\Vladimir\Desktop\GoogleMaps_new\GoogleMaps\bin\GoogleMaps.dll.config
+C:\Users\Vladimir\Desktop\GoogleMaps_new\GoogleMaps\bin\GoogleMaps.dll
+C:\Users\Vladimir\Desktop\GoogleMaps_new\GoogleMaps\bin\GoogleMaps.pdb
+C:\Users\Vladimir\Desktop\GoogleMaps_new\GoogleMaps\bin\jQueryTmpl.dll
+C:\Users\Vladimir\Desktop\GoogleMaps_new\GoogleMaps\bin\jQueryTmpl.Mvc.dll
+C:\Users\Vladimir\Desktop\GoogleMaps_new\GoogleMaps\bin\jQueryTmpl.xml
+C:\Users\Vladimir\Desktop\GoogleMaps_new\GoogleMaps\bin\jQueryTmpl.Mvc.xml
+C:\Users\Vladimir\Desktop\GoogleMaps_new\GoogleMaps\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\Vladimir\Desktop\GoogleMaps_new\GoogleMaps\obj\Debug\GoogleMaps.csprojResolveAssemblyReference.cache
+C:\Users\Vladimir\Desktop\GoogleMaps_new\GoogleMaps\obj\Debug\GoogleMaps.dll
+C:\Users\Vladimir\Desktop\GoogleMaps_new\GoogleMaps\obj\Debug\GoogleMaps.pdb

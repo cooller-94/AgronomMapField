@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="DefaultConnection-Web.config Connection String" description="DefaultConnection Connection String used in web.config by the application to access the database." defaultValue="Server=tcp:dbagr.database.windows.net,1433;Database=DB_AGR;User ID=cooller@dbagr;Password=vova-0394;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="C:\\Диплом\\GoogleMaps\\GoogleMaps\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='DefaultConnection']/@connectionString" />
+  </parameter>
+  <parameter name="AgrDB-Web.config Connection String" description="AgrDB Connection String used in web.config by the application to access the database." defaultValue="data source=dbagr.database.windows.net;initial catalog=DB_AGR;user id=cooller;password=vova-0394;MultipleActiveResultSets=True;App=EntityFramework" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="C:\\Диплом\\GoogleMaps\\GoogleMaps\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='AgrDB']/@connectionString" />
+  </parameter>
+  <parameter name="DBAgrField-Web.config Connection String" description="DBAgrField Connection String used in web.config by the application to access the database." defaultValue="metadata=res://*/DAL.DBModel.DbAgrField.csdl|res://*/DAL.DBModel.DbAgrField.ssdl|res://*/DAL.DBModel.DbAgrField.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=dbagr.database.windows.net;initial catalog=DB_AGR;user id=cooller;Password=vova-0394;MultipleActiveResultSets=True;App=EntityFramework&quot;" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="C:\\Диплом\\GoogleMaps\\GoogleMaps\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='DBAgrField']/@connectionString" />
+  </parameter>
+</parameters>
