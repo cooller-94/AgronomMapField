@@ -6,6 +6,7 @@
     WindowInfoHtmlContent: null,
     CurrentInfoWindow: null,
     CurrentMarker: null,
+    Fields: null,
 
     Init: function (baseUrl) {
         GoogleActions.baseUrl = baseUrl;
@@ -20,12 +21,14 @@
     },
 
     LoadFields: function () {
+        $("#fountainG").show();
 
         $.ajax({
             url: GoogleActions.baseUrl + "/LoadFields",
             type: 'GET',
             success: function (data) {
-                $("#targetListFields").tmpl({ fields: data.Fields }).appendTo('.fieldsList')
+                GoogleActions.Fields = data.Fields;
+                GoogleActions.RenderFieldsTemplate();
             },
             error: function (data) {
                 console.log(data);
@@ -34,12 +37,19 @@
     },
 
 
+    RenderFieldsTemplate: function () {
+        $("#fountainG").hide();
+        $(".fieldsList").empty();
+        $("#targetListFields").tmpl({ fields: GoogleActions.Fields }).appendTo('.fieldsList')
+    },
+
     OnSuccesSaveField: function (data) {
         if (data.IsSuccess = true) {
             GoogleActions.ShowNoty("Данные успешно добавленны", "success");
             GoogleActions.CurrentFieldId = data.data.FieldId;
             $("#fillFieldModal").modal('hide');
             $("#selectFieldModal").modal('show');
+            GoogleActions.LoadFields();
         }
         else {
             GoogleActions.ShowNoty("Произошла ошибка", "error");
@@ -92,12 +102,12 @@
 
                 var field = new google.maps.Polygon({
                     paths: array,
-                    strokeColor: '#' + response.Field.Color,
+                    strokeColor: '#8FBC8F',
                     strokeOpacity: 0.8,
                     strokeWeight: 1,
-                    fillColor: '#' + response.Field.Color,
+                    fillColor: '#8FBC8F',
                     fillOpacity: 0.8,
-                   // editable: true,
+                    // editable: true,
                 });
 
                 field.setMap(InitializeGoogleMapAPI.DrawingManager.getMap())
@@ -105,11 +115,14 @@
                 InitializeGoogleMapAPI.DrawingManager.getMap().setCenter(array[0]);
                 InitializeGoogleMapAPI.DrawingManager.getMap().setZoom(14);
                 GoogleActions.ChagneActiveItem(sender);
+
                 var marker = new google.maps.Marker({
                     map: InitializeGoogleMapAPI.DrawingManager.getMap(),
                     position: bounds.getCenter(),
-                    icon: new google.maps.MarkerImage("http://cdn.shopify.com/s/files/1/0975/7464/files/sunflower.png?8452329196668647598", null, null, null, new google.maps.Size(42, 68))
+                    icon: new google.maps.MarkerImage(response.Field.CultureIconLink, null, null, null, new google.maps.Size(42, 68)),
+                    animation: google.maps.Animation.DROP
                 })
+
                 GoogleActions.CurrentMarker = marker;
                 google.maps.event.addListener(marker, 'click', function () { GoogleActions.OnClickMarker(marker) });
 
@@ -214,4 +227,5 @@
             }
         });
     },
+
 }

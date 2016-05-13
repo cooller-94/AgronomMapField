@@ -7,13 +7,13 @@ using GoogleMaps.HelperClasses;
 
 namespace GoogleMaps.Services
 {
-    public class ColorService
+    public class CultureLinkService
     {
         private JobAccauntingContext jobContext = new JobAccauntingContext();
 
-        public CultureIconLink GetColorForField(FieldJobState state)
+        public CultureIconLink GetIconLinkForField(String culture)
         {
-            return jobContext.CultureIconLinks?.Where(c => c.Culture.CultureName == state.Culture)?.SingleOrDefault();
+            return jobContext.CultureIconLinks?.Where(c => c.Culture.CultureName == culture)?.SingleOrDefault();
         }
     }
 }

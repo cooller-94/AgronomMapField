@@ -17,17 +17,16 @@
             <div class="col-lg-6">
                 @if (Model.Field != null)
                 {
-                    @*<span><b>Название поля: </b>@Model.Field</span>*@
                     <div class="form-group">
-                        @Html.LabelFor(m => m.Field.FieldTitle)
+                        @Html.LabelFor(m => m.Field.FieldTitle):
                         @Html.DisplayFor(m => m.Field.FieldTitle)
                     </div>
                     <div class="form-group">
-                        @Html.LabelFor(m => m.Field.Area)
+                        @Html.LabelFor(m => m.Field.Area):
                         @Html.DisplayFor(m => m.Field.Area)
                     </div>
                     <div class="form-group">
-                        @Html.LabelFor(m => m.Field.Owner)
+                        @Html.LabelFor(m => m.Field.Owner):
                         @Html.DisplayFor(m => m.Field.Owner)
                     </div>
                 }
@@ -58,7 +57,7 @@
                 </thead>
                 <tbody>
                     @foreach (var item in Model.JobAccountingModel)
-                {
+                    {
                         <tr>
                             <td>@item.Date</td>
                             <td>@item.Quantity</td>
@@ -72,6 +71,25 @@
         }
     </div>
     <div id="menu2" class="tab-pane fade">
-        TODO
+        @if (Model.JobPlanningModel != null && Model.JobPlanningModel.Count > 0)
+        {
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>@Html.LabelFor(i => Model.JobPlanningModel[0].Year)</th>
+                        <th>@Html.LabelFor(i => Model.JobPlanningModel[0].Culture)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.JobPlanningModel)
+                    {
+                        <tr>
+                            <td>@item.Year</td>
+                            <td>@item.Culture</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
     </div>
 </div>

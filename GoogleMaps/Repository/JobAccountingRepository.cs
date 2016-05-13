@@ -36,10 +36,32 @@ namespace GoogleMaps.Repository
             return model;
         }
 
+        public static JobPlanningModel GetJobPlanningModelFromFieldPlanning(FieldPlanningJob planningJob)
+        {
+            return new JobPlanningModel()
+            {
+                Culture = planningJob.Culture.CultureName,
+                Year = planningJob.YearPlanning
+            };
+        }
+
+        public static List<JobPlanningModel> GetJobPlanningModelFromFieldPlanning(List<FieldPlanningJob> planningJob)
+        {
+            List<JobPlanningModel> model = new List<JobPlanningModel>();
+
+            foreach(var job in planningJob)
+            {
+                model.Add(GetJobPlanningModelFromFieldPlanning(job));
+            }
+
+            return model;
+        }
+
         public static JobModel GetJobModelFromFromField(Field field)
         {
             JobModel model = new JobModel();
             model.JobAccountingModel = GetJobAccountinModelFromJob(field.JobsAccauntings.ToList());
+            model.JobPlanningModel = GetJobPlanningModelFromFieldPlanning(field.FieldPlanningJobs.ToList());
             model.Field = FieldRepository.GetModelFromField(field);
             return model;
         }

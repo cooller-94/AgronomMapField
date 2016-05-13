@@ -15,9 +15,7 @@ namespace GoogleMaps.Models
         [Required]
         public String FieldTitle { get; set; }
 
-        public FieldJobState FieldJobState { get; set; }
-
-        public String Color { get; set; }
+        //public FieldJobState FieldJobState { get; set; }
 
         [Display(Name = "Площадь")]
         [Required]
@@ -27,6 +25,9 @@ namespace GoogleMaps.Models
         [Display(Name = "Владелец")]
         [Required]
         public String Owner { get; set; }
+
+        public String CurrentCulture { get; set; }
+        public String CultureIconLink { get; set; }
 
         public List<Point> PolygonPoints { get; set; }
 

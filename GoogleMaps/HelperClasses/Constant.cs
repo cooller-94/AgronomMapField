@@ -7,8 +7,6 @@ namespace GoogleMaps.HelperClasses
 {
     public static class Constant
     {
-        //public String Corn = "посів соняшника";
-        public static String Corn = "кукурудзи";
-        public static String Sunflower = "соняшника";
+        public static String DEFAULT_ICON_LINK = "https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png";
     }
 }

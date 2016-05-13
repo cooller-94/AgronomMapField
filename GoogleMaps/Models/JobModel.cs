@@ -10,5 +10,6 @@ namespace GoogleMaps.Models
     {
         public FieldModel Field { get; set; }
         public List<JobAccountingModel> JobAccountingModel { get; set; }
+        public List<JobPlanningModel> JobPlanningModel { get; set; }
     }
 }

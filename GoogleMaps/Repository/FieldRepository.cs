@@ -22,18 +22,13 @@ namespace GoogleMaps.Repository
             fieldModel.Area = field.Area.HasValue ? field.Area.Value : 0;
             fieldModel.Owner = field?.OwnerName ?? String.Empty;
             fieldModel.PolygonPoints = new List<Point>();
-
-            FieldJobState state = FieldHelper.GetCurrentState(field.JobsAccauntings.ToList());
-
-            if (state != null)
-            {
-                fieldModel.Color = new ColorService().GetColorForField(state)?.CultureIconLinl ?? "https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png";
-            }
+            fieldModel.CurrentCulture = field.FieldPlanningJobs?.Where(jp => jp.YearPlanning == DateTime.Now.Year).SingleOrDefault()?.Culture.CultureName;
+            fieldModel.CultureIconLink = new CultureLinkService().GetIconLinkForField(fieldModel.CurrentCulture)?.CultureIconLinl ?? Constant.DEFAULT_ICON_LINK;
 
 
             foreach (DAL.DBModel.JobAccauntingModels.AgrFieldLocation location in field.AgrFieldLocations)
             {
-                fieldModel.PolygonPoints.Add(new Point{ lat = location.lat, lng = location.lng });
+                fieldModel.PolygonPoints.Add(new Point { lat = location.lat, lng = location.lng });
             }
 
             return fieldModel;
@@ -52,7 +47,7 @@ namespace GoogleMaps.Repository
 
                 return result.ToList();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return null;
             }
@@ -78,7 +73,7 @@ namespace GoogleMaps.Repository
 
                 return field;
             }
-            catch(Exception)
+            catch (Exception)
             {
                 return null;
             }
