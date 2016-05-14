@@ -12,6 +12,7 @@
 <link href="~/Content/Site.css" rel="stylesheet" />
 <script src="~/Scripts/GoogleMap/InitializeGoogleMapAPI.js"></script>
 <script src="~/Scripts/GoogleMap/GoogleActions.js"></script>
+<script src="~/Scripts/GoogleMap/MarkerManager.js"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD6RXBQJirPU3UyvggVbl82r1KKvzxCng4&libraries=drawing,weather&callback=InitializeGoogleMapAPI.Init"
         async defer></script>
 @*<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3&sensor=false&libraries=weather">
@@ -30,6 +31,7 @@
             <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#fillFieldModal" id="btnAdd">
                 Добавить поле
             </button>
+            @Html.DropDownList("Cultures",(List<SelectListItem>)ViewBag.Cultures, new { multiple = "multiple" })
         </div>
         <div class="col-lg-3"></div>
 

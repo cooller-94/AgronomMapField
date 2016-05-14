@@ -1,17 +1,19 @@
 ﻿/// <reference path="C:\Users\Vladimir\Desktop\GoogleMaps-2016-04-18 (1)\GoogleMaps\GoogleMaps\Views/GoogleMap/FieldInfo.cshtml" />
 InitializeGoogleMapAPI = {
-    latitude: 23.99,
-    longitude: 11.13,
+    latitude: 50.453242,
+    longitude: 30.525513,
     DrawingManager: null,
+    MarkerManager: null,
 
     Init: function () {
         var latlng = new google.maps.LatLng(InitializeGoogleMapAPI.latitude, InitializeGoogleMapAPI.longitude);
         var options = {
-            zoom: 3,
+            zoom: 6,
             center: latlng,
             mapTypeId: google.maps.MapTypeId.HYBRID,
         };
         var map = new google.maps.Map($("#map_canvas")[0], options);
+        InitializeGoogleMapAPI.MarkerManager = new MarkerManager(map);
         var marker = new google.maps.Marker({ map: map, position: latlng });
         var weatherLayer = new google.maps.weather.WeatherLayer({
             temperatureUnits: google.maps.weather.TemperatureUnit.CELSIUM

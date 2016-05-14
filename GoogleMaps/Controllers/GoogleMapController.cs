@@ -32,6 +32,7 @@ namespace GoogleMaps.Controllers
             }, "Value", "Text");
 
             ViewBag.Cities = Cities;
+            ViewBag.Cultures = CultureHelper.GetCultureValues();
 
             return View();
         }
