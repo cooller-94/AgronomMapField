@@ -16,6 +16,11 @@ GoogleActions = {
         GoogleActions.LoadFields();
         GoogleActions.InitFilterCulture();
 
+        $("body").on("click", "#jobAccaunting", GoogleActions.OnJobAccauntingTabClick);
+        $("body").on("click", "#jobPlanning", GoogleActions.OnJobPlanningTabClick);
+        $("body").on("click", "#generalField", GoogleActions.OnGeneralFieldClick);
+        $("body").on("click", ".nav-tabs li", GoogleActions.OnTabClick);
+
     },
 
     GetFieldInfo: function (polygon, callback) {
@@ -103,6 +108,11 @@ GoogleActions = {
 
     OnClickRowField: function (sender) {
         var currentField = GoogleActions.FindFieldById($(sender.target).closest(".field-item").find("[type='hidden']").val())
+
+        if (GoogleActions.CurrentInfoWindow != null) {
+            GoogleActions.CurrentInfoWindow.close();
+        }
+
         GoogleActions.InitField(currentField)
         GoogleActions.ChagneActiveItem(sender.target);
         var point = Util.MetersToLatLon({ X: currentField.PolygonPoints[0].lng, Y: currentField.PolygonPoints[0].lat })
@@ -137,10 +147,14 @@ GoogleActions = {
 
         fieldMap.setMap(InitializeGoogleMapAPI.DrawingManager.getMap());
 
-        InitializeGoogleMapAPI.MarkerManager.createMarker(bounds.getCenter(), new google.maps.MarkerImage(field.CultureIconLink, null, null, null, new google.maps.Size(42, 68)), google.maps.Animation.DROP);
+        var marker = InitializeGoogleMapAPI.MarkerManager.getMarker(bounds.getCenter());
 
-        GoogleActions.CurrentMarker = InitializeGoogleMapAPI.MarkerManager.getMarker(bounds.getCenter());
-        google.maps.event.addListener(GoogleActions.CurrentMarker, 'click', function () { GoogleActions.OnClickMarker(InitializeGoogleMapAPI.MarkerManager.getMarker(bounds.getCenter()), field.Id) });
+        if (marker == null) {
+            InitializeGoogleMapAPI.MarkerManager.createMarker(bounds.getCenter(), new google.maps.MarkerImage(field.CultureIconLink, null, null, null, new google.maps.Size(30, 40)), google.maps.Animation.DROP);
+            marker = InitializeGoogleMapAPI.MarkerManager.getMarker(bounds.getCenter());
+            google.maps.event.addListener(marker, 'click', function () { GoogleActions.OnClickMarker(marker, field.Id) });
+        }
+
     },
 
     OnClickEditLocation: function (sender) {
@@ -157,10 +171,13 @@ GoogleActions = {
             url: GoogleActions.baseUrl + "/GetWindowInfo",
             dataType: 'html',
             contentType: 'application/json',
-            data: { fieldId: fieldId },
             traditional: true,
             success: function (html) {
                 GoogleActions.WindowInfoHtmlContent = html;
+
+                if (GoogleActions.CurrentInfoWindow != null) {
+                    GoogleActions.CurrentInfoWindow.close();
+                }
 
                 GoogleActions.CurrentInfoWindow = new google.maps.InfoWindow({
                     content: html,
@@ -169,12 +186,111 @@ GoogleActions = {
                 GoogleActions.ChagneActiveItem($("[type='hidden'][value = '" + fieldId + "']"))
                 GoogleActions.CurrentMarker = marker;
                 GoogleActions.CurrentInfoWindow.open(InitializeGoogleMapAPI.DrawingManager.getMap(), marker);
-                GoogleActions.LoadWeather(GoogleActions.CurrentMarker.position)
+                GoogleActions.CurrentFieldId = fieldId;
+                GoogleActions.OnGeneralFieldClick();
             },
             error: function (data) {
                 console.log('error')
             },
         });
+    },
+
+    OnTabClick: function (sender) {
+        if ($("#generalField").hasClass("active")) {
+            $(".nav-field li").last().hide()
+        } else {
+            $(".nav-field li").last().show()
+        }
+    },
+
+    OnJobAccauntingTabClick: function (sender) {
+        $.ajax({
+            url: GoogleActions.baseUrl + "/GetJobAccaunting",
+            data: { fieldId: GoogleActions.CurrentFieldId },
+            beforeSend: function () {
+                $("#menu1").html("")
+                $(".img-loading").show();
+            },
+            complete: function () {
+                $(".img-loading").hide();
+            },
+            success: function (html) {
+                GoogleActions.WindowInfoHtmlContent = html;
+
+
+                if ($(".fullScreenInfo").find(".glyphicon").hasClass("glyphicon-resize-full")) {
+                    $("#menu1").html(html);
+                    $(".form-partial").hide();
+                }
+
+                //$("#fullScreenInfoModal").modal("show");
+                //$("#fullScreenInfoBody").append(html);
+            },
+            error: function (data) {
+                console.log(data);
+            }
+        });
+    },
+
+    OnJobPlanningTabClick: function (sender) {
+        var id = $(".FieldId").first().val();
+        $.ajax({
+            url: GoogleActions.baseUrl + "/GetJobPlaning",
+            data: { fieldId: GoogleActions.CurrentFieldId },
+            beforeSend: function () {
+                $("#menu2").html("")
+                $(".img-loading").show();
+            },
+            complete: function () {
+                $(".img-loading").hide();
+            },
+            success: function (html) {
+                GoogleActions.WindowInfoHtmlContent = html;
+
+
+                if ($(".fullScreenInfo").find(".glyphicon").hasClass("glyphicon-resize-full")) {
+                    $("#menu2").html(GoogleActions.WindowInfoHtmlContent);
+                    $(".form-partial").hide();
+                }
+
+            },
+            error: function (data) {
+                console.log(data);
+            }
+        });
+    },
+
+    OnGeneralFieldClick: function (sender) {
+        $.ajax({
+            url: GoogleActions.baseUrl + "/GetFieldPartial",
+            data: { fieldId: GoogleActions.CurrentFieldId },
+            beforeSend: function () {
+                $("#home").html("")
+                $(".img-loading").show();
+            },
+            complete:function(){
+                $(".img-loading").hide();
+            },
+            success: function (html) {
+                GoogleActions.WindowInfoHtmlContent = html;
+
+
+                if ($(".fullScreenInfo").find(".glyphicon").hasClass("glyphicon-resize-full")) {
+                    $("#home").html(GoogleActions.WindowInfoHtmlContent);
+                }
+                GoogleActions.LoadWeather(GoogleActions.CurrentMarker.position)
+            },
+            error: function (data) {
+                console.log(data);
+            }
+        });
+    },
+
+    OnSuccessLoadFromFilter: function (response) {
+        if (response.length > 0) {
+            GoogleActions.WindowInfoHtmlContent = response;
+            $("#jobTableBody").html(GoogleActions.WindowInfoHtmlContent);
+        }
     },
 
     OnClickFullScreenWindowInfo: function (sender) {
@@ -183,7 +299,9 @@ GoogleActions = {
         if ($(".fullScreenInfo").find(".glyphicon").hasClass("glyphicon-resize-full")) {
             GoogleActions.CurrentInfoWindow.close();
             $("#fullScreenInfoModal").modal("show");
-            $("#fullScreenInfoBody").html(GoogleActions.WindowInfoHtmlContent);
+            $(".form-partial").show();
+            $("#jobTableBody").html(GoogleActions.WindowInfoHtmlContent);
+            $(".FieldId").val(GoogleActions.CurrentFieldId)
             $(".fullScreenInfo").find(".glyphicon").removeClass("glyphicon-resize-full").addClass("glyphicon-resize-small");
         }
         else {
@@ -281,7 +399,9 @@ GoogleActions = {
         if (includeFields.length > 0) {
             for (var field of includeFields) {
                 var centerMarker = GoogleActions.GetBoundField(field).getCenter();
-                InitializeGoogleMapAPI.MarkerManager.createMarker(centerMarker, new google.maps.MarkerImage(field.CultureIconLink, null, null, null, new google.maps.Size(42, 68)), google.maps.Animation.DROP);
+                InitializeGoogleMapAPI.MarkerManager.createMarker(centerMarker, new google.maps.MarkerImage(field.CultureIconLink, null, null, null, new google.maps.Size(30, 40)), google.maps.Animation.DROP);
+                marker = InitializeGoogleMapAPI.MarkerManager.getMarker(centerMarker);
+                google.maps.event.addListener(marker, 'click', function () { GoogleActions.OnClickMarker(marker, field.Id) });
             }
         }
     },

@@ -7,6 +7,6 @@ namespace GoogleMaps.HelperClasses
 {
     public static class Constant
     {
-        public static String DEFAULT_ICON_LINK = "https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png";
+        public static String DEFAULT_ICON_LINK = "http://maps.google.com/mapfiles/marker.png";
     }
 }

@@ -223,6 +223,9 @@
     <Compile Include="Models\FieldModel.cs" />
     <Compile Include="Models\FilterCultureModel.cs" />
     <Compile Include="Models\FilterDataModel.cs" />
+    <Compile Include="Models\FilterJobAccauntinData.cs" />
+    <Compile Include="Models\ShortFilterJobAccauntingModel.cs" />
+    <Compile Include="Models\FilterJobPlanningModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\JobAccountingModel.cs" />
     <Compile Include="Models\JobModel.cs" />
@@ -237,10 +240,13 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\FieldRepository.cs" />
     <Compile Include="Repository\JobAccountingRepository.cs" />
+    <Compile Include="Repository\JobPlanningRepository.cs" />
     <Compile Include="Services\CultureService.cs" />
     <Compile Include="Services\IconLinkService.cs" />
     <Compile Include="Services\FieldService.cs" />
     <Compile Include="Services\IFieldService.cs" />
+    <Compile Include="Services\JobAccauntingService.cs" />
+    <Compile Include="Services\JobPlanningService.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -277,6 +283,7 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Images\default.gif" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -466,6 +473,7 @@
     <Content Include="Scripts\Utils\Weather\jquery.simpleWeather.min.js" />
     <Content Include="Scripts\Utils\Weather\MIT-LICENSE.txt" />
     <Content Include="Scripts\_references.js" />
+    <Content Include="Scripts\Statistics\Statistics.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -516,6 +524,10 @@
     <Content Include="Scripts\Utils\Weather\package.json" />
     <Content Include="Scripts\Utils\Weather\README.md" />
     <Content Include="Scripts\Utils\Weather\simpleweather.jquery.json" />
+    <Content Include="Views\GoogleMap\JobAccauntingView.cshtml" />
+    <Content Include="Views\GoogleMap\JobPlanningView.cshtml" />
+    <Content Include="Views\GoogleMap\FieldView.cshtml" />
+    <Content Include="Views\GoogleMap\JobAccauntingFilterPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

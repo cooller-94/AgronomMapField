@@ -1,7 +1,9 @@
-﻿@{
+﻿@using GoogleMaps.Models
+@{
     Layout = null;
 }
 
+@model GoogleMaps.Models.ShortFilterJobAccauntingModel
 
 @Scripts.Render("~/bundles/jquery")
 @Scripts.Render("~/bundles/bootstrap")
@@ -13,10 +15,10 @@
 <script src="~/Scripts/GoogleMap/InitializeGoogleMapAPI.js"></script>
 <script src="~/Scripts/GoogleMap/GoogleActions.js"></script>
 <script src="~/Scripts/GoogleMap/MarkerManager.js"></script>
+<script src="~/Scripts/Statistics/Statistics.js"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD6RXBQJirPU3UyvggVbl82r1KKvzxCng4&libraries=drawing,weather&callback=InitializeGoogleMapAPI.Init"
         async defer></script>
-@*<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3&sensor=false&libraries=weather">
-</script>*@
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 @section Styles {
     html { height: 100% }
     body { height: 100%; margin: 0px; padding: 0px }
@@ -27,13 +29,16 @@
         <div class="col-lg-3">
             <h3 style="margin-top:2px">Агроном. Карты полей</h3>
         </div>
-        <div class="col-lg-3">
+        <div class="col-lg-4">
             <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#fillFieldModal" id="btnAdd">
                 Добавить поле
             </button>
-            @Html.DropDownList("Cultures",(List<SelectListItem>)ViewBag.Cultures, new { multiple = "multiple" })
+            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#chartModel">
+                Проанализировать
+            </button>
+            @Html.DropDownList("Cultures", (List<SelectListItem>)ViewBag.Cultures, new { multiple = "multiple" })
         </div>
-        <div class="col-lg-3"></div>
+        <div class="col-lg-2"></div>
 
         <div class="col-lg-3">
             <div class="input-group">
@@ -50,9 +55,10 @@
                 <div class="panel panel-primary">
                     <div class="panel-heading">
                         <h4 class="panel-title">
-                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseFields">
+                            @*<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseFields">
                                 Поля
-                            </a><i class="indicator glyphicon glyphicon-chevron-down  pull-right"></i>
+                            </a><i class="indicator glyphicon glyphicon-chevron-down  pull-right"></i>*@
+                            Поля
                         </h4>
                     </div>
                     <div id="collapseFields" class="panel-collapse collapse in">
@@ -68,20 +74,6 @@
                                 <div id="fountainG_7" class="fountainG"></div>
                                 <div id="fountainG_8" class="fountainG"></div>
                             </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="panel panel-primary">
-                    <div class="panel-heading">
-                        <h4 class="panel-title">
-                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseActions">
-                                Действия
-                            </a><i class="indicator glyphicon glyphicon-chevron-down  pull-right"></i>
-                        </h4>
-                    </div>
-                    <div id="collapseActions" class="panel-collapse collapse in">
-                        <div class="panel-body">
-                            TODO
                         </div>
                     </div>
                 </div>
@@ -150,7 +142,7 @@
             </div>
             <div class="modal-body">
                 <div class="input-group search">
-                    <input type="text" class="form-control" id="map_search" name="map_search"  rel="cad_num_mask" placeholder="Введите кадастровый номер. Например: 3221655100:01:047:0052">
+                    <input type="text" class="form-control" id="map_search" name="map_search" rel="cad_num_mask" placeholder="Введите кадастровый номер. Например: 3221655100:01:047:0052">
                     <input type="hidden" name="get_serach_cadnum" value="" id="get_serach_cadnum">
                     <span class="input-group-btn">
                         <button class="btn btn-default" type="button" id="map_search_btn">Найти</button>
@@ -193,6 +185,70 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             </div>
             <div class="modal-body" id="fullScreenInfoBody">
+                <div class="filter">
+                    <div id="jobTableBody">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Model for full screen information about field-->
+<div class="modal fade" id="chartModel" tabindex="-1" role="dialog" aria-labelledby="chartModelLabel">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Статистика</h4>
+            </div>
+            <div class="modal-body" id="chart">
+                <div class="row">
+                    <div class="col-sm-3">
+                        <div class="sidebar-nav">
+                            <ul class="nav nav-pills nav-stacked">
+                                <li role="presentation" class="active">
+                                    <a data-toggle="tab" href="#home">Засееность культур</a>
+                                </li>
+                                <li role="presentation">
+                                    <a data-toggle="tab" href="#menu1">Площади полей</a>
+                                </li>
+                                <li role="presentation">
+                                    <a data-toggle="tab" href="#menu2">График работ</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-sm-9">
+                        <div class="tab-content">
+                            <div id="home" class="tab-pane fade in active">
+                                <label>Год посева: </label>
+                                <select id="yearChart" class="dropdown" style="width:100px">
+                                    <option value="2010">2010</option>
+                                    <option value="2011">2011</option>
+                                    <option value="2012">2012</option>
+                                    <option value="2013">2013</option>
+                                    <option value="2014">2014</option>
+                                    <option value="2015">2015</option>
+                                    <option value="2016" selected>2016</option>
+                                    <option value="2017">2017</option>
+                                    <option value="2018">2018</option>
+                                    <option value="2019">2019</option>
+                                </select>
+                                <div id="piechart_3d"></div>
+                            </div>
+                            <div id="menu1" class="tab-pane fade">
+                                <div id="barchart_values" style="width: auto; height: 400px;"></div>
+                            </div>
+                            <div id="menu2" class="tab-pane fade">
+                                @Html.Action("GetJobAccauntingFilter")
+                                <div id="calendar_basic" style="width: auto; height: auto;">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -203,6 +259,7 @@
 <script type="text/javascript">
     $(document).ready(function () {
         GoogleActions.Init('@Url.Action("Index", "GoogleMap")')
+        Statistics.Init();
     });
 </script>
 

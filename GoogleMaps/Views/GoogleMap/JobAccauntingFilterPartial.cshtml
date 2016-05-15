@@ -1,0 +1,13 @@
+﻿@model GoogleMaps.Models.FilterJobAccauntinData
+
+@using (Ajax.BeginForm("GetJobForCalendar", "GoogleMap", new AjaxOptions { OnSuccess = "Statistics.OnSuccessFilter", HttpMethod = "POST" }, new { id = "filter-form" }))
+{
+    @Html.LabelFor(item => item.Year)
+    @Html.DropDownListFor(d => d.Year, (List<SelectListItem>)ViewBag.Years)
+
+    @Html.LabelFor(item => item.FieldId)
+    @Html.DropDownListFor(d => d.FieldId, (List<SelectListItem>)ViewBag.Fields)
+
+    <input type="submit" value="Применить" />
+}
+

@@ -14,7 +14,6 @@ InitializeGoogleMapAPI = {
         };
         var map = new google.maps.Map($("#map_canvas")[0], options);
         InitializeGoogleMapAPI.MarkerManager = new MarkerManager(map);
-        var marker = new google.maps.Marker({ map: map, position: latlng });
         var weatherLayer = new google.maps.weather.WeatherLayer({
             temperatureUnits: google.maps.weather.TemperatureUnit.CELSIUM
         });
@@ -22,19 +21,6 @@ InitializeGoogleMapAPI = {
         var cloud = new google.maps.weather.CloudLayer();
         cloud.setMap(map)
         InitializeGoogleMapAPI.InitDwawing(map);
-
-        $('#accordion').on('hidden.bs.collapse', function toggleChevron(e) {
-            $(e.target)
-                .prev('.panel-heading')
-                .find("i.indicator")
-                .toggleClass('glyphicon-chevron-down glyphicon-chevron-up');
-        });
-        $('#accordion').on('shown.bs.collapse', function toggleChevron(e) {
-            $(e.target)
-                .prev('.panel-heading')
-                .find("i.indicator")
-                .toggleClass('glyphicon-chevron-down glyphicon-chevron-up');
-        });
     },
 
     InitDwawing: function (map) {

@@ -242,7 +242,7 @@ function SetMarker(point) {
     map.addLayer(markers);
     var size = new OpenLayers.Size(21, 25);
     var offset = new OpenLayers.Pixel(-(size.w / 2), -size.h);
-    var icon = new OpenLayers.Icon('https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png', size, offset);
+    var icon = new OpenLayers.Icon('http://maps.google.com/mapfiles/marker.png', size, offset);
     markers.addMarker(new OpenLayers.Marker(point, icon));
 
     GoogleActions.SetMarker(point);

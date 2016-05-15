@@ -1,95 +1,20 @@
-﻿@model GoogleMaps.Models.JobModel
-
-<ul class="nav nav-tabs">
-    <li class="active"><a data-toggle="tab" href="#home">Общая информация</a></li>
-    <li><a data-toggle="tab" href="#menu1">Фактически сделано</a></li>
-    <li><a data-toggle="tab" href="#menu2">Планируется сделать</a></li>
-    <li style="float:right">
+﻿
+<ul class="nav nav-tabs nav-field">
+    <li class="active"><a data-toggle="tab" href="#home" id="generalField">Общая информация</a></li>
+    <li><a data-toggle="tab" href="#menu1" id="jobAccaunting">Фактически сделано</a></li>
+    <li><a data-toggle="tab" href="#menu2" id="jobPlanning">Планируется сделать</a></li>
+    <li style="float:right; display:none">
         <a href="#" class="field-buttons-actions fullScreenInfo">
             <span class="glyphicon glyphicon-resize-full" aria-hidden="true"></span>
         </a>
     </li>
 </ul>
-
+<img src="~/Content/Images/default.gif" class="img-loading loading" style="margin:0 auto;"/>
 <div class="tab-content">
     <div id="home" class="tab-pane fade in active">
-        <div class="row">
-            <div class="col-lg-6">
-                @if (Model.Field != null)
-                {
-                    <div class="form-group">
-                        @Html.LabelFor(m => m.Field.FieldTitle):
-                        @Html.DisplayFor(m => m.Field.FieldTitle)
-                    </div>
-                    <div class="form-group">
-                        @Html.LabelFor(m => m.Field.Area):
-                        @Html.DisplayFor(m => m.Field.Area)
-                    </div>
-                    <div class="form-group">
-                        @Html.LabelFor(m => m.Field.Owner):
-                        @Html.DisplayFor(m => m.Field.Owner)
-                    </div>
-                }
-            </div>
-            <div class="col-lg-6 weather">
-                <div class="thumbnail">
-                    <img src="" id="img">
-                    <div class="caption">
-                        <h3 id="weather-value"></h3>
-                        <p id="weather-city"></p>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
     <div id="menu1" class="tab-pane fade">
-        @if (Model.JobAccountingModel != null && Model.JobAccountingModel.Count > 0)
-        {
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th>@Html.LabelFor(i => Model.JobAccountingModel[0].Date)</th>
-                        <th>@Html.LabelFor(i => Model.JobAccountingModel[0].Quantity)</th>
-                        <th>@Html.LabelFor(i => Model.JobAccountingModel[0].Square)</th>
-                        <th>@Html.LabelFor(i => Model.JobAccountingModel[0].WorkKind)</th>
-                        <th>@Html.LabelFor(i => Model.JobAccountingModel[0].WorkType)</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var item in Model.JobAccountingModel)
-                    {
-                        <tr>
-                            <td>@item.Date</td>
-                            <td>@item.Quantity</td>
-                            <td>@item.Square</td>
-                            <td>@item.WorkKind</td>
-                            <td>@item.WorkType</td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
-        }
     </div>
     <div id="menu2" class="tab-pane fade">
-        @if (Model.JobPlanningModel != null && Model.JobPlanningModel.Count > 0)
-        {
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th>@Html.LabelFor(i => Model.JobPlanningModel[0].Year)</th>
-                        <th>@Html.LabelFor(i => Model.JobPlanningModel[0].Culture)</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var item in Model.JobPlanningModel)
-                    {
-                        <tr>
-                            <td>@item.Year</td>
-                            <td>@item.Culture</td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
-        }
     </div>
 </div>

@@ -18,6 +18,8 @@ namespace GoogleMaps.Controllers
     public class GoogleMapController : Controller
     {
         private FieldService fieldService = new FieldService();
+        private JobAccauntingService jobService = new JobAccauntingService();
+        private JobPlanningService jobPlanningService = new JobPlanningService();
         // GET: GoogleMap
         public ActionResult Index()
         {
@@ -100,19 +102,9 @@ namespace GoogleMaps.Controllers
             return model != null ? Json(new { IsSuccess = true, Field = model }, JsonRequestBehavior.AllowGet) : Json(new { IsSuccess = true }, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult GetWindowInfo(Int32? fieldId)
+        public ActionResult GetWindowInfo()
         {
-            JobModel model = new JobModel();
-            Field field = fieldService.GetField(fieldId.Value);
-
-            if (field == null)
-            {
-                return this.GenerateJson(new { IsSuccess = false, Message = "Для данного поля нет данных" });
-            }
-
-            model = JobAccountingRepository.GetJobModelFromFromField(field);
-
-            return PartialView("~/Views/GoogleMap/WindowInfo.cshtml", model);
+            return PartialView("~/Views/GoogleMap/WindowInfo.cshtml");
         }
 
         private JsonResult GenerateJson(Object data)
@@ -123,5 +115,87 @@ namespace GoogleMaps.Controllers
             }, JsonRequestBehavior.AllowGet);
         }
 
+        public ActionResult GetFieldPartial(Int32 fieldId)
+        {
+            FieldModel model = FieldRepository.GetModelFromField(fieldService.GetField(fieldId));
+
+            if (model == null)
+            {
+                return this.GenerateJson(new { IsSuccess = false, Message = "Для данного поля нет данных" });
+            }
+
+            return PartialView("~/Views/GoogleMap/FieldView.cshtml", model);
+        }
+
+        public ActionResult GetJobAccaunting(ShortFilterJobAccauntingModel filter)
+        {
+            List<JobAccountingModel> model = new List<JobAccountingModel>();
+            model = JobAccountingRepository.GetJobAccountinModelFromJob(jobService.GetJobAccauntings(filter));
+
+            if (model == null)
+            {
+                return this.GenerateJson(new { IsSuccess = false, Message = "Для данного поля нет данных" });
+            }
+
+            return PartialView("~/Views/GoogleMap/JobAccauntingView.cshtml", model);
+        }
+
+        public ActionResult GetJobPlaning(FilterJobPlanningModel filter)
+        {
+            List<JobPlanningModel> model = new List<JobPlanningModel>();
+            model = JobPlanningRepository.GetJobPlanningModelFromFieldPlanning(jobPlanningService.GetFieldJobPlannings(filter));
+
+            if (model == null)
+            {
+                return this.GenerateJson(new { IsSuccess = false, Message = "Для данного поля нет данных" });
+            }
+
+            return PartialView("~/Views/GoogleMap/JobPlanningView.cshtml", model);
+        }
+
+        #region Statistics
+
+        public ActionResult GetAreaInfo(Int32? year)
+        {
+            List<FieldPlanningJob> jobs = jobPlanningService.GetJobPlanningByYear(year.HasValue ? year.Value : DateTime.Now.Year);
+
+            return this.GenerateJson(new
+            {
+                IsSuccess = true,
+                Cultures = jobs.GroupBy(j => j.Culture.CultureID).SelectMany(item => item.Select(s => new { Culture = s.Culture.CultureName, Area = item.Sum(c => c.Field.Area) }).Distinct())
+            });
+        }
+
+        [HttpPost]
+        public ActionResult GetJobForCalendar(FilterJobAccauntinData filter)
+        {
+            var jobs = jobService.GetJobsAccauntings(filter);
+
+            return this.GenerateJson(new
+            {
+                IsSuccess = true,
+                Jobs = jobs.Select(s => new { Year = s.Date.Year, Month = s.Date.Month, Day = s.Date.Day, Area = s.Square })
+            });
+        }
+
+        public ActionResult GetJobAccauntingFilter()
+        {
+            FilterJobAccauntinData model = new FilterJobAccauntinData();
+            ViewBag.Fields = new List<SelectListItem>(fieldService.GetFields().Select(c => new SelectListItem() { Text = c.FieldName, Value = c.FieldID.ToString() }));
+
+            ViewBag.Years = new List<SelectListItem>
+            {
+                new SelectListItem {Text = "Select", Value = "-1" },
+                new SelectListItem() { Text = "2012", Value =  "2012"},
+                new SelectListItem() { Text = "2013", Value =  "2013"},
+                new SelectListItem() { Text = "2014", Value =  "2014"},
+                new SelectListItem() { Text = "2015", Value =  "2015"},
+                new SelectListItem() { Text = "2016", Value =  "2016"},
+            };
+
+            return PartialView("~/Views/GoogleMap/JobAccauntingFilterPartial.cshtml", model);
+        }
+
+        #endregion Statistics
     }
 }
