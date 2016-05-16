@@ -33,6 +33,8 @@ namespace GoogleMaps.Controllers
                 new SelectListItem() {Selected = false, Text = "Днепропетровская", Value =  "1200000000"},
             }, "Value", "Text");
 
+
+
             ViewBag.Cities = Cities;
             ViewBag.Cultures = CultureHelper.GetCultureValues();
 
@@ -54,14 +56,28 @@ namespace GoogleMaps.Controllers
         }
 
         [HttpPost]
-        public JsonResult AddFieldLocation(Int32 fieldId, List<Point> polygon)
+        public JsonResult AddEditFieldLocation(Int32 fieldId, List<Point> polygon, FormAction action)
         {
             if (polygon == null || polygon.Count == 0)
             {
                 return this.GenerateJson(new { IsSuccess = false, ErrorMessage = "Произошла ошибка. Неверный данные" });
             }
 
-            return this.GenerateJson(new { IsSuccess = fieldService.AddLocation(fieldId, polygon) });
+            Boolean IsSuccess = false;
+
+            switch (action)
+            {
+                case FormAction.Create:
+                    IsSuccess = fieldService.AddLocation(fieldId, polygon);
+                    break;
+                case FormAction.Update:
+                    IsSuccess = fieldService.EditLocation(fieldId, polygon);
+                    break;
+                default:
+                    break;
+            }
+
+            return this.GenerateJson(new { IsSuccess = IsSuccess });
         }
 
         public ActionResult GetFieldInfo(Int32? fieldId)

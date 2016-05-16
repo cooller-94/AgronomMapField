@@ -216,6 +216,7 @@
     <Compile Include="HelperClasses\CulturesString.cs" />
     <Compile Include="HelperClasses\FieldHelper.cs" />
     <Compile Include="HelperClasses\FieldJobState.cs" />
+    <Compile Include="HelperClasses\FormAction.cs" />
     <Compile Include="HelperClasses\Point.cs" />
     <Compile Include="HelperClasses\WorkType.cs" />
     <Compile Include="HelperClasses\WorkTypeCulture.cs" />
@@ -306,6 +307,7 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\CadastreUA\click-carousel.js" />
     <Content Include="Scripts\CadastreUA\config.js" />
+    <Content Include="Scripts\CadastreUA\Enums.js" />
     <Content Include="Scripts\CadastreUA\index.js" />
     <Content Include="Scripts\CadastreUA\jq.js" />
     <Content Include="Scripts\CadastreUA\OpenLayers.js" />

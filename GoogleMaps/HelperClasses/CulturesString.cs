@@ -9,5 +9,6 @@ namespace GoogleMaps.HelperClasses
     {
         public static String Corn = "Кукурудза";
         public static String Sunflower = "Соняшник";
+        public static String @heat = "Пшениця Озима";
     }
 }

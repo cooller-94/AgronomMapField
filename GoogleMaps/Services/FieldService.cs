@@ -5,6 +5,7 @@ using System.Web;
 using GoogleMaps.DAL.DBModel;
 using GoogleMaps.HelperClasses;
 using GoogleMaps.DAL.DBModel.JobAccauntingModels;
+using System.Data.Entity;
 
 namespace GoogleMaps.Services
 {
@@ -32,6 +33,36 @@ namespace GoogleMaps.Services
                 return true;
             }
             catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
+        public Boolean EditLocation(Int32 fieldId, List<Point> newPolygon)
+        {
+            try
+            {
+                Field field = jobContext.Fields.Find(fieldId);
+
+                if (field == null)
+                {
+                    return false;
+                }
+
+                field.AgrFieldLocations.ToList().ForEach(s => jobContext.Entry(s).State = EntityState.Deleted);
+                jobContext.SaveChanges();
+                field.AgrFieldLocations = new List<AgrFieldLocation>();
+
+                foreach (Point point in newPolygon)
+                {
+                    field.AgrFieldLocations.Add(new DAL.DBModel.JobAccauntingModels.AgrFieldLocation() { lat = point.lat, lng = point.lng });
+                }
+
+                jobContext.SaveChanges();
+                return true;
+
+            }
+            catch(Exception ex)
             {
                 return false;
             }

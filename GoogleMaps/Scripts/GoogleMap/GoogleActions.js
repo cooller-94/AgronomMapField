@@ -136,16 +136,39 @@ GoogleActions = {
         }
 
         var fieldMap = new google.maps.Polygon({
-            paths: array,
-            strokeColor: '#8FBC8F',
+            paths: field.PolygonPoints,
+            strokeColor: '#FF0000',
             strokeOpacity: 0.8,
-            strokeWeight: 1,
-            fillColor: '#8FBC8F',
-            fillOpacity: 0.8,
-            // editable: true,
+            strokeWeight: 2,
+            fillColor: '#FF0000',
+            fillOpacity: 0.35,
+            draggable: true, 
+            editable: true,
         });
 
         fieldMap.setMap(InitializeGoogleMapAPI.DrawingManager.getMap());
+        GoogleActions.PolygonPath = fieldMap.getPath();
+
+
+        google.maps.event.addListener(fieldMap.getPath(), "insert_at", getPolygonCoords);
+
+        google.maps.event.addListener(fieldMap.getPath(), "set_at", getPolygonCoords);
+
+        function getPolygonCoords() {
+            var len = fieldMap.getPath().getLength();
+            var htmlStr = "";
+            GoogleActions.PolygonPath = [];
+            for (var i = 0; i < len; i++) {
+                var _lat = fieldMap.getPath().getAt(i).lat();
+                var _lng = fieldMap.getPath().getAt(i).lng();
+                GoogleActions.PolygonPath.push({ lat: _lat, lng: _lng });
+                htmlStr += "new google.maps.LatLng(" + fieldMap.getPath().getAt(i).toUrlValue(5) + "), ";
+            }
+
+            console.log(htmlStr)
+        }
+
+
 
         var marker = InitializeGoogleMapAPI.MarkerManager.getMarker(bounds.getCenter());
 
@@ -268,7 +291,7 @@ GoogleActions = {
                 $("#home").html("")
                 $(".img-loading").show();
             },
-            complete:function(){
+            complete: function () {
                 $(".img-loading").hide();
             },
             success: function (html) {
@@ -323,9 +346,9 @@ GoogleActions = {
         InitializeGoogleMapAPI.DrawPolygon(array);
 
         $.ajax({
-            url: GoogleActions.baseUrl + "/AddFieldLocation",
+            url: GoogleActions.baseUrl + "/AddEditFieldLocation",
             type: "POST",
-            data: { fieldId: GoogleActions.CurrentFieldId, polygon: GoogleActions.PolygonPath },
+            data: { fieldId: GoogleActions.CurrentFieldId, polygon: GoogleActions.PolygonPath, action: FormAction.Create },
             success: function (response) {
                 alert('success');
             }

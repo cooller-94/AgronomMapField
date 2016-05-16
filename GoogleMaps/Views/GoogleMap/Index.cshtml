@@ -41,11 +41,11 @@
         <div class="col-lg-2"></div>
 
         <div class="col-lg-3">
-            <div class="input-group">
-                <input type="text" class="form-control" placeholder="Введите название поля или местоположение">
-                <span class="input-group-btn">
-                    <button class="btn btn-default" type="button">Найти</button>
-                </span>
+            <div class="form-group" style="display:inline;">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Введите название поля">
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-search"></span></span>
+                </div>
             </div>
         </div>
     </div>
@@ -55,9 +55,6 @@
                 <div class="panel panel-primary">
                     <div class="panel-heading">
                         <h4 class="panel-title">
-                            @*<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseFields">
-                                Поля
-                            </a><i class="indicator glyphicon glyphicon-chevron-down  pull-right"></i>*@
                             Поля
                         </h4>
                     </div>
@@ -85,71 +82,83 @@
             <div id="map_canvas" class="map_canvas"></div>
         </div>
     </div>
-
-    <div class="row">
-        <div class="col-lg-3 text-left ">
-            <div class="search-form" style="display:none">
-                <select id="id_region" name="id_region" class="filter_select">
-                    <option>Выберите область</option>
-                    <option rel="2600000000" value="1">Івано-франківська</option>
-                    <option rel="100000000" value="2">Авт.республіка крим</option>
-                    <option rel="500000000" value="3">Вінницька</option>
-                    <option rel="700000000" value="4">Волинська</option>
-                    <option rel="1200000000" value="5">Дніпропетровська</option>
-                    <option rel="1400000000" value="6">Донецька</option>
-                    <option rel="1800000000" value="7">Житомирська</option>
-                    <option rel="2100000000" value="8">Закарпатська</option>
-                    <option rel="2300000000" value="9">Запорізька</option>
-                    <option rel="3500000000" value="10">Кіровоградська</option>
-                    <option rel="8000000000" value="26">Київ</option>
-                    <option rel="3200000000" value="11">Київська</option>
-                    <option rel="4400000000" value="12">Луганська</option>
-                    <option rel="4600000000" value="13">Львівська</option>
-                    <option rel="4800000000" value="14">Миколаївська</option>
-                    <option rel="5100000000" value="15">Одеська</option>
-                    <option rel="5300000000" value="16">Полтавська</option>
-                    <option rel="5600000000" value="17">Рівненська</option>
-                    <option rel="8500000000" value="27">Севастополь</option>
-                    <option rel="5900000000" value="18">Сумська</option>
-                    <option rel="6100000000" value="21">Тернопільська</option>
-                    <option rel="6300000000" value="19">Харківська</option>
-                    <option rel="6500000000" value="20">Херсонська</option>
-                    <option rel="6800000000" value="22">Хмельницька</option>
-                    <option rel="7100000000" value="23">Черкаська</option>
-                    <option rel="7300000000" value="24">Чернівецька</option>
-                    <option rel="7400000000" value="25">Чернігівська</option>
-                </select>
-                <select disabled="true" id="id_district" namd="id_district" class="filter_select">
-                    <option>Выберите район</option>
-                </select>
-                <select disabled="true" id="id_city" namd="id_city" class="filter_select">
-                    <option>Выберите город</option>
-                </select>
-            </div>
-        </div>
-
-    </div>
 </div>
 
 <!-- Modal -->
 <!--Model for select field-->>
 <div class="modal fade" id="selectFieldModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog modal-lg select-field" role="document">
-        <div class="modal-content">
+        <div class="modal-content cadastre">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title" id="myModalLabel">Выбор поля</h4>
             </div>
             <div class="modal-body">
-                <div class="input-group search">
-                    <input type="text" class="form-control" id="map_search" name="map_search" rel="cad_num_mask" placeholder="Введите кадастровый номер. Например: 3221655100:01:047:0052">
-                    <input type="hidden" name="get_serach_cadnum" value="" id="get_serach_cadnum">
-                    <span class="input-group-btn">
-                        <button class="btn btn-default" type="button" id="map_search_btn">Найти</button>
-                    </span>
+                <div class="row">
+                    <div class="navbar-form" style="float:right">
+                        <div class="form-group" style="display:inline;">
+                            <div class="input-group">
+                                <input type="text" class="form-control">
+                                <span class="input-group-addon"><span class="glyphicon glyphicon-search"></span></span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="map">
-                    <div class="map-wrap olMap" id="map">
+                <div class="row">
+                    <div class="col-lg-3">
+                        <div class="search-form">
+                            <fieldset>
+                                <label>Область</label>
+                                <select id="id_region" name="id_region" class="filter_select">
+                                    <option selected>Выберите область</option>
+                                    <option rel="2600000000" value="1">Івано-франківська</option>
+                                    <option rel="100000000" value="2">Авт.республіка крим</option>
+                                    <option rel="500000000" value="3">Вінницька</option>
+                                    <option rel="700000000" value="4">Волинська</option>
+                                    <option rel="1200000000" value="5">Дніпропетровська</option>
+                                    <option rel="1400000000" value="6">Донецька</option>
+                                    <option rel="1800000000" value="7">Житомирська</option>
+                                    <option rel="2100000000" value="8">Закарпатська</option>
+                                    <option rel="2300000000" value="9">Запорізька</option>
+                                    <option rel="3500000000" value="10">Кіровоградська</option>
+                                    <option rel="8000000000" value="26">Київ</option>
+                                    <option rel="3200000000" value="11">Київська</option>
+                                    <option rel="4400000000" value="12">Луганська</option>
+                                    <option rel="4600000000" value="13">Львівська</option>
+                                    <option rel="4800000000" value="14">Миколаївська</option>
+                                    <option rel="5100000000" value="15">Одеська</option>
+                                    <option rel="5300000000" value="16">Полтавська</option>
+                                    <option rel="5600000000" value="17">Рівненська</option>
+                                    <option rel="8500000000" value="27">Севастополь</option>
+                                    <option rel="5900000000" value="18">Сумська</option>
+                                    <option rel="6100000000" value="21">Тернопільська</option>
+                                    <option rel="6300000000" value="19">Харківська</option>
+                                    <option rel="6500000000" value="20">Херсонська</option>
+                                    <option rel="6800000000" value="22">Хмельницька</option>
+                                    <option rel="7100000000" value="23">Черкаська</option>
+                                    <option rel="7300000000" value="24">Чернівецька</option>
+                                    <option rel="7400000000" value="25">Чернігівська</option>
+                                </select>
+                            </fieldset>
+                            <fieldset>
+                                <label>Район</label>
+                                <select disabled="true" id="id_district" namd="id_district" class="filter_select">
+                                    <option>Выберите район</option>
+                                </select>
+                            </fieldset>
+                            <fieldset>
+                                <label>Город</label>
+                                <select disabled="true" id="id_city" namd="id_city" class="filter_select">
+                                    <option>Выберите район</option>
+                                </select>
+                            </fieldset>
+                        </div>
+                    </div>
+                    <div class="col-lg-9">
+                        <div class="map">
+                            <div class="map-wrap olMap" id="map">
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
