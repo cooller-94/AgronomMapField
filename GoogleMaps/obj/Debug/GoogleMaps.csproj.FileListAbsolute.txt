@@ -195,7 +195,6 @@ D:\Users\Vladimir\Google Диск\University\Diplom\Project\GoogleMaps_new\Googl
 D:\Users\Vladimir\Google Диск\University\Diplom\Project\GoogleMaps_new\GoogleMaps\bin\jQueryTmpl.Mvc.dll
 D:\Users\Vladimir\Google Диск\University\Diplom\Project\GoogleMaps_new\GoogleMaps\bin\jQueryTmpl.xml
 D:\Users\Vladimir\Google Диск\University\Diplom\Project\GoogleMaps_new\GoogleMaps\bin\jQueryTmpl.Mvc.xml
-D:\Users\Vladimir\Google Диск\University\Diplom\Project\GoogleMaps_new\GoogleMaps\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
 D:\Users\Vladimir\Google Диск\University\Diplom\Project\GoogleMaps_new\GoogleMaps\obj\Debug\GoogleMaps.csprojResolveAssemblyReference.cache
 D:\Users\Vladimir\Google Диск\University\Diplom\Project\GoogleMaps_new\GoogleMaps\obj\Debug\GoogleMaps.dll
 D:\Users\Vladimir\Google Диск\University\Diplom\Project\GoogleMaps_new\GoogleMaps\obj\Debug\GoogleMaps.pdb

@@ -205,6 +205,7 @@
     <Compile Include="DAL\DBModel\JobAccauntingModels\JobAccauntingContext.cs" />
     <Compile Include="DAL\DBModel\JobAccauntingModels\JobsAccaunting.cs" />
     <Compile Include="DAL\DBModel\JobAccauntingModels\Pesticide.cs" />
+    <Compile Include="DAL\DBModel\JobAccauntingModels\Soil.cs" />
     <Compile Include="DAL\DBModel\JobAccauntingModels\Tillage.cs" />
     <Compile Include="DAL\DBModel\JobAccauntingModels\WorkKind.cs" />
     <Compile Include="DAL\DBModel\JobAccauntingModels\WorkType.cs" />
@@ -248,6 +249,7 @@
     <Compile Include="Services\IFieldService.cs" />
     <Compile Include="Services\JobAccauntingService.cs" />
     <Compile Include="Services\JobPlanningService.cs" />
+    <Compile Include="Services\SoilService.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>

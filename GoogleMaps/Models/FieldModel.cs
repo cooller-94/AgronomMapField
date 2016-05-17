@@ -15,7 +15,7 @@ namespace GoogleMaps.Models
         [Required]
         public String FieldTitle { get; set; }
 
-        //public FieldJobState FieldJobState { get; set; }
+        public FormAction Action { get; set; }
 
         [Display(Name = "Площадь")]
         [Required]
@@ -25,6 +25,10 @@ namespace GoogleMaps.Models
         [Display(Name = "Владелец")]
         [Required]
         public String Owner { get; set; }
+
+        [Display(Name = "Почва")]
+        [Required]
+        public Int32 SoildId { get; set; }
 
         public String CurrentCulture { get; set; }
         public String CultureIconLink { get; set; }

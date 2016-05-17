@@ -23,6 +23,7 @@ namespace GoogleMaps.DAL.DBModel.JobAccauntingModels
         public virtual DbSet<Grade> Grades { get; set; }
         public virtual DbSet<JobsAccaunting> JobsAccauntings { get; set; }
         public virtual DbSet<Pesticide> Pesticides { get; set; }
+        public virtual DbSet<Soil> Soils { get; set; }
         public virtual DbSet<Tillage> Tillages { get; set; }
         public virtual DbSet<WorkKind> WorkKinds { get; set; }
         public virtual DbSet<WorkType> WorkTypes { get; set; }
@@ -38,16 +39,6 @@ namespace GoogleMaps.DAL.DBModel.JobAccauntingModels
             modelBuilder.Entity<Culture>()
                 .HasMany(e => e.FieldPlanningJobs)
                 .WithRequired(e => e.Culture)
-                .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<Field>()
-                .HasMany(e => e.FieldPlanningJobs)
-                .WithRequired(e => e.Field)
-                .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<Field>()
-                .HasMany(e => e.AgrFieldLocations)
-                .WithRequired(e => e.Field)
                 .WillCascadeOnDelete(false);
         }
     }

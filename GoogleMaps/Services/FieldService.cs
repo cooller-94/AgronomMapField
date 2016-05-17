@@ -62,7 +62,7 @@ namespace GoogleMaps.Services
                 return true;
 
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return false;
             }
@@ -88,6 +88,39 @@ namespace GoogleMaps.Services
             catch (Exception ex)
             {
                 fieldId = null;
+                return false;
+            }
+        }
+
+        public Boolean Delete(Int32 fieldId)
+        {
+            try
+            {
+                Field field = jobContext.Fields.Find(fieldId);
+                jobContext.Entry<Field>(field).State = EntityState.Deleted;
+                jobContext.SaveChanges();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
+        public Boolean Edit(Field field)
+        {
+            try
+            {
+                Field _field = jobContext.Fields.Find(field.FieldID);
+                _field.Area = field.Area;
+                _field.OwnerName = field.OwnerName;
+                _field.SoilID = field.SoilID;
+                jobContext.Entry<Field>(_field).State = EntityState.Modified;
+                jobContext.SaveChanges();
+                return true;
+            }
+            catch (Exception ex)
+            {
                 return false;
             }
         }

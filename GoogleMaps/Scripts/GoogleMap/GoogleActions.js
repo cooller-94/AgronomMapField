@@ -15,17 +15,25 @@ GoogleActions = {
         GoogleActions.baseUrl = baseUrl;
         GoogleActions.LoadFields();
         GoogleActions.InitFilterCulture();
+        GoogleActions.BindEvents();
+    },
 
+    BindEvents: function () {
         $("body").on("click", "#jobAccaunting", GoogleActions.OnJobAccauntingTabClick);
         $("body").on("click", "#jobPlanning", GoogleActions.OnJobPlanningTabClick);
         $("body").on("click", "#generalField", GoogleActions.OnGeneralFieldClick);
         $("body").on("click", ".nav-tabs li", GoogleActions.OnTabClick);
         $("body").on("click", "#SaveChanges", GoogleActions.OnClickSaveChanges);
         $("body").on("click", "#changeLocationField", GoogleActions.OnClickChangeLocation);
-
+        $("body").on("click", "#saveMap", GoogleActions.OnClickSaveMap);
+        $("body").on("click", ".field-item", GoogleActions.OnClickRowField);
+        $("body").on("click", "#editField", GoogleActions.OnClickAddEditField);
+        $("body").on("click", "#btnAdd", GoogleActions.OnClickAddEditField);
+        $("body").on("click", "#deleteLocationField", GoogleActions.OnClickDeleteField);
+        $("body").on("click", ".fullScreenInfo", GoogleActions.OnClickFullScreenWindowInfo);
     },
 
-    GetFieldInfo: function (polygon, callback) {
+    GetFieldInfo: function (fieldId, callback) {
         $('#windowInfo').load('/GoogleMap/GetFieldInfo', { fieldId: 1 }, function (data) {
             callback();
         });
@@ -55,6 +63,7 @@ GoogleActions = {
                 GoogleActions.Fields = data.Fields;
 
                 for(var field of GoogleActions.Fields) {
+                    InitializeGoogleMapAPI.DrawPolygon(field.PolygonPoints);
                     GoogleActions.InitField(field);
                 }
 
@@ -73,12 +82,14 @@ GoogleActions = {
         $("#targetListFields").tmpl({ fields: GoogleActions.Fields }).appendTo('.fieldsList')
     },
 
-    OnSuccesSaveField: function (data) {
-        if (data.IsSuccess = true) {
+    OnSuccesSaveField: function (response) {
+        if (response.data.IsSuccess == true) {
             GoogleActions.ShowNoty("Данные успешно добавленны", "success");
-            GoogleActions.CurrentFieldId = data.data.FieldId;
             $("#fillFieldModal").modal('hide');
-            $("#selectFieldModal").modal('show');
+            if (response.data.FieldId != null) {
+                GoogleActions.CurrentFieldId = response.data.FieldId;
+                $("#selectFieldModal").modal('show');
+            } 
             GoogleActions.LoadFields();
         }
         else {
@@ -205,7 +216,7 @@ GoogleActions = {
         }
     },
 
-    InitField: function (field) {
+    InitField: function (field, isNeededDraw) {
         if (field.PolygonPoints == null || field.PolygonPoints.length == 0) {
             return;
         }
@@ -218,17 +229,6 @@ GoogleActions = {
             bounds.extend(array[i]);
         }
 
-        var fieldMap = new google.maps.Polygon({
-            paths: field.PolygonPoints,
-            strokeColor: '#FF0000',
-            strokeOpacity: 0.8,
-            strokeWeight: 2,
-            fillColor: '#FF0000',
-            fillOpacity: 0.35,
-        });
-
-        fieldMap.setMap(InitializeGoogleMapAPI.DrawingManager.getMap());
-
         var marker = InitializeGoogleMapAPI.MarkerManager.getMarker(bounds.getCenter());
 
         if (marker == null) {
@@ -239,13 +239,13 @@ GoogleActions = {
 
     },
 
-    OnClickEditLocation: function (sender) {
-        if (GoogleActions.CurrentMarker != null && GoogleActions.CurrentMarker.infowindow != null) {
-            GoogleActions.CurrentMarker.infowindow.close();
-        }
-
+    OnClickAddEditField: function (sender) {
         GoogleActions.CurrentFieldId = $(sender.target).closest(".panel").find(".field-item [type='hidden']").val();
-        $("#selectFieldModal").modal("show");
+
+        $('#windowInfo').load('/GoogleMap/GetFieldInfo', { fieldId: GoogleActions.CurrentFieldId }, function (html) {
+            $("#fillFieldModal").modal('show');
+            $("#editFieldContent").html(html);
+        });
     },
 
     OnClickMarker: function (marker, fieldId) {
@@ -278,7 +278,7 @@ GoogleActions = {
     },
 
     OnTabClick: function (sender) {
-        if ($("#generalField").hasClass("active")) {
+        if ($(sender.target).attr("id") == "generalField") {
             $(".nav-field li").last().hide()
         } else {
             $(".nav-field li").last().show()
@@ -291,7 +291,7 @@ GoogleActions = {
             data: { fieldId: GoogleActions.CurrentFieldId },
             beforeSend: function () {
                 $("#menu1").html("")
-                $(".img-loading").show();
+                GoogleActions.ShowMask();
             },
             complete: function () {
                 $(".img-loading").hide();
@@ -304,9 +304,6 @@ GoogleActions = {
                     $("#menu1").html(html);
                     $(".form-partial").hide();
                 }
-
-                //$("#fullScreenInfoModal").modal("show");
-                //$("#fullScreenInfoBody").append(html);
             },
             error: function (data) {
                 console.log(data);
@@ -321,7 +318,7 @@ GoogleActions = {
             data: { fieldId: GoogleActions.CurrentFieldId },
             beforeSend: function () {
                 $("#menu2").html("")
-                $(".img-loading").show();
+                GoogleActions.ShowMask();
             },
             complete: function () {
                 $(".img-loading").hide();
@@ -347,8 +344,8 @@ GoogleActions = {
             url: GoogleActions.baseUrl + "/GetFieldPartial",
             data: { fieldId: GoogleActions.CurrentFieldId },
             beforeSend: function () {
-                $("#home").html("")
-                $(".img-loading").show();
+                $("#home").html("");
+                GoogleActions.ShowMask();
             },
             complete: function () {
                 $(".img-loading").hide();
@@ -372,6 +369,7 @@ GoogleActions = {
         if (response.length > 0) {
             GoogleActions.WindowInfoHtmlContent = response;
             $("#jobTableBody").html(GoogleActions.WindowInfoHtmlContent);
+            $(".FieldId").val(GoogleActions.CurrentFieldId)
         }
     },
 
@@ -403,6 +401,8 @@ GoogleActions = {
         }
 
         InitializeGoogleMapAPI.DrawPolygon(array);
+        InitializeGoogleMapAPI.DrawingManager.getMap().setZoom(10);
+        InitializeGoogleMapAPI.DrawingManager.getMap().panTo(array[0]);
 
         $.ajax({
             url: GoogleActions.baseUrl + "/AddEditFieldLocation",
@@ -414,6 +414,35 @@ GoogleActions = {
         });
 
         GoogleActions.PolygonPath = [];
+    },
+
+    OnClickDeleteField: function (sender) {
+        if (confirm("Вы действительно хотите удалить это поле?")) {
+            var fieldId = $(sender.target).closest(".panel").find(".field-item [type='hidden']").val();
+            GoogleActions.DeleteField(fieldId);
+        }
+
+    },
+
+    DeleteField: function (fieldId) {
+        $.ajax({
+            url: GoogleActions.baseUrl + "/Delete",
+            data: { fieldId: fieldId },
+            success: function (response) {
+                if (response.data.IsSuccess) {
+                    GoogleActions.ShowNoty("Поле успешно удалено", "success");
+                    GoogleActions.Fields = GoogleActions.Fields.filter(function (item, index) {
+                        return item.Id != fieldId;
+                    });
+                    GoogleActions.RenderFieldsTemplate();
+                } else {
+                    GoogleActions.ShowNoty("При удалении произошла ошибка", "error");
+                }
+            },
+            error: function (response) {
+
+            }
+        });
     },
 
     ChagneActiveItem: function (item) {
@@ -430,7 +459,6 @@ GoogleActions = {
             success: function (weather) {
                 $("#img").attr("src", weather.image);
                 $("#weather-value").html(weather.temp + '&deg' + weather.units.temp);
-                $("#weather-city").html(weather.city + ", " + weather.region)
             },
             error: function () {
                 alert("error")
@@ -505,5 +533,9 @@ GoogleActions = {
         return result;
     },
 
+    ShowMask: function () {
+        $(".img-loading").show();
+        //$(".img-loading").css("display", "block");
+    }
 
 }

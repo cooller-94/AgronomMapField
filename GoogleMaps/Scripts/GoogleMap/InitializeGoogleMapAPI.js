@@ -1,14 +1,14 @@
 ﻿/// <reference path="C:\Users\Vladimir\Desktop\GoogleMaps-2016-04-18 (1)\GoogleMaps\GoogleMaps\Views/GoogleMap/FieldInfo.cshtml" />
 InitializeGoogleMapAPI = {
-    latitude: 50.453242,
-    longitude: 30.525513,
+    latitude: 50.4744066,
+    longitude: 35.183177,
     DrawingManager: null,
     MarkerManager: null,
 
     Init: function () {
         var latlng = new google.maps.LatLng(InitializeGoogleMapAPI.latitude, InitializeGoogleMapAPI.longitude);
         var options = {
-            zoom: 6,
+            zoom: 15,
             center: latlng,
             mapTypeId: google.maps.MapTypeId.HYBRID,
         };
@@ -59,8 +59,8 @@ InitializeGoogleMapAPI = {
         });
 
         field.setMap(InitializeGoogleMapAPI.DrawingManager.getMap());
-        InitializeGoogleMapAPI.DrawingManager.getMap().setZoom(17);
-        InitializeGoogleMapAPI.DrawingManager.getMap().panTo(points[0]);
+        //InitializeGoogleMapAPI.DrawingManager.getMap().setZoom(10);
+        //InitializeGoogleMapAPI.DrawingManager.getMap().panTo(points[0]);
     },
 
 
@@ -76,10 +76,5 @@ InitializeGoogleMapAPI = {
             $(this).data("modal", null);
             $("#map").empty();
         })
-
-        $("body").on("click", "#saveMap", GoogleActions.OnClickSaveMap);
-        $("body").on("click", ".field-item", GoogleActions.OnClickRowField);
-        $("body").on("click", "#editLocationField", GoogleActions.OnClickEditLocation);
-        $("body").on("click", ".fullScreenInfo", GoogleActions.OnClickFullScreenWindowInfo)
     }
 }

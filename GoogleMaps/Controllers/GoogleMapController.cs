@@ -20,6 +20,8 @@ namespace GoogleMaps.Controllers
         private FieldService fieldService = new FieldService();
         private JobAccauntingService jobService = new JobAccauntingService();
         private JobPlanningService jobPlanningService = new JobPlanningService();
+        private SoilService soilService = new SoilService();
+
         // GET: GoogleMap
         public ActionResult Index()
         {
@@ -45,14 +47,33 @@ namespace GoogleMaps.Controllers
         public JsonResult AddNewField(FormCollection fieldModel)
         {
             Int32? fieldId = 0;
-            Field field = FieldRepository.GetFieldFromModel(fieldModel);
+            FormAction? action = null;
+            Field field = FieldRepository.GetFieldFromModel(fieldModel, out action);
 
-            if (fieldService.Create(field, out fieldId))
+
+            switch (action.Value)
             {
-                return this.GenerateJson(new { IsSuccess = true, FieldId = fieldId });
+                case FormAction.Create:
+                    if (fieldService.Create(field, out fieldId))
+                    {
+                        return this.GenerateJson(new { IsSuccess = true, FieldId = fieldId });
+                    }
+                    break;
+                case FormAction.Update:
+                    if (fieldService.Edit(field))
+                    {
+                        return this.GenerateJson(new { IsSuccess = true });
+                    }
+                    break;
+                default: break;
             }
 
             return this.GenerateJson(new { IsSuccess = false });
+        }
+
+        public JsonResult Delete(Int32 fieldId)
+        {
+            return this.GenerateJson(new { IsSuccess = fieldService.Delete(fieldId) });
         }
 
         [HttpPost]
@@ -82,12 +103,20 @@ namespace GoogleMaps.Controllers
 
         public ActionResult GetFieldInfo(Int32? fieldId)
         {
+            FieldModel model = new FieldModel();
+            ViewBag.Soils = new List<SelectListItem>(soilService.GetSoils().Select(c => new SelectListItem() { Text = c.SoilName, Value = c.SoilID.ToString() }));
+
             if (!fieldId.HasValue)
             {
-                return PartialView("~/Views/GoogleMap/FieldInfo.cshtml", new FieldModel());
+                model.Action = FormAction.Create;
+                return PartialView("~/Views/GoogleMap/FieldInfo.cshtml", model);
             }
 
-            return PartialView("~/Views/GoogleMap/FieldInfo.cshtml", new FieldModel());
+            Field field = fieldService.GetField(fieldId.Value);
+            model = FieldRepository.GetModelFromField(field);
+            model.Action = FormAction.Update;
+
+            return PartialView("~/Views/GoogleMap/FieldInfo.cshtml", model);
         }
 
         public JsonResult LoadFields()

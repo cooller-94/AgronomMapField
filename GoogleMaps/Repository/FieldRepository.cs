@@ -21,6 +21,7 @@ namespace GoogleMaps.Repository
             fieldModel.FieldTitle = field.FieldName;
             fieldModel.Area = field.Area.HasValue ? field.Area.Value : 0;
             fieldModel.Owner = field?.OwnerName ?? String.Empty;
+            fieldModel.SoildId = field.Soil.SoilID;
             fieldModel.PolygonPoints = new List<Point>();
             fieldModel.CurrentCulture = field.FieldPlanningJobs?.Where(jp => jp.YearPlanning == DateTime.Now.Year).SingleOrDefault()?.Culture.CultureName;
             fieldModel.CultureIconLink = new CultureLinkService().GetIconLinkForField(fieldModel.CurrentCulture)?.CultureIconLinl ?? Constant.DEFAULT_ICON_LINK;
@@ -53,28 +54,36 @@ namespace GoogleMaps.Repository
             }
         }
 
-        public static Field GetFieldFromModel(FormCollection model)
+        public static Field GetFieldFromModel(FormCollection model, out FormAction? action)
         {
             try
             {
                 Field field = new Field();
+                action = String.IsNullOrEmpty(model["Action"]) ? null : (Enum.Parse(typeof(FormAction), model["Action"]) as FormAction?);
                 field.FieldName = model["FieldTitle"];
+                field.SoilID = Int32.Parse(model["SoildId"]);
                 field.Area = String.IsNullOrEmpty(model["Area"]) ? null : (float.Parse(model["Area"]) as float?);
                 field.OwnerName = model["Owner"];
-                List<Point> points = new JavaScriptSerializer().Deserialize<List<Point>>(model["PolygonPoints"]);
+                field.FieldID = Int32.Parse(model["Id"]);
 
-                if (points != null)
+                if (action.HasValue && action.Value == FormAction.Create)
                 {
-                    foreach (Point point in points)
+                    List<Point> points = new JavaScriptSerializer().Deserialize<List<Point>>(model["PolygonPoints"]);
+
+                    if (points != null)
                     {
-                        field.AgrFieldLocations.Add(new DAL.DBModel.JobAccauntingModels.AgrFieldLocation() { lat = point.lat, lng = point.lng });
+                        foreach (Point point in points)
+                        {
+                            field.AgrFieldLocations.Add(new DAL.DBModel.JobAccauntingModels.AgrFieldLocation() { lat = point.lat, lng = point.lng });
+                        }
                     }
                 }
 
                 return field;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                action = null;
                 return null;
             }
 

@@ -24,11 +24,15 @@ namespace GoogleMaps.DAL.DBModel.JobAccauntingModels
 
         public string OwnerName { get; set; }
 
+        public int SoilID { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<FieldPlanningJob> FieldPlanningJobs { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AgrFieldLocation> AgrFieldLocations { get; set; }
+
+        public virtual Soil Soil { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<JobsAccaunting> JobsAccauntings { get; set; }
