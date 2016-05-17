@@ -37,7 +37,7 @@ namespace GoogleMaps
                       "~/Scripts/CadastreUA/region_cities.js",
                       "~/Scripts/CadastreUA/index.js", "~/Scripts/CadastreUA/system.js"));
 
-            bundles.Add(new StyleBundle("~/bundles/Utils").Include( "~/Scripts/Utils/Utils.js"));
+            bundles.Add(new StyleBundle("~/bundles/Utils").Include( "~/Scripts/Utils/Utils.js", "~/Scripts/Utils/Enums.js"));
             bundles.Add(new StyleBundle("~/bundles/WeatherLib").Include("~/Scripts/Utils/Weather/jquery.simpleWeather.js"));
             //bundles.Add(new StyleBundle("~/bundles/ColorPicker").Include("~/Scripts/colorpicker/js/colorpicker.js",
             //     "~/Scripts/colorpicker/js/eye.js",

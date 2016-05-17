@@ -307,7 +307,7 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\CadastreUA\click-carousel.js" />
     <Content Include="Scripts\CadastreUA\config.js" />
-    <Content Include="Scripts\CadastreUA\Enums.js" />
+    <Content Include="Scripts\Utils\Enums.js" />
     <Content Include="Scripts\CadastreUA\index.js" />
     <Content Include="Scripts\CadastreUA\jq.js" />
     <Content Include="Scripts\CadastreUA\OpenLayers.js" />
