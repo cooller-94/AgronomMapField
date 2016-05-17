@@ -43,7 +43,7 @@
     });
 
     $('#map_search_btn').click(function () {
-        var s = trim($('#map_search').val());
+        var s = $('#map_search').val().trim();
         if (is_cadnum(s)) {
             searchCadnum(s);
         } else {
@@ -53,7 +53,7 @@
 
     $('#map_search').keypress(function (event) {
         if (event.which == 13) {
-            var s = trim($('#map_search').val());
+            var s = $('#map_search').val().trim();
 
             if (is_cadnum(s)) {
                 searchCadnum(s);
@@ -363,7 +363,7 @@
 
 
     $("#cnap_region").change(function () {
-        $("#cnap_name").load("/ajax/cnaps-list/", {
+        $("#cnap_name").load("http://212.26.144.110//ajax/cnaps-list/", {
             'id': $("#cnap_region option:selected").val()
         },
             function () {
@@ -391,7 +391,7 @@
         var idOffice = $(this).data('id-office');
 
         $.fancybox.open({
-            href: '/monetary-evaluation/request-form?cadnum=' + cadnum + '&id_office=' + idOffice,
+            href: 'http://212.26.144.110//monetary-evaluation/request-form?cadnum=' + cadnum + '&id_office=' + idOffice,
             type: 'iframe'
         });
     });
@@ -404,7 +404,7 @@
         var extNumber = $(this).data('excerpt');
 
         $.fancybox.open({
-            href: '/land-disposal/intentions-info?ext_number=' + extNumber,
+            href: 'http://212.26.144.110//land-disposal/intentions-info?ext_number=' + extNumber,
             type: 'iframe'
         });
     });
@@ -537,7 +537,7 @@ function request_excerpt_clean_errors() {
 
 
 function show_cnap_address() {
-    $("#cnap_address").load("/ajax/cnap-address/", {
+    $("#cnap_address").load("http://212.26.144.110//ajax/cnap-address/", {
         'id': $("#cnap_name").val()
     });
 }

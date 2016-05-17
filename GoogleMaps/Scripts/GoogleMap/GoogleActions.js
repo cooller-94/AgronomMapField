@@ -115,7 +115,7 @@ GoogleActions = {
             data: { fieldId: GoogleActions.CurrentFieldId, polygon: GoogleActions.PolygonPath, action: FormAction.Update },
             success: function (response) {
                 var fieldMap = new google.maps.Polygon({
-                    paths: field.PolygonPoints,
+                    paths: GoogleActions.PolygonPath,
                     strokeColor: '#FF0000',
                     strokeOpacity: 0.8,
                     strokeWeight: 2,
@@ -169,27 +169,39 @@ GoogleActions = {
             GoogleActions.PolygonPath = fieldMap.getPath();
 
 
-            google.maps.event.addListener(fieldMap.getPath(), "insert_at", GoogleActions.getPolygonCoords);
+            google.maps.event.addListener(fieldMap.getPath(), "insert_at", function () {
+                var len = fieldMap.getPath().getLength();
+                var htmlStr = "";
+                GoogleActions.PolygonPath = [];
 
-            google.maps.event.addListener(fieldMap.getPath(), "set_at", GoogleActions.getPolygonCoords);
+                for (var i = 0; i < len; i++) {
+                    var _lat = fieldMap.getPath().getAt(i).lat();
+                    var _lng = fieldMap.getPath().getAt(i).lng();
+                    GoogleActions.PolygonPath.push({ lat: _lat, lng: _lng });
+                }
+
+                if ($("#SaveChanges").is(":hidden")) {
+                    $("#SaveChanges").show();
+                }
+            });
+
+            google.maps.event.addListener(fieldMap.getPath(), "set_at", function () {
+                var len = fieldMap.getPath().getLength();
+                var htmlStr = "";
+                GoogleActions.PolygonPath = [];
+
+                for (var i = 0; i < len; i++) {
+                    var _lat = fieldMap.getPath().getAt(i).lat();
+                    var _lng = fieldMap.getPath().getAt(i).lng();
+                    GoogleActions.PolygonPath.push({ lat: _lat, lng: _lng });
+                }
+
+                if ($("#SaveChanges").is(":hidden")) {
+                    $("#SaveChanges").show();
+                }
+            });
 
             GoogleActions.CurrentFieldId = field.Id;
-        }
-    },
-
-    getPolygonCoords:function(){
-        var len = fieldMap.getPath().getLength();
-        var htmlStr = "";
-        GoogleActions.PolygonPath = [];
-
-        for (var i = 0; i < len; i++) {
-            var _lat = fieldMap.getPath().getAt(i).lat();
-            var _lng = fieldMap.getPath().getAt(i).lng();
-            GoogleActions.PolygonPath.push({ lat: _lat, lng: _lng });
-        }
-
-        if ($("#SaveChanges").is(":hidden")) {
-            $("#SaveChanges").show();
         }
     },
 

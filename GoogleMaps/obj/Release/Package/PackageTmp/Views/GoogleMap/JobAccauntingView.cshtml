@@ -1,0 +1,42 @@
+﻿@model IEnumerable<GoogleMaps.Models.JobAccountingModel>
+
+
+<div class="form-partial">
+    @using (Ajax.BeginForm("GetJobAccaunting", new AjaxOptions { OnSuccess = "GoogleActions.OnSuccessLoadFromFilter" }))
+    {
+        <input type="hidden" name="FieldId" class="FieldId" />
+        <fieldset class="filter-option">
+            <input type="date" name="StartDate" id="StartDate" />
+        </fieldset>
+        <fieldset class="filter-option">
+            <input type="date" name="EndDate" id="EndDate" />
+        </fieldset>
+        <div class="filter-submit">
+            <input type="submit" id="filterGo" value="Применить" />
+        </div>
+    }
+</div>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(i => i.Date)</th>
+            <th>@Html.DisplayNameFor(i => i.Quantity)</th>
+            <th>@Html.DisplayNameFor(i => i.Square)</th>
+            <th>@Html.DisplayNameFor(i => i.WorkKind)</th>
+            <th>@Html.DisplayNameFor(i => i.WorkType)</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.Date)</td>
+                <td>@Html.DisplayFor(modelItem => item.Quantity)</td>
+                <td>@Html.DisplayFor(modelItem => item.Square)</td>
+                <td>@Html.DisplayFor(modelItem => item.WorkKind)</td>
+                <td>@Html.DisplayFor(modelItem => item.WorkType)</td>
+            </tr>
+        }
+    </tbody>
+</table>

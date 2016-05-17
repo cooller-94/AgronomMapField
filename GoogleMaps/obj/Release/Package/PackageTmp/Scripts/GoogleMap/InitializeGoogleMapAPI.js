@@ -1,18 +1,25 @@
 ﻿/// <reference path="C:\Users\Vladimir\Desktop\GoogleMaps-2016-04-18 (1)\GoogleMaps\GoogleMaps\Views/GoogleMap/FieldInfo.cshtml" />
 InitializeGoogleMapAPI = {
-    latitude: 23.99,
-    longitude: 11.13,
+    latitude: 50.453242,
+    longitude: 30.525513,
     DrawingManager: null,
+    MarkerManager: null,
 
     Init: function () {
         var latlng = new google.maps.LatLng(InitializeGoogleMapAPI.latitude, InitializeGoogleMapAPI.longitude);
         var options = {
-            zoom: 3,
+            zoom: 6,
             center: latlng,
-            mapTypeId: google.maps.MapTypeId.ROADMAP,
+            mapTypeId: google.maps.MapTypeId.HYBRID,
         };
         var map = new google.maps.Map($("#map_canvas")[0], options);
-        var marker = new google.maps.Marker({ map: map, position: latlng });
+        InitializeGoogleMapAPI.MarkerManager = new MarkerManager(map);
+        var weatherLayer = new google.maps.weather.WeatherLayer({
+            temperatureUnits: google.maps.weather.TemperatureUnit.CELSIUM
+        });
+        weatherLayer.setMap(map);
+        var cloud = new google.maps.weather.CloudLayer();
+        cloud.setMap(map)
         InitializeGoogleMapAPI.InitDwawing(map);
     },
 
@@ -58,19 +65,6 @@ InitializeGoogleMapAPI = {
 
 
     BindEvents: function () {
-        /*google.maps.event.addListener(InitializeGoogleMapAPI.DrawingManager, "overlaycomplete", function (event) {
-            var newShape = event.overlay;
-            newShape.type = event.type;
-        });
-
-        google.maps.event.addListener(InitializeGoogleMapAPI.DrawingManager, "overlaycomplete", function (event) {
-            GoogleActions.GetFieldInfo(event.overlay.getPath().getArray(), function () {
-                var area = google.maps.geometry.spherical.computeArea(event.overlay.getPath());
-                $("#PolygonPoints").val(JSON.stringify(event.overlay.getPath().getArray()));
-                $("#Area").val(area);
-                $("#windowInfo").fadeIn();
-            })
-        });*/
 
         $("#selectFieldModal").on("shown.bs.modal", function () {
             init();
@@ -85,5 +79,7 @@ InitializeGoogleMapAPI = {
 
         $("body").on("click", "#saveMap", GoogleActions.OnClickSaveMap);
         $("body").on("click", ".field-item", GoogleActions.OnClickRowField);
+        $("body").on("click", "#editLocationField", GoogleActions.OnClickEditLocation);
+        $("body").on("click", ".fullScreenInfo", GoogleActions.OnClickFullScreenWindowInfo)
     }
 }

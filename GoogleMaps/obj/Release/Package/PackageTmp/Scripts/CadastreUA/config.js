@@ -34,22 +34,6 @@ switch (window.location.hostname) {
         }
 }
 
-// -- set OpenLayers --
-OpenLayers.IMAGE_RELOAD_ATTEMPTS = 3;
-OpenLayers.Util.onImageLoadErrorColor = "transparent";
-OpenLayers.DOTS_PER_INCH = 25.4 / 0.28;
-OpenLayers.ProxyHost = "/cgi-bin/proxy.cgi?url=";
-
-// -- sets --
-var mapBounds = new OpenLayers.Bounds(-160, -74, 160, 74);
-var mapMinZoom = 2;
-var mapMaxZoom = 17;
-var map;
-var measureControls;
-var navControls;
-var markers;
-var kadpodil;
-
 // -- click() --
 $(document).ready(function () {
     var map = $("#map");
@@ -156,15 +140,31 @@ $(document).ready(function () {
 
         //searchCadnum(cadNumber);
     }
-
 });
+
+// -- set OpenLayers --
+OpenLayers.IMAGE_RELOAD_ATTEMPTS = 3;
+OpenLayers.Util.onImageLoadErrorColor = "transparent";
+OpenLayers.DOTS_PER_INCH = 25.4 / 0.28;
+OpenLayers.ProxyHost = "/cgi-bin/proxy.cgi?url=";
+
+// -- sets 
+var mapMinZoom = 2;
+var mapMaxZoom = 17;
+var map;
+var measureControls;
+var navControls;
+var markers;
+var kadpodil;
+var mapBounds = new OpenLayers.Bounds(-160, -74, 160, 74);
+
 
 // ------------------------
 // -- init() - MAIN INIT --
 // ------------------------
 function init() {
     OpenLayers.Lang.setCode("ru");
-
+    mapBounds = new OpenLayers.Bounds(-160, -74, 160, 74);
     var options = {
         controls: [],
         projection: new OpenLayers.Projection("EPSG:900913"),
@@ -242,7 +242,7 @@ function SetMarker(point) {
     map.addLayer(markers);
     var size = new OpenLayers.Size(21, 25);
     var offset = new OpenLayers.Pixel(-(size.w / 2), -size.h);
-    var icon = new OpenLayers.Icon('https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png', size, offset);
+    var icon = new OpenLayers.Icon('http://maps.google.com/mapfiles/marker.png', size, offset);
     markers.addMarker(new OpenLayers.Marker(point, icon));
 
     GoogleActions.SetMarker(point);
@@ -1004,7 +1004,7 @@ function searchCadnum(cadnum) {
     change_region(koatuu_district);
 
     $.getJSON(
-        '/kadastrova-karta/find-Parcel',
+        'http://212.26.144.110/kadastrova-karta/find-Parcel',
         { 'cadnum': cadnum },
         function (data) {
             var output;
@@ -1024,70 +1024,71 @@ function searchCadnum(cadnum) {
                 var y = new_bounds_res.centerLonLat.lon;
 
                 map.setCenter(new OpenLayers.LonLat(y, x), 16);
+                SetMarker(new OpenLayers.LonLat(y, x))
 
-                var cad_arr = explode(':', cadnum);
-                var p = getParcelInfo(cad_arr[0], cad_arr[1], cad_arr[2], cad_arr[3]);
+                //var cad_arr = explode(':', cadnum);
+                //var p = getParcelInfo(cad_arr[0], cad_arr[1], cad_arr[2], cad_arr[3]);
 
-                output = '<ul style="padding: 0;">';
+                //output = '<ul style="padding: 0;">';
 
-                output += '<li><div class="label" style="width:150px;">Кадастр.номер:</div><span><strong>' + cadnum + '</strong></span></li>';
+                //output += '<li><div class="label" style="width:150px;">Кадастр.номер:</div><span><strong>' + cadnum + '</strong></span></li>';
 
-                if (p.length > 0) {
-                    if (p[0]['ownershipvalue']) {
-                        output += '<li><div class="label" style="width:150px;">Власність:</div>' + p[0]['ownershipvalue'] + '</li>';
-                    }
+                //if (p.length > 0) {
+                //    if (p[0]['ownershipvalue']) {
+                //        output += '<li><div class="label" style="width:150px;">Власність:</div>' + p[0]['ownershipvalue'] + '</li>';
+                //    }
 
-                    if (p[0]['purpose']) {
-                        output += '<li><div class="label" style="width:150px;">Цільове призначення:</div>' + p[0]['purpose'] + '</li>';
-                    }
+                //    if (p[0]['purpose']) {
+                //        output += '<li><div class="label" style="width:150px;">Цільове призначення:</div>' + p[0]['purpose'] + '</li>';
+                //    }
 
-                    if (p[0]['area']) {
-                        output += '<li><div class="label" style="width:150px;">Площа:</div>' + p[0]['area'] + ' ' + p[0]['unit_area'] + '</li>';
-                    }
+                //    if (p[0]['area']) {
+                //        output += '<li><div class="label" style="width:150px;">Площа:</div>' + p[0]['area'] + ' ' + p[0]['unit_area'] + '</li>';
+                //    }
 
-                    if (p[0]['add_date']) {
-                        output += '<li><div class="label" style="width:150px;">Дата оновлення:</div>' + p[0]['add_date'].substr(0, 10) + '</li>';
-                    }
+                //    if (p[0]['add_date']) {
+                //        output += '<li><div class="label" style="width:150px;">Дата оновлення:</div>' + p[0]['add_date'].substr(0, 10) + '</li>';
+                //    }
 
-                    if (p[0]['ext_number']) {
-                        extNumber = p[0]['ext_number'];
-                    }
-                }
+                //    if (p[0]['ext_number']) {
+                //        extNumber = p[0]['ext_number'];
+                //    }
+                //}
 
-                if (extNumber) {
-                    output += '<li><br/><div style="font-weight: normal;font-size: 11px;"><a class="open_parcel_land_disposal" data-excerpt="' + extNumber + '" href="javascript:;"><strong>Розпорядження с/г землею</strong></a></div></li>';
-                }
+                //if (extNumber) {
+                //    output += '<li><br/><div style="font-weight: normal;font-size: 11px;"><a class="open_parcel_land_disposal" data-excerpt="' + extNumber + '" href="javascript:;"><strong>Розпорядження с/г землею</strong></a></div></li>';
+                //}
 
-                output += '<li><br/><div style="font-weight: normal;font-size: 11px;"><a class="open_request_excerpt" data-cadnum="' + cadnum + '" href="javascript:;"><strong>Замовити Витяг про земельну ділянку</strong></a></div></li>';
-                //output += '<li><br/><div style="font-weight: normal;font-size: 11px;" class="hidden"><a class="open_request_valuation" data-cadnum="' + cadnum + '" data-id-office="' + p[0]['id_office'] + '" href="javascript:;"><strong>Замовити Витяг про нормативну грошову оцінку</strong></a></div>&nbsp;</li>';
-                output += '<li><br/><div style="font-weight: normal;font-size: 11px;" class="hidden"><a href="http://e-gov.dzk.gov.ua/back/me/?cad_num=' + cadnum + '" target="_blank" style="color: #9fbeea;"><strong>Замовити Витяг про нормативну грошову оцінку</strong></a></div>&nbsp;</li>';
-                output += '<li><div style="font-weight: normal;font-size: 11px;" class="hidden"><a href="http://e-gov.dzk.gov.ua/back/cadaster/get/data/cad_num?cad_num=' + cadnum + '" target="_blank" style="color: #9fbeea;"><strong>Інформація про право власності та речові права</strong></a></div>&nbsp;</li>';
-                output += '</ul>';
+                //output += '<li><br/><div style="font-weight: normal;font-size: 11px;"><a class="open_request_excerpt" data-cadnum="' + cadnum + '" href="javascript:;"><strong>Замовити Витяг про земельну ділянку</strong></a></div></li>';
+                ////output += '<li><br/><div style="font-weight: normal;font-size: 11px;" class="hidden"><a class="open_request_valuation" data-cadnum="' + cadnum + '" data-id-office="' + p[0]['id_office'] + '" href="javascript:;"><strong>Замовити Витяг про нормативну грошову оцінку</strong></a></div>&nbsp;</li>';
+                //output += '<li><br/><div style="font-weight: normal;font-size: 11px;" class="hidden"><a href="http://e-gov.dzk.gov.ua/back/me/?cad_num=' + cadnum + '" target="_blank" style="color: #9fbeea;"><strong>Замовити Витяг про нормативну грошову оцінку</strong></a></div>&nbsp;</li>';
+                //output += '<li><div style="font-weight: normal;font-size: 11px;" class="hidden"><a href="http://e-gov.dzk.gov.ua/back/cadaster/get/data/cad_num?cad_num=' + cadnum + '" target="_blank" style="color: #9fbeea;"><strong>Інформація про право власності та речові права</strong></a></div>&nbsp;</li>';
+                //output += '</ul>';
 
-                //При каждом клике прячем все елементы которые ми видели при предыдущем отображении
-                $('#a_dilanka, #a_ikk, #a_atu, #a_rajonunion,#a_obl, #a_grunt, #a_land_disposal, #page_1, #page_2, #page_3, #page_4, #page_5, #page_6, #page_7').hide();
+                ////При каждом клике прячем все елементы которые ми видели при предыдущем отображении
+                //$('#a_dilanka, #a_ikk, #a_atu, #a_rajonunion,#a_obl, #a_grunt, #a_land_disposal, #page_1, #page_2, #page_3, #page_4, #page_5, #page_6, #page_7').hide();
 
-                //Удаляем все настройки класов при каждом клике
-                $("#a_dilanka, #a_ikk, #a_atu, #a_rajonunion, #a_obl, #a_grunt, #a_land_disposal").removeClass("on");
+                ////Удаляем все настройки класов при каждом клике
+                //$("#a_dilanka, #a_ikk, #a_atu, #a_rajonunion, #a_obl, #a_grunt, #a_land_disposal").removeClass("on");
 
-                $('#a_dilanka').show().addClass('on').html('Ділянка');
-                $('.page_dilanka').show().html(output);
+                //$('#a_dilanka').show().addClass('on').html('Ділянка');
+                //$('.page_dilanka').show().html(output);
 
-                $('#tooltip').find('.switcher span').click(function () {
-                    var id = $(this).attr('rel');
-                    var tTip = $('#tooltip');
+                //$('#tooltip').find('.switcher span').click(function () {
+                //    var id = $(this).attr('rel');
+                //    var tTip = $('#tooltip');
 
-                    tTip.find('.switcher span').removeClass('on');
+                //    tTip.find('.switcher span').removeClass('on');
 
-                    $(this).addClass('on');
+                //    $(this).addClass('on');
 
-                    tTip.find('.page').hide();
-                    tTip.find('.page[rel=' + id + ']').show();
-                });
+                //    tTip.find('.page').hide();
+                //    tTip.find('.page[rel=' + id + ']').show();
+                //});
 
-                // shift window info in polygon
-                tooltip.open('tooltip', getWindowWidth() / 2, getWindowHeight() / 2 - 30);
-                initTabs();
+                //// shift window info in polygon
+                //tooltip.open('tooltip', getWindowWidth() / 2, getWindowHeight() / 2 - 30);
+                //initTabs();
             } else {
                 if (data['status']) {
                     $('#popup_find_msg').find('strong.cadnum').html(cadnum);
@@ -1105,15 +1106,15 @@ function searchCadnum(cadnum) {
  * @param s
  * @returns {boolean}
  */
-//function is_cadnum(s) {
-//    var s_arr = explode(':', s);
+function is_cadnum(s) {
+    var s_arr = explode(':', s);
 
-//    if (s_arr.length != 4) {
-//        return false;
-//    }
+    if (s_arr.length != 4) {
+        return false;
+    }
 
-//    return !!(parseFloat(s_arr[0]) > 0 && parseFloat(s_arr[3]) > 0);
-//}
+    return !!(parseFloat(s_arr[0]) > 0 && parseFloat(s_arr[3]) > 0);
+}
 
 /**
  *

@@ -1,12 +1,27 @@
-﻿GoogleActions = {
+﻿/// <reference path="~/Scripts/GoogleMap/InitializeGoogleMapAPI.js />
+/// <reference path="~/Scripts/GoogleMap/MarkerManager.js />
+GoogleActions = {
     baseUrl: null,
     FieldModel: null,
     PolygonPath: [],
     CurrentFieldId: null,
+    WindowInfoHtmlContent: null,
+    CurrentInfoWindow: null,
+    CurrentMarker: null,
+    Fields: null,
+    NonSelectedCultures: [],
 
     Init: function (baseUrl) {
         GoogleActions.baseUrl = baseUrl;
         GoogleActions.LoadFields();
+        GoogleActions.InitFilterCulture();
+
+        $("body").on("click", "#jobAccaunting", GoogleActions.OnJobAccauntingTabClick);
+        $("body").on("click", "#jobPlanning", GoogleActions.OnJobPlanningTabClick);
+        $("body").on("click", "#generalField", GoogleActions.OnGeneralFieldClick);
+        $("body").on("click", ".nav-tabs li", GoogleActions.OnTabClick);
+        $("body").on("click", "#SaveChanges", GoogleActions.OnClickSaveChanges);
+        $("body").on("click", "#changeLocationField", GoogleActions.OnClickChangeLocation);
 
     },
 
@@ -16,26 +31,34 @@
         });
     },
 
+    InitFilterCulture: function () {
+        $('#Cultures').multiselect({
+            includeSelectAllOption: true,
+            enableFiltering: true,
+            includeSelectAllOption: true,
+            selectAllText: 'Выбрать все',
+            nonSelectedText: 'Фильтр',
+            allSelectedText: 'Выбраны все культуры',
+            selectAllName: 'selectAll',
+            onChange: GoogleActions.OnChangeCultureFilter
+        });
+        $(".multiselect-container").find("[type='checkbox']").prop("checked", true)
+    },
+
     LoadFields: function () {
+        $("#fountainG").show();
 
         $.ajax({
             url: GoogleActions.baseUrl + "/LoadFields",
             type: 'GET',
             success: function (data) {
-                //$.each(data.Fields, function (index, value) {
-                //    var field = new google.maps.Polygon({
-                //        paths: value.PolygonPoints,
-                //        strokeColor: '#FF0000',
-                //        strokeOpacity: 0.8,
-                //        strokeWeight: 1,
-                //        fillColor: '#FF0000',
-                //        fillOpacity: 0.35
-                //    });
+                GoogleActions.Fields = data.Fields;
 
-                //    field.setMap(InitializeGoogleMapAPI.DrawingManager.getMap())
-                //});
+                for(var field of GoogleActions.Fields) {
+                    GoogleActions.InitField(field);
+                }
 
-                $("#targetListFields").tmpl({ fields: data.Fields }).appendTo('.fieldsList')
+                GoogleActions.RenderFieldsTemplate();
             },
             error: function (data) {
                 console.log(data);
@@ -44,12 +67,19 @@
     },
 
 
+    RenderFieldsTemplate: function () {
+        $("#fountainG").hide();
+        $(".fieldsList").empty();
+        $("#targetListFields").tmpl({ fields: GoogleActions.Fields }).appendTo('.fieldsList')
+    },
+
     OnSuccesSaveField: function (data) {
         if (data.IsSuccess = true) {
             GoogleActions.ShowNoty("Данные успешно добавленны", "success");
             GoogleActions.CurrentFieldId = data.data.FieldId;
             $("#fillFieldModal").modal('hide');
             $("#selectFieldModal").modal('show');
+            GoogleActions.LoadFields();
         }
         else {
             GoogleActions.ShowNoty("Произошла ошибка", "error");
@@ -78,47 +108,293 @@
         $("#selectFieldModal").modal('hide')
     },
 
-    OnClickRowField: function (sender) {
-        var id = $(sender.target).closest("tr").find("[type='hidden']").val();
-        var name = $(sender.target).closest("tr")
-
+    OnClickSaveChanges: function (sender) {
         $.ajax({
-            url: GoogleActions.baseUrl + "/LoadField",
-            type: "GET",
-            data: { id: id },
+            url: GoogleActions.baseUrl + "/AddEditFieldLocation",
+            type: "POST",
+            data: { fieldId: GoogleActions.CurrentFieldId, polygon: GoogleActions.PolygonPath, action: FormAction.Update },
             success: function (response) {
-                if (response.Field.PolygonPoints == null || response.Field.PolygonPoints.length == 0) {
-                    return;
-                }
-
-                var array = [];
-                for (var i = 0; i < response.Field.PolygonPoints.length; i++) {
-                    var point = { X: response.Field.PolygonPoints[i].lng, Y: response.Field.PolygonPoints[i].lat }
-                    var result = Util.MetersToLatLon(point)
-                    array.push(new google.maps.LatLng(result.Latitude, result.Longitude))
-                }
-
-                var field = new google.maps.Polygon({
-                    paths: array,
+                var fieldMap = new google.maps.Polygon({
+                    paths: GoogleActions.PolygonPath,
                     strokeColor: '#FF0000',
                     strokeOpacity: 0.8,
-                    strokeWeight: 1,
+                    strokeWeight: 2,
                     fillColor: '#FF0000',
-                    fillOpacity: 0.35
+                    fillOpacity: 0.35,
+                    draggable: true,
+                    editable: true,
                 });
 
-                field.setMap(InitializeGoogleMapAPI.DrawingManager.getMap())
+                fieldMap.setMap(InitializeGoogleMapAPI.DrawingManager.getMap());
+                $("#SaveChanges").hide();
+            }
+        });
 
-                InitializeGoogleMapAPI.DrawingManager.getMap().setCenter(array[0])
-                InitializeGoogleMapAPI.DrawingManager.getMap().setZoom(14);
+        GoogleActions.PolygonPath = [];
+    },
+
+    OnClickRowField: function (sender) {
+        var currentField = GoogleActions.FindFieldById($(sender.target).closest(".field-item").find("[type='hidden']").val())
+
+        if (GoogleActions.CurrentInfoWindow != null) {
+            GoogleActions.CurrentInfoWindow.close();
+        }
+
+        GoogleActions.InitField(currentField)
+        GoogleActions.ChagneActiveItem(sender.target);
+        InitializeGoogleMapAPI.DrawingManager.getMap().setCenter(new google.maps.LatLng(currentField.PolygonPoints[0].lat, currentField.PolygonPoints[0].lng));
+        InitializeGoogleMapAPI.DrawingManager.getMap().setZoom(14);
+    },
+
+    OnClickChangeLocation: function (sender) {
+        GoogleActions.CurrentFieldId = $(sender.target).closest(".panel").find(".field-item [type='hidden']").val();
+
+        var field = GoogleActions.Fields.filter(function (item, index) {
+            return item.Id == GoogleActions.CurrentFieldId;
+        })[0];
+
+        if (field != null) {
+            var fieldMap = new google.maps.Polygon({
+                paths: field.PolygonPoints,
+                strokeColor: '#FF0000',
+                strokeOpacity: 0.8,
+                strokeWeight: 2,
+                fillColor: '#FF0000',
+                fillOpacity: 0.35,
+                draggable: true,
+                editable: true,
+            });
+
+            fieldMap.setMap(InitializeGoogleMapAPI.DrawingManager.getMap());
+            GoogleActions.PolygonPath = fieldMap.getPath();
+
+
+            google.maps.event.addListener(fieldMap.getPath(), "insert_at", function () {
+                var len = fieldMap.getPath().getLength();
+                var htmlStr = "";
+                GoogleActions.PolygonPath = [];
+
+                for (var i = 0; i < len; i++) {
+                    var _lat = fieldMap.getPath().getAt(i).lat();
+                    var _lng = fieldMap.getPath().getAt(i).lng();
+                    GoogleActions.PolygonPath.push({ lat: _lat, lng: _lng });
+                }
+
+                if ($("#SaveChanges").is(":hidden")) {
+                    $("#SaveChanges").show();
+                }
+            });
+
+            google.maps.event.addListener(fieldMap.getPath(), "set_at", function () {
+                var len = fieldMap.getPath().getLength();
+                var htmlStr = "";
+                GoogleActions.PolygonPath = [];
+
+                for (var i = 0; i < len; i++) {
+                    var _lat = fieldMap.getPath().getAt(i).lat();
+                    var _lng = fieldMap.getPath().getAt(i).lng();
+                    GoogleActions.PolygonPath.push({ lat: _lat, lng: _lng });
+                }
+
+                if ($("#SaveChanges").is(":hidden")) {
+                    $("#SaveChanges").show();
+                }
+            });
+
+            GoogleActions.CurrentFieldId = field.Id;
+        }
+    },
+
+    InitField: function (field) {
+        if (field.PolygonPoints == null || field.PolygonPoints.length == 0) {
+            return;
+        }
+
+        var array = [];
+        var bounds = new google.maps.LatLngBounds();
+
+        for (var i = 0; i < field.PolygonPoints.length; i++) {
+            array.push(new google.maps.LatLng(field.PolygonPoints[i].lat, field.PolygonPoints[i].lng));
+            bounds.extend(array[i]);
+        }
+
+        var fieldMap = new google.maps.Polygon({
+            paths: field.PolygonPoints,
+            strokeColor: '#FF0000',
+            strokeOpacity: 0.8,
+            strokeWeight: 2,
+            fillColor: '#FF0000',
+            fillOpacity: 0.35,
+        });
+
+        fieldMap.setMap(InitializeGoogleMapAPI.DrawingManager.getMap());
+
+        var marker = InitializeGoogleMapAPI.MarkerManager.getMarker(bounds.getCenter());
+
+        if (marker == null) {
+            InitializeGoogleMapAPI.MarkerManager.createMarker(bounds.getCenter(), new google.maps.MarkerImage(field.CultureIconLink, null, null, null, new google.maps.Size(30, 40)), google.maps.Animation.DROP);
+            marker = InitializeGoogleMapAPI.MarkerManager.getMarker(bounds.getCenter());
+            google.maps.event.addListener(marker, 'click', function () { GoogleActions.OnClickMarker(marker, field.Id) });
+        }
+
+    },
+
+    OnClickEditLocation: function (sender) {
+        if (GoogleActions.CurrentMarker != null && GoogleActions.CurrentMarker.infowindow != null) {
+            GoogleActions.CurrentMarker.infowindow.close();
+        }
+
+        GoogleActions.CurrentFieldId = $(sender.target).closest(".panel").find(".field-item [type='hidden']").val();
+        $("#selectFieldModal").modal("show");
+    },
+
+    OnClickMarker: function (marker, fieldId) {
+        $.ajax({
+            url: GoogleActions.baseUrl + "/GetWindowInfo",
+            dataType: 'html',
+            contentType: 'application/json',
+            traditional: true,
+            success: function (html) {
+                GoogleActions.WindowInfoHtmlContent = html;
+
+                if (GoogleActions.CurrentInfoWindow != null) {
+                    GoogleActions.CurrentInfoWindow.close();
+                }
+
+                GoogleActions.CurrentInfoWindow = new google.maps.InfoWindow({
+                    content: html,
+                    maxWidth: 800
+                });
+                GoogleActions.ChagneActiveItem($("[type='hidden'][value = '" + fieldId + "']"))
+                GoogleActions.CurrentMarker = marker;
+                GoogleActions.CurrentInfoWindow.open(InitializeGoogleMapAPI.DrawingManager.getMap(), marker);
+                GoogleActions.CurrentFieldId = fieldId;
+                GoogleActions.OnGeneralFieldClick();
             },
             error: function (data) {
-                GoogleActions.ShowNoty("Произошла ошибка при добавлении данных", "error");
+                console.log('error')
+            },
+        });
+    },
+
+    OnTabClick: function (sender) {
+        if ($("#generalField").hasClass("active")) {
+            $(".nav-field li").last().hide()
+        } else {
+            $(".nav-field li").last().show()
+        }
+    },
+
+    OnJobAccauntingTabClick: function (sender) {
+        $.ajax({
+            url: GoogleActions.baseUrl + "/GetJobAccaunting",
+            data: { fieldId: GoogleActions.CurrentFieldId },
+            beforeSend: function () {
+                $("#menu1").html("")
+                $(".img-loading").show();
+            },
+            complete: function () {
+                $(".img-loading").hide();
+            },
+            success: function (html) {
+                GoogleActions.WindowInfoHtmlContent = html;
+
+
+                if ($(".fullScreenInfo").find(".glyphicon").hasClass("glyphicon-resize-full")) {
+                    $("#menu1").html(html);
+                    $(".form-partial").hide();
+                }
+
+                //$("#fullScreenInfoModal").modal("show");
+                //$("#fullScreenInfoBody").append(html);
+            },
+            error: function (data) {
+                console.log(data);
             }
         });
     },
 
-    SaveMap: function () {
+    OnJobPlanningTabClick: function (sender) {
+        var id = $(".FieldId").first().val();
+        $.ajax({
+            url: GoogleActions.baseUrl + "/GetJobPlaning",
+            data: { fieldId: GoogleActions.CurrentFieldId },
+            beforeSend: function () {
+                $("#menu2").html("")
+                $(".img-loading").show();
+            },
+            complete: function () {
+                $(".img-loading").hide();
+            },
+            success: function (html) {
+                GoogleActions.WindowInfoHtmlContent = html;
+
+
+                if ($(".fullScreenInfo").find(".glyphicon").hasClass("glyphicon-resize-full")) {
+                    $("#menu2").html(GoogleActions.WindowInfoHtmlContent);
+                    $(".form-partial").hide();
+                }
+
+            },
+            error: function (data) {
+                console.log(data);
+            }
+        });
+    },
+
+    OnGeneralFieldClick: function (sender) {
+        $.ajax({
+            url: GoogleActions.baseUrl + "/GetFieldPartial",
+            data: { fieldId: GoogleActions.CurrentFieldId },
+            beforeSend: function () {
+                $("#home").html("")
+                $(".img-loading").show();
+            },
+            complete: function () {
+                $(".img-loading").hide();
+            },
+            success: function (html) {
+                GoogleActions.WindowInfoHtmlContent = html;
+
+
+                if ($(".fullScreenInfo").find(".glyphicon").hasClass("glyphicon-resize-full")) {
+                    $("#home").html(GoogleActions.WindowInfoHtmlContent);
+                }
+                GoogleActions.LoadWeather(GoogleActions.CurrentMarker.position)
+            },
+            error: function (data) {
+                console.log(data);
+            }
+        });
+    },
+
+    OnSuccessLoadFromFilter: function (response) {
+        if (response.length > 0) {
+            GoogleActions.WindowInfoHtmlContent = response;
+            $("#jobTableBody").html(GoogleActions.WindowInfoHtmlContent);
+        }
+    },
+
+    OnClickFullScreenWindowInfo: function (sender) {
+        var element = $(".fullScreenInfo").find(".glyphicon")
+
+        if ($(".fullScreenInfo").find(".glyphicon").hasClass("glyphicon-resize-full")) {
+            GoogleActions.CurrentInfoWindow.close();
+            $("#fullScreenInfoModal").modal("show");
+            $(".form-partial").show();
+            $("#jobTableBody").html(GoogleActions.WindowInfoHtmlContent);
+            $(".FieldId").val(GoogleActions.CurrentFieldId)
+            $(".fullScreenInfo").find(".glyphicon").removeClass("glyphicon-resize-full").addClass("glyphicon-resize-small");
+        }
+        else {
+            $("#fullScreenInfoModal").modal("hide");
+            GoogleActions.CurrentInfoWindow.open(InitializeGoogleMapAPI.DrawingManager.getMap(), GoogleActions.CurrentMarker);
+            $(".fullScreenInfo").find(".glyphicon").removeClass("glyphicon-resize-small").addClass("glyphicon-resize-full");
+        }
+
+    },
+
+    SaveMap: function (array) {
         var array = [];
         for (var i = 0; i < GoogleActions.PolygonPath.length; i++) {
             var point = { X: GoogleActions.PolygonPath[i].lng, Y: GoogleActions.PolygonPath[i].lat }
@@ -129,9 +405,9 @@
         InitializeGoogleMapAPI.DrawPolygon(array);
 
         $.ajax({
-            url: GoogleActions.baseUrl + "/AddFieldLocation",
+            url: GoogleActions.baseUrl + "/AddEditFieldLocation",
             type: "POST",
-            data: { fieldId: GoogleActions.CurrentFieldId, polygon: GoogleActions.PolygonPath },
+            data: { fieldId: GoogleActions.CurrentFieldId, polygon: GoogleActions.ConvertToGoogleMapsCoorditanes(GoogleActions.PolygonPath), action: FormAction.Create },
             success: function (response) {
                 alert('success');
             }
@@ -139,4 +415,95 @@
 
         GoogleActions.PolygonPath = [];
     },
+
+    ChagneActiveItem: function (item) {
+        $(".fieldsList").children().removeClass("active-item");
+        $(item).closest(".panel").addClass("active-item");
+    },
+
+    LoadWeather: function (location) {
+        var locationString = location.lat() + "," + location.lng();
+        $.simpleWeather({
+            location: locationString,
+            woeid: '',
+            unit: 'c',
+            success: function (weather) {
+                $("#img").attr("src", weather.image);
+                $("#weather-value").html(weather.temp + '&deg' + weather.units.temp);
+                $("#weather-city").html(weather.city + ", " + weather.region)
+            },
+            error: function () {
+                alert("error")
+            }
+        });
+    },
+
+    FindFieldById: function (id) {
+        return GoogleActions.Fields.filter(function (item, index) {
+            return item.Id == id;
+        })[0];
+    },
+
+    FindFieldsByCulture: function (culture) {
+        return GoogleActions.Fields.filter(function (item, index) {
+            return item.CurrentCulture != null && item.CurrentCulture == culture;
+        });
+    },
+
+    GetBoundField: function (field) {
+        var array = [];
+        var bounds = new google.maps.LatLngBounds();
+
+        for (var i = 0; i < field.PolygonPoints.length; i++) {
+            array.push(new google.maps.LatLng(field.PolygonPoints[i].lat, field.PolygonPoints[i].lng));
+            bounds.extend(array[i]);
+        }
+
+        return bounds;
+    },
+
+    HideFieldMarker: function (culture) {
+        var excludeFields = GoogleActions.FindFieldsByCulture(culture);
+
+        if (excludeFields.length > 0) {
+            for (var field of excludeFields) {
+                var centerMarker = GoogleActions.GetBoundField(field).getCenter();
+                InitializeGoogleMapAPI.MarkerManager.removeMarker(InitializeGoogleMapAPI.MarkerManager.getMarker(centerMarker));
+            }
+        }
+    },
+
+    ShowFieldMarker: function (culture) {
+        var includeFields = GoogleActions.FindFieldsByCulture(culture);
+
+        if (includeFields.length > 0) {
+            for (var field of includeFields) {
+                var centerMarker = GoogleActions.GetBoundField(field).getCenter();
+                InitializeGoogleMapAPI.MarkerManager.createMarker(centerMarker, new google.maps.MarkerImage(field.CultureIconLink, null, null, null, new google.maps.Size(30, 40)), google.maps.Animation.DROP);
+                marker = InitializeGoogleMapAPI.MarkerManager.getMarker(centerMarker);
+                google.maps.event.addListener(marker, 'click', function () { GoogleActions.OnClickMarker(marker, field.Id) });
+            }
+        }
+    },
+
+    OnChangeCultureFilter: function (option, checked) {
+        if (!checked) {
+            GoogleActions.HideFieldMarker($(option).text());
+        } else {
+            GoogleActions.ShowFieldMarker($(option).text());
+        }
+    },
+
+    ConvertToGoogleMapsCoorditanes: function (data) {
+        var result = [];
+        for (var i = 0; i < GoogleActions.PolygonPath.length; i++) {
+            var point = { X: GoogleActions.PolygonPath[i].lng, Y: GoogleActions.PolygonPath[i].lat }
+            let convertedLocation = Util.MetersToLatLon(point)
+            result.push({ lat: convertedLocation.Latitude, lng: convertedLocation.Longitude });
+        }
+
+        return result;
+    },
+
+
 }
