@@ -114,7 +114,19 @@ GoogleActions = {
             type: "POST",
             data: { fieldId: GoogleActions.CurrentFieldId, polygon: GoogleActions.PolygonPath, action: FormAction.Update },
             success: function (response) {
-                alert('success');
+                var fieldMap = new google.maps.Polygon({
+                    paths: field.PolygonPoints,
+                    strokeColor: '#FF0000',
+                    strokeOpacity: 0.8,
+                    strokeWeight: 2,
+                    fillColor: '#FF0000',
+                    fillOpacity: 0.35,
+                    draggable: true,
+                    editable: true,
+                });
+
+                fieldMap.setMap(InitializeGoogleMapAPI.DrawingManager.getMap());
+                $("#SaveChanges").hide();
             }
         });
 
@@ -157,27 +169,27 @@ GoogleActions = {
             GoogleActions.PolygonPath = fieldMap.getPath();
 
 
-            google.maps.event.addListener(fieldMap.getPath(), "insert_at", getPolygonCoords);
+            google.maps.event.addListener(fieldMap.getPath(), "insert_at", GoogleActions.getPolygonCoords);
 
-            google.maps.event.addListener(fieldMap.getPath(), "set_at", getPolygonCoords);
+            google.maps.event.addListener(fieldMap.getPath(), "set_at", GoogleActions.getPolygonCoords);
 
             GoogleActions.CurrentFieldId = field.Id;
+        }
+    },
 
-            function getPolygonCoords() {
-                var len = fieldMap.getPath().getLength();
-                var htmlStr = "";
-                GoogleActions.PolygonPath = [];
+    getPolygonCoords:function(){
+        var len = fieldMap.getPath().getLength();
+        var htmlStr = "";
+        GoogleActions.PolygonPath = [];
 
-                for (var i = 0; i < len; i++) {
-                    var _lat = fieldMap.getPath().getAt(i).lat();
-                    var _lng = fieldMap.getPath().getAt(i).lng();
-                    GoogleActions.PolygonPath.push({ lat: _lat, lng: _lng });
-                }
+        for (var i = 0; i < len; i++) {
+            var _lat = fieldMap.getPath().getAt(i).lat();
+            var _lng = fieldMap.getPath().getAt(i).lng();
+            GoogleActions.PolygonPath.push({ lat: _lat, lng: _lng });
+        }
 
-                if ($("#SaveChanges").is(":hidden")) {
-                    $("#SaveChanges").show();
-                }
-            }
+        if ($("#SaveChanges").is(":hidden")) {
+            $("#SaveChanges").show();
         }
     },
 
@@ -201,35 +213,9 @@ GoogleActions = {
             strokeWeight: 2,
             fillColor: '#FF0000',
             fillOpacity: 0.35,
-            //draggable: true,
-            //editable: true,
         });
 
         fieldMap.setMap(InitializeGoogleMapAPI.DrawingManager.getMap());
-        //GoogleActions.PolygonPath = fieldMap.getPath();
-
-
-        //google.maps.event.addListener(fieldMap.getPath(), "insert_at", getPolygonCoords);
-
-        //google.maps.event.addListener(fieldMap.getPath(), "set_at", getPolygonCoords);
-
-        //GoogleActions.CurrentFieldId = field.Id;
-
-        //function getPolygonCoords() {
-        //    var len = fieldMap.getPath().getLength();
-        //    var htmlStr = "";
-        //    GoogleActions.PolygonPath = [];
-        //    for (var i = 0; i < len; i++) {
-        //        var _lat = fieldMap.getPath().getAt(i).lat();
-        //        var _lng = fieldMap.getPath().getAt(i).lng();
-        //        GoogleActions.PolygonPath.push({ lat: _lat, lng: _lng });
-        //        htmlStr += "new google.maps.LatLng(" + fieldMap.getPath().getAt(i).toUrlValue(5) + "), ";
-        //    }
-
-        //    console.log(htmlStr)
-        //}
-
-
 
         var marker = InitializeGoogleMapAPI.MarkerManager.getMarker(bounds.getCenter());
 
@@ -457,9 +443,7 @@ GoogleActions = {
         var bounds = new google.maps.LatLngBounds();
 
         for (var i = 0; i < field.PolygonPoints.length; i++) {
-            var point = { X: field.PolygonPoints[i].lng, Y: field.PolygonPoints[i].lat }
-            var result = Util.MetersToLatLon(point)
-            array.push(new google.maps.LatLng(result.Latitude, result.Longitude));
+            array.push(new google.maps.LatLng(field.PolygonPoints[i].lat, field.PolygonPoints[i].lng));
             bounds.extend(array[i]);
         }
 
