@@ -16,6 +16,7 @@
 <script src="~/Scripts/GoogleMap/InitializeGoogleMapAPI.js"></script>
 <script src="~/Scripts/GoogleMap/GoogleActions.js"></script>
 <script src="~/Scripts/GoogleMap/MarkerManager.js"></script>
+<script src="~/Scripts/GoogleMap/PolygonManager.js"></script>
 <script src="~/Scripts/Statistics/Statistics.js"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD6RXBQJirPU3UyvggVbl82r1KKvzxCng4&libraries=drawing,weather&callback=InitializeGoogleMapAPI.Init"
         async defer></script>
@@ -47,8 +48,11 @@
         <div class="col-lg-3">
             <div class="form-group" style="display:inline;">
                 <div class="input-group">
-                    <input type="text" class="form-control"  placeholder="Введите название поля">
-                    <span class="input-group-addon"><span class="glyphicon glyphicon-search"></span></span>
+                    <input type="text" class="form-control" style="float:right" placeholder="Введите название поля">
+                    <span class="input-group-addon" id="findField">
+                        <span class="glyphicon glyphicon-search">
+                        </span>
+                    </span>
                 </div>
             </div>
         </div>
@@ -221,20 +225,20 @@
                         <div class="sidebar-nav">
                             <ul class="nav nav-pills nav-stacked">
                                 <li role="presentation" class="active">
-                                    <a data-toggle="tab" href="#home">Засееность культур</a>
+                                    <a data-toggle="tab" href="#chartPi">Засееность культур</a>
                                 </li>
                                 <li role="presentation">
-                                    <a data-toggle="tab" href="#menu1">Площади полей</a>
+                                    <a data-toggle="tab" href="#barchart">Площади полей</a>
                                 </li>
                                 <li role="presentation">
-                                    <a data-toggle="tab" href="#menu2">График работ</a>
+                                    <a data-toggle="tab" href="#calendar">График работ</a>
                                 </li>
                             </ul>
                         </div>
                     </div>
                     <div class="col-sm-9">
                         <div class="tab-content">
-                            <div id="home" class="tab-pane fade in active">
+                            <div id="chartPi" class="tab-pane fade in active">
                                 <label>Год посева: </label>
                                 <select id="yearChart" class="dropdown" style="width:100px">
                                     <option value="2010">2010</option>
@@ -250,10 +254,10 @@
                                 </select>
                                 <div id="piechart_3d"></div>
                             </div>
-                            <div id="menu1" class="tab-pane fade">
+                            <div id="barchart" class="tab-pane fade">
                                 <div id="barchart_values" style="width: auto; height: 400px;"></div>
                             </div>
-                            <div id="menu2" class="tab-pane fade">
+                            <div id="calendar" class="tab-pane fade">
                                 @Html.Action("GetJobAccauntingFilter")
                                 <div id="calendar_basic" style="width: auto; height: auto;">
                                 </div>

@@ -20,6 +20,7 @@ namespace GoogleMaps.Models
         [Display(Name = "Площадь")]
         [Required]
         [Range(0,99999)]
+        [DisplayFormat(DataFormatString = "{0:0.00}")]
         public Double Area { get; set; }
 
         [Display(Name = "Владелец")]

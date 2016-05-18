@@ -4,6 +4,7 @@ InitializeGoogleMapAPI = {
     longitude: 35.183177,
     DrawingManager: null,
     MarkerManager: null,
+    PolygonManager: null,
 
     Init: function () {
         var latlng = new google.maps.LatLng(InitializeGoogleMapAPI.latitude, InitializeGoogleMapAPI.longitude);
@@ -14,6 +15,7 @@ InitializeGoogleMapAPI = {
         };
         var map = new google.maps.Map($("#map_canvas")[0], options);
         InitializeGoogleMapAPI.MarkerManager = new MarkerManager(map);
+        InitializeGoogleMapAPI.PolygonManager = new PolygonManager(map);
         var weatherLayer = new google.maps.weather.WeatherLayer({
             temperatureUnits: google.maps.weather.TemperatureUnit.CELSIUM
         });
@@ -51,10 +53,10 @@ InitializeGoogleMapAPI = {
     DrawPolygon: function (points) {
         var field = new google.maps.Polygon({
             paths: points,
-            strokeColor: '#FF0000',
+            strokeColor: '#BDB76B',
             strokeOpacity: 0.8,
             strokeWeight: 1,
-            fillColor: '#FF0000',
+            fillColor: '#BDB76B',
             fillOpacity: 0.35
         });
 

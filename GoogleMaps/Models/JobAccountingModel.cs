@@ -11,6 +11,7 @@ namespace GoogleMaps.Models
         public String Field { get; set; }
 
         [Display(Name = "Дата")]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}")]
         public DateTime Date { get; set; }
 
         [Display(Name = "Количество")]

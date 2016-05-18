@@ -71,6 +71,12 @@ namespace GoogleMaps.Controllers
             return this.GenerateJson(new { IsSuccess = false });
         }
 
+        public JsonResult FindField(String term)
+        {
+            Field field = fieldService.GetField(term);
+            return this.GenerateJson(new { Field = field == null ? null : FieldRepository.GetModelFromField(field)});
+        }
+
         public JsonResult Delete(Int32 fieldId)
         {
             return this.GenerateJson(new { IsSuccess = fieldService.Delete(fieldId) });

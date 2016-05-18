@@ -10,6 +10,7 @@ GoogleActions = {
     CurrentMarker: null,
     Fields: null,
     NonSelectedCultures: [],
+    Polygones: [],
 
     Init: function (baseUrl) {
         GoogleActions.baseUrl = baseUrl;
@@ -31,6 +32,7 @@ GoogleActions = {
         $("body").on("click", "#btnAdd", GoogleActions.OnClickAddEditField);
         $("body").on("click", "#deleteLocationField", GoogleActions.OnClickDeleteField);
         $("body").on("click", ".fullScreenInfo", GoogleActions.OnClickFullScreenWindowInfo);
+        $("body").on("click", "#findField", GoogleActions.OnFindClick)
     },
 
     GetFieldInfo: function (fieldId, callback) {
@@ -63,7 +65,8 @@ GoogleActions = {
                 GoogleActions.Fields = data.Fields;
 
                 for(var field of GoogleActions.Fields) {
-                    InitializeGoogleMapAPI.DrawPolygon(field.PolygonPoints);
+                //InitializeGoogleMapAPI.DrawPolygon(field.PolygonPoints);
+                    InitializeGoogleMapAPI.PolygonManager.createPolygon(field.PolygonPoints, field.Id, false);
                     GoogleActions.InitField(field);
                 }
 
@@ -89,7 +92,7 @@ GoogleActions = {
             if (response.data.FieldId != null) {
                 GoogleActions.CurrentFieldId = response.data.FieldId;
                 $("#selectFieldModal").modal('show');
-            } 
+            }
             GoogleActions.LoadFields();
         }
         else {
@@ -104,7 +107,8 @@ GoogleActions = {
     ShowNoty: function (text, type) {
         noty({
             text: text,
-            type: type
+            type: type,
+            timeout: 2000
         });
     },
 
@@ -125,23 +129,39 @@ GoogleActions = {
             type: "POST",
             data: { fieldId: GoogleActions.CurrentFieldId, polygon: GoogleActions.PolygonPath, action: FormAction.Update },
             success: function (response) {
-                var fieldMap = new google.maps.Polygon({
-                    paths: GoogleActions.PolygonPath,
-                    strokeColor: '#FF0000',
-                    strokeOpacity: 0.8,
-                    strokeWeight: 2,
-                    fillColor: '#FF0000',
-                    fillOpacity: 0.35,
-                    draggable: true,
-                    editable: true,
+                InitializeGoogleMapAPI.PolygonManager.createPolygon(GoogleActions.PolygonPath, GoogleActions.CurrentFieldId, false);
+                $.each(GoogleActions.Fields, function (index, item) {
+                    if (item.Id == GoogleActions.CurrentFieldId) {
+                        item.PolygonPoints = GoogleActions.PolygonPath;
+                        return;
+                    }
                 });
-
-                fieldMap.setMap(InitializeGoogleMapAPI.DrawingManager.getMap());
                 $("#SaveChanges").hide();
+                GoogleActions.ShowNoty("Поле успешно изменено", "success");
+                GoogleActions.PolygonPath = [];
             }
         });
+    },
 
-        GoogleActions.PolygonPath = [];
+    OnFindClick: function (sender) {
+        var term = $(sender.target).closest(".form-group").find("input").val();
+        $.ajax({
+            url: GoogleActions.baseUrl + "/FindField",
+            type: "GET",
+            data: { term: term },
+            success: function (response) {
+
+                if (response.data.Field != null) {
+                    var centerMarker = GoogleActions.GetBoundField(response.data.Field).getCenter();
+                    marker = InitializeGoogleMapAPI.MarkerManager.getMarker(centerMarker);
+                    new google.maps.event.trigger(marker, 'click');
+                    InitializeGoogleMapAPI.DrawingManager.getMap().setCenter(new google.maps.LatLng(response.data.Field.PolygonPoints[0].lat, response.data.Field.PolygonPoints[0].lng));
+                } else {
+                    GoogleActions.ShowNoty('Поле не найдено','information')
+                }
+
+            }
+        });
     },
 
     OnClickRowField: function (sender) {
@@ -165,29 +185,21 @@ GoogleActions = {
         })[0];
 
         if (field != null) {
-            var fieldMap = new google.maps.Polygon({
-                paths: field.PolygonPoints,
-                strokeColor: '#FF0000',
-                strokeOpacity: 0.8,
-                strokeWeight: 2,
-                fillColor: '#FF0000',
-                fillOpacity: 0.35,
-                draggable: true,
-                editable: true,
-            });
+            InitializeGoogleMapAPI.PolygonManager.createPolygon(field.PolygonPoints, field.Id, true);
+            var polygon = InitializeGoogleMapAPI.PolygonManager.findPolygon(field.Id).polygon;
+            GoogleActions.PolygonPath = polygon.getPath();
 
-            fieldMap.setMap(InitializeGoogleMapAPI.DrawingManager.getMap());
-            GoogleActions.PolygonPath = fieldMap.getPath();
+            var center = GoogleActions.GetBoundField(field).getCenter();
+            InitializeGoogleMapAPI.DrawingManager.getMap().panTo(InitializeGoogleMapAPI.MarkerManager.getMarker(center).position);
 
-
-            google.maps.event.addListener(fieldMap.getPath(), "insert_at", function () {
-                var len = fieldMap.getPath().getLength();
+            google.maps.event.addListener(polygon.getPath(), "insert_at", function () {
+                var len = polygon.getPath().getLength();
                 var htmlStr = "";
                 GoogleActions.PolygonPath = [];
 
                 for (var i = 0; i < len; i++) {
-                    var _lat = fieldMap.getPath().getAt(i).lat();
-                    var _lng = fieldMap.getPath().getAt(i).lng();
+                    var _lat = polygon.getPath().getAt(i).lat();
+                    var _lng = polygon.getPath().getAt(i).lng();
                     GoogleActions.PolygonPath.push({ lat: _lat, lng: _lng });
                 }
 
@@ -196,14 +208,14 @@ GoogleActions = {
                 }
             });
 
-            google.maps.event.addListener(fieldMap.getPath(), "set_at", function () {
-                var len = fieldMap.getPath().getLength();
+            google.maps.event.addListener(polygon.getPath(), "set_at", function () {
+                var len = polygon.getPath().getLength();
                 var htmlStr = "";
                 GoogleActions.PolygonPath = [];
 
                 for (var i = 0; i < len; i++) {
-                    var _lat = fieldMap.getPath().getAt(i).lat();
-                    var _lng = fieldMap.getPath().getAt(i).lng();
+                    var _lat = polygon.getPath().getAt(i).lat();
+                    var _lng = polygon.getPath().getAt(i).lng();
                     GoogleActions.PolygonPath.push({ lat: _lat, lng: _lng });
                 }
 

@@ -135,5 +135,10 @@ namespace GoogleMaps.Services
         {
             return jobContext.Fields.Find(id);
         }
+
+        public Field GetField(String fieldName)
+        {
+            return jobContext.Fields.Where(f => f.FieldName == fieldName).SingleOrDefault();
+        }
     }
 }
