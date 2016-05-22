@@ -5,10 +5,12 @@
     {
         <input type="hidden" name="FieldId" class="FieldId" />
         <fieldset class="filter-option">
-            <input type="number" name="StartYear" id="StartYear" placeholder="Стартовая дата"/>
+            <label for="StartYear">Стартовая дата</label>
+            <input type="number" name="StartYear" id="StartYear"/>
         </fieldset>
         <fieldset class="filter-option">
-            <input type="number" name="EndYear" id="EndDate" placeholder="Конечная дата"/>
+            <label for="EndYear">Стартовая дата</label>
+            <input type="number" name="EndYear" id="EndDate"/>
         </fieldset>
         <div class="filter-submit">
             <input type="submit" id="filterGo" value="Применить" />
@@ -16,24 +18,29 @@
     }
 </div>
 
-
-<table class="table table-bordered">
-    <thead>
-        <tr>
-            <th>@Html.DisplayNameFor(i => i.Year)</th>
-            <th>@Html.DisplayNameFor(i => i.Culture)</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
+@if (Model.Count() != 0)
+{
+    <table class="table table-bordered">
+        <thead>
             <tr>
-                <td>@Html.DisplayFor(modelItem => item.Year)</td>
-                <td>@Html.DisplayFor(modelItem => item.Culture)</td>
+                <th>@Html.DisplayNameFor(i => i.Year)</th>
+                <th>@Html.DisplayNameFor(i => i.Culture)</th>
             </tr>
-        }
-    </tbody>
-</table>
-
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.Year)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Culture)</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <h3>Данных нет</h3>
+}
 
 

@@ -60,3 +60,25 @@ C:\Users\LocalAdmin\Documents\Diploma\AgronomMapField\GoogleMaps\bin\jQueryTmpl.
 C:\Users\LocalAdmin\Documents\Diploma\AgronomMapField\GoogleMaps\obj\Release\GoogleMaps.csprojResolveAssemblyReference.cache
 C:\Users\LocalAdmin\Documents\Diploma\AgronomMapField\GoogleMaps\obj\Release\GoogleMaps.dll
 C:\Users\LocalAdmin\Documents\Diploma\AgronomMapField\GoogleMaps\obj\Release\GoogleMaps.pdb
+D:\Users\Vladimir\Google Диск\University\Diplom\Project\GoogleMaps_new\GoogleMaps\bin\roslyn\csc.exe
+D:\Users\Vladimir\Google Диск\University\Diplom\Project\GoogleMaps_new\GoogleMaps\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+D:\Users\Vladimir\Google Диск\University\Diplom\Project\GoogleMaps_new\GoogleMaps\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+D:\Users\Vladimir\Google Диск\University\Diplom\Project\GoogleMaps_new\GoogleMaps\bin\roslyn\Microsoft.CodeAnalysis.dll
+D:\Users\Vladimir\Google Диск\University\Diplom\Project\GoogleMaps_new\GoogleMaps\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+D:\Users\Vladimir\Google Диск\University\Diplom\Project\GoogleMaps_new\GoogleMaps\bin\roslyn\Microsoft.CSharp.Core.targets
+D:\Users\Vladimir\Google Диск\University\Diplom\Project\GoogleMaps_new\GoogleMaps\bin\roslyn\Microsoft.VisualBasic.Core.targets
+D:\Users\Vladimir\Google Диск\University\Diplom\Project\GoogleMaps_new\GoogleMaps\bin\roslyn\System.Collections.Immutable.dll
+D:\Users\Vladimir\Google Диск\University\Diplom\Project\GoogleMaps_new\GoogleMaps\bin\roslyn\System.Reflection.Metadata.dll
+D:\Users\Vladimir\Google Диск\University\Diplom\Project\GoogleMaps_new\GoogleMaps\bin\roslyn\vbc.exe
+D:\Users\Vladimir\Google Диск\University\Diplom\Project\GoogleMaps_new\GoogleMaps\bin\roslyn\VBCSCompiler.exe
+D:\Users\Vladimir\Google Диск\University\Diplom\Project\GoogleMaps_new\GoogleMaps\bin\roslyn\VBCSCompiler.exe.config
+D:\Users\Vladimir\Google Диск\University\Diplom\Project\GoogleMaps_new\GoogleMaps\bin\GoogleMaps.dll.config
+D:\Users\Vladimir\Google Диск\University\Diplom\Project\GoogleMaps_new\GoogleMaps\bin\GoogleMaps.dll
+D:\Users\Vladimir\Google Диск\University\Diplom\Project\GoogleMaps_new\GoogleMaps\bin\GoogleMaps.pdb
+D:\Users\Vladimir\Google Диск\University\Diplom\Project\GoogleMaps_new\GoogleMaps\bin\jQueryTmpl.dll
+D:\Users\Vladimir\Google Диск\University\Diplom\Project\GoogleMaps_new\GoogleMaps\bin\jQueryTmpl.Mvc.dll
+D:\Users\Vladimir\Google Диск\University\Diplom\Project\GoogleMaps_new\GoogleMaps\bin\jQueryTmpl.xml
+D:\Users\Vladimir\Google Диск\University\Diplom\Project\GoogleMaps_new\GoogleMaps\bin\jQueryTmpl.Mvc.xml
+D:\Users\Vladimir\Google Диск\University\Diplom\Project\GoogleMaps_new\GoogleMaps\obj\Release\GoogleMaps.csprojResolveAssemblyReference.cache
+D:\Users\Vladimir\Google Диск\University\Diplom\Project\GoogleMaps_new\GoogleMaps\obj\Release\GoogleMaps.dll
+D:\Users\Vladimir\Google Диск\University\Diplom\Project\GoogleMaps_new\GoogleMaps\obj\Release\GoogleMaps.pdb

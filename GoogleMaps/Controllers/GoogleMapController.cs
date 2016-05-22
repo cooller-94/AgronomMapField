@@ -21,6 +21,7 @@ namespace GoogleMaps.Controllers
         private JobAccauntingService jobService = new JobAccauntingService();
         private JobPlanningService jobPlanningService = new JobPlanningService();
         private SoilService soilService = new SoilService();
+        private CultureLinkService linkService = new CultureLinkService();
 
         // GET: GoogleMap
         public ActionResult Index()
@@ -74,7 +75,7 @@ namespace GoogleMaps.Controllers
         public JsonResult FindField(String term)
         {
             Field field = fieldService.GetField(term);
-            return this.GenerateJson(new { Field = field == null ? null : FieldRepository.GetModelFromField(field)});
+            return this.GenerateJson(new { Field = field == null ? null : FieldRepository.GetModelFromField(field) });
         }
 
         public JsonResult Delete(Int32 fieldId)
@@ -245,6 +246,37 @@ namespace GoogleMaps.Controllers
             };
 
             return PartialView("~/Views/GoogleMap/JobAccauntingFilterPartial.cshtml", model);
+        }
+
+        public String GetCultureIconList(Int32 rows, Int32 page, String sidx, String sord)
+        {
+
+            var cultureIconList = linkService.GetCulureIcons();
+            var culturesList = new CultureService().GetCultures();
+            var jsonData = new
+            {
+                total = cultureIconList.Count,
+                page = page,
+                records = cultureIconList.Count,
+                rows = (
+                        from culture in culturesList
+                        select new
+                        {
+                            id = culture.CultureID,
+                            cell = new String[]
+                            {
+                                culture.CultureName,
+                                culture.CultureIconLinks?.FirstOrDefault()?.CultureIconLinl ?? String.Empty
+                            }
+                        }).ToArray()
+            };
+
+            return new JavaScriptSerializer().Serialize(jsonData);
+        }
+
+        public ActionResult AddEditLink(Int32 cultureId, String value)
+        {
+            return this.GenerateJson(new { IsSuccess = linkService.AddEdit(cultureId, value) });
         }
 
         #endregion Statistics

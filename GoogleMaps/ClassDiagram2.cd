@@ -1,0 +1,390 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="GoogleMaps.BundleConfig" Collapsed="true">
+    <Position X="5.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAA=</HashCode>
+      <FileName>App_Start\BundleConfig.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GoogleMaps.FilterConfig" Collapsed="true">
+    <Position X="9.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAA=</HashCode>
+      <FileName>App_Start\FilterConfig.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GoogleMaps.EmailService" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="2.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>App_Start\IdentityConfig.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="GoogleMaps.ApplicationUserManager" Collapsed="true">
+    <Position X="7.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAA=</HashCode>
+      <FileName>App_Start\IdentityConfig.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GoogleMaps.RouteConfig" Collapsed="true">
+    <Position X="7.5" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAA=</HashCode>
+      <FileName>App_Start\RouteConfig.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GoogleMaps.Startup" Collapsed="true">
+    <Position X="2.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAgAAAAAAAAAA=</HashCode>
+      <FileName>App_Start\Startup.Auth.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GoogleMaps.MvcApplication" Collapsed="true">
+    <Position X="2.25" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAA=</HashCode>
+      <FileName>Global.asax.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GoogleMaps.Controllers.AccountController" Collapsed="true">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABAChACAAAAAAAAFgEgAABAABMKIAAAMRAAQgAAA=</HashCode>
+      <FileName>Controllers\AccountController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GoogleMaps.Controllers.GoogleMapController" Collapsed="true">
+    <Position X="5.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAggAAkAAAAAAQAAAUAAACEAACABAAEAgAEEEiA=</HashCode>
+      <FileName>Controllers\GoogleMapController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GoogleMaps.Controllers.HomeController" Collapsed="true">
+    <Position X="9.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAA=</HashCode>
+      <FileName>Controllers\HomeController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GoogleMaps.Controllers.ManageController" Collapsed="true">
+    <Position X="7.5" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABACAQiAAgAAAAEFhAAAAAAEAIMIAAEEEgAAkAAA=</HashCode>
+      <FileName>Controllers\ManageController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GoogleMaps.DAL.DBModel.JobAccauntingModels.AgrFieldLocation" Collapsed="true">
+    <Position X="2.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAEACAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAgAA=</HashCode>
+      <FileName>DAL\DBModel\JobAccauntingModels\AgrFieldLocation.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GoogleMaps.DAL.DBModel.JobAccauntingModels.Culture" Collapsed="true">
+    <Position X="0.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAASAAAAEAAEA=</HashCode>
+      <FileName>DAL\DBModel\JobAccauntingModels\Culture.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GoogleMaps.DAL.DBModel.JobAccauntingModels.CultureIconLink" Collapsed="true">
+    <Position X="4" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAIAAAAAAAAAAAAQAAAAAAACAAAAAAAAA=</HashCode>
+      <FileName>DAL\DBModel\JobAccauntingModels\CultureIconLink.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GoogleMaps.DAL.DBModel.JobAccauntingModels.Field" Collapsed="true">
+    <Position X="9.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIAAAAABAgAoAAAAAAAAAQAgCAAAAAAAAAAQAAAAA=</HashCode>
+      <FileName>DAL\DBModel\JobAccauntingModels\Field.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GoogleMaps.DAL.DBModel.JobAccauntingModels.FieldPlanningJob" Collapsed="true">
+    <Position X="4" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAACAAAAAAAAAAAAAAAAQAAAAAAACAAAAAAwAA=</HashCode>
+      <FileName>DAL\DBModel\JobAccauntingModels\FieldPlanningJob.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GoogleMaps.DAL.DBModel.JobAccauntingModels.JobAccauntingContext" Collapsed="true">
+    <Position X="4" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgAEAAAABAgAIAQAEIAAAAAEQAAAAAAIAAQAAEAgUA=</HashCode>
+      <FileName>DAL\DBModel\JobAccauntingModels\JobAccauntingContext.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GoogleMaps.DAL.DBModel.JobAccauntingModels.JobsAccaunting" Collapsed="true">
+    <Position X="4" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAIAAAAAAAAEAAAAAAAAAAAAQAAEAABAAAggAAAgAA=</HashCode>
+      <FileName>DAL\DBModel\JobAccauntingModels\JobsAccaunting.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GoogleMaps.DAL.DBModel.JobAccauntingModels.Soil" Collapsed="true">
+    <Position X="2.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAgAA=</HashCode>
+      <FileName>DAL\DBModel\JobAccauntingModels\Soil.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GoogleMaps.DAL.DBModel.JobAccauntingModels.WorkKind" Collapsed="true">
+    <Position X="7.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQAAAAAAAAAAQAAEAAAAAAAAAAAAAA=</HashCode>
+      <FileName>DAL\DBModel\JobAccauntingModels\WorkKind.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GoogleMaps.DAL.DBModel.JobAccauntingModels.WorkType" Collapsed="true">
+    <Position X="0.5" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAAAAAAQA=</HashCode>
+      <FileName>DAL\DBModel\JobAccauntingModels\WorkType.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GoogleMaps.HelperClasses.Constant" Collapsed="true">
+    <Position X="5.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>HelperClasses\Constant.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GoogleMaps.HelperClasses.CultureHelper" Collapsed="true">
+    <Position X="5.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>HelperClasses\CultureHelper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GoogleMaps.HelperClasses.CulturesString" Collapsed="true">
+    <Position X="0.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAJAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>HelperClasses\CulturesString.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GoogleMaps.HelperClasses.FieldHelper" Collapsed="true">
+    <Position X="9.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>HelperClasses\FieldHelper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GoogleMaps.HelperClasses.FieldJobState" Collapsed="true">
+    <Position X="0.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAQAAAAAAAAA=</HashCode>
+      <FileName>HelperClasses\FieldJobState.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GoogleMaps.HelperClasses.Point" Collapsed="true">
+    <Position X="5.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>HelperClasses\Point.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GoogleMaps.Models.ForgotViewModel" Collapsed="true">
+    <Position X="4" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\AccountViewModels.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GoogleMaps.Models.LoginViewModel" Collapsed="true">
+    <Position X="9.25" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAAAAAAAAAAAAAACAAAAAAAgAAA=</HashCode>
+      <FileName>Models\AccountViewModels.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GoogleMaps.Models.ResetPasswordViewModel" Collapsed="true">
+    <Position X="9.25" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAAgAAAAAAAAAAACAAAAAAAAIAA=</HashCode>
+      <FileName>Models\AccountViewModels.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GoogleMaps.Models.FieldModel" Collapsed="true">
+    <Position X="2.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAICAACAAAAAIAAAAAACAAAAAAAAAAAAAAAAARAAAIQ=</HashCode>
+      <FileName>Models\FieldModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GoogleMaps.Models.FilterCultureModel" Collapsed="true">
+    <Position X="2.25" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>Models\FilterCultureModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GoogleMaps.Models.FilterDataModel" Collapsed="true">
+    <Position X="4" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\FilterDataModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GoogleMaps.Models.FilterJobAccauntinData" Collapsed="true">
+    <Position X="2.25" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAADAAAAAAAAAAAAAAgAAAAAAAAACAAAEAAAAA=</HashCode>
+      <FileName>Models\FilterJobAccauntinData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GoogleMaps.Models.FilterJobPlanningModel" Collapsed="true">
+    <Position X="0.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgAAAAACAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\FilterJobPlanningModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GoogleMaps.Models.ApplicationUser" Collapsed="true">
+    <Position X="7.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\IdentityModels.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GoogleMaps.Models.ApplicationDbContext" Collapsed="true">
+    <Position X="4" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\IdentityModels.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GoogleMaps.Models.JobAccountingModel" Collapsed="true">
+    <Position X="0.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAQAAAAABAAAggAAAgQA=</HashCode>
+      <FileName>Models\JobAccountingModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GoogleMaps.Models.JobModel" Collapsed="true">
+    <Position X="4" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAIAIAAAAAAAAAAAAAAAAAAgAA=</HashCode>
+      <FileName>Models\JobModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GoogleMaps.Models.JobPlanningModel" Collapsed="true">
+    <Position X="5.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAABAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\JobPlanningModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GoogleMaps.Models.FactorViewModel" Collapsed="true">
+    <Position X="4" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAA=</HashCode>
+      <FileName>Models\ManageViewModels.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GoogleMaps.Models.ShortFilterJobAccauntingModel" Collapsed="true">
+    <Position X="0.5" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAACAAAAAAAAAAAAAAgAAAAAAAAAAAAAEAAAAA=</HashCode>
+      <FileName>Models\ShortFilterJobAccauntingModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GoogleMaps.Repository.FieldRepository" Collapsed="true">
+    <Position X="5.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAAAAAAIAAAAAAAAAAAAAAAAAAAACAAAAAAAA=</HashCode>
+      <FileName>Repository\FieldRepository.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GoogleMaps.Repository.JobAccountingRepository" Collapsed="true">
+    <Position X="2.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAAIAAEAAAAAAAAAAAACAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Repository\JobAccountingRepository.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GoogleMaps.Repository.JobPlanningRepository" Collapsed="true">
+    <Position X="7.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Repository\JobPlanningRepository.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GoogleMaps.Services.CultureService" Collapsed="true">
+    <Position X="9.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAEAAAAAAAAAAAAAAAgAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Services\CultureService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GoogleMaps.Services.FieldService" Collapsed="true">
+    <Position X="7.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAgAAAEAAAAAAAAAAAAAEAAEACAAAIAAAEAAA=</HashCode>
+      <FileName>Services\FieldService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GoogleMaps.Services.CultureLinkService" Collapsed="true">
+    <Position X="7.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAEQAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Services\IconLinkService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GoogleMaps.Services.JobAccauntingService" Collapsed="true">
+    <Position X="0.5" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAQEAAAAAAAAAAEAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Services\JobAccauntingService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GoogleMaps.Services.JobPlanningService" Collapsed="true">
+    <Position X="9.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAEAAAAAAAAGAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Services\JobPlanningService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GoogleMaps.Services.SoilService" Collapsed="true">
+    <Position X="5.75" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAEAAAAAAAAAAAgAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Services\SoilService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="GoogleMaps.Services.IFieldService" Collapsed="true">
+    <Position X="5.75" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAEAAA=</HashCode>
+      <FileName>Services\IFieldService.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="GoogleMaps.HelperClasses.FormAction" Collapsed="true">
+    <Position X="0.5" Y="9.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAA=</HashCode>
+      <FileName>HelperClasses\FormAction.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="GoogleMaps.HelperClasses.WorkType" Collapsed="true">
+    <Position X="9.25" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAA=</HashCode>
+      <FileName>HelperClasses\WorkType.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="GoogleMaps.HelperClasses.WorkTypeCulture" Collapsed="true">
+    <Position X="7.5" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAABAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>HelperClasses\WorkTypeCulture.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

@@ -287,6 +287,9 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Images\default.gif" />
+    <Content Include="Content\ui.jqgrid-bootstrap.css" />
+    <Content Include="Content\ui.jqgrid-bootstrap-ui.css" />
+    <Content Include="Content\ui.jqgrid.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -302,6 +305,8 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="ClassDiagram1.cd" />
+    <Content Include="ClassDiagram2.cd" />
     <None Include="Properties\PublishProfiles\AgrGoogleMaps.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\bootstrap-multiselect.js" />
@@ -310,6 +315,9 @@
     <Content Include="Scripts\CadastreUA\click-carousel.js" />
     <Content Include="Scripts\CadastreUA\config.js" />
     <Content Include="Scripts\GoogleMap\PolygonManager.js" />
+    <Content Include="Scripts\JqGrid\grid.locale-uk.js" />
+    <Content Include="Scripts\JqGrid\jquery.jqGrid.js" />
+    <Content Include="Scripts\GoogleMap\LinkGrid.js" />
     <Content Include="Scripts\Utils\Enums.js" />
     <Content Include="Scripts\CadastreUA\index.js" />
     <Content Include="Scripts\CadastreUA\jq.js" />
@@ -492,9 +500,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
     <Content Include="Views\Account\ConfirmEmail.cshtml" />
     <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
@@ -533,6 +538,7 @@
     <Content Include="Views\GoogleMap\JobPlanningView.cshtml" />
     <Content Include="Views\GoogleMap\FieldView.cshtml" />
     <Content Include="Views\GoogleMap\JobAccauntingFilterPartial.cshtml" />
+    <Content Include="Views\GoogleMap\_IconListGrid.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

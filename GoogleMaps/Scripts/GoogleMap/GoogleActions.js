@@ -421,8 +421,15 @@ GoogleActions = {
             type: "POST",
             data: { fieldId: GoogleActions.CurrentFieldId, polygon: GoogleActions.ConvertToGoogleMapsCoorditanes(GoogleActions.PolygonPath), action: FormAction.Create },
             success: function (response) {
-                alert('success');
-            }
+                $.each(GoogleActions.Fields, function (index, item) {
+                    if (item.Id == GoogleActions.CurrentFieldId) {
+                        item.PolygonPoints = GoogleActions.PolygonPath;
+                    }
+                });
+            },
+            error: function () {
+                GoogleActions.ShowNoty("Произошла ошибка", "error");
+            },
         });
 
         GoogleActions.PolygonPath = [];

@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <sitemanifest>
-  <IisApp path="C:\Users\LocalAdmin\Documents\Diploma\AgronomMapField\GoogleMaps\obj\Release\Package\PackageTmp" />
-  <setAcl path="C:\Users\LocalAdmin\Documents\Diploma\AgronomMapField\GoogleMaps\obj\Release\Package\PackageTmp" setAclResourceType="Directory" />
-  <setAcl path="C:\Users\LocalAdmin\Documents\Diploma\AgronomMapField\GoogleMaps\obj\Release\Package\PackageTmp" setAclUser="anonymousAuthenticationUser" setAclResourceType="Directory" />
+  <IisApp path="D:\Users\Vladimir\Google Диск\University\Diplom\Project\GoogleMaps_new\GoogleMaps\obj\Release\Package\PackageTmp" />
+  <setAcl path="D:\Users\Vladimir\Google Диск\University\Diplom\Project\GoogleMaps_new\GoogleMaps\obj\Release\Package\PackageTmp" setAclResourceType="Directory" />
+  <setAcl path="D:\Users\Vladimir\Google Диск\University\Diplom\Project\GoogleMaps_new\GoogleMaps\obj\Release\Package\PackageTmp" setAclUser="anonymousAuthenticationUser" setAclResourceType="Directory" />
 </sitemanifest>

@@ -9,6 +9,9 @@
     BindEvents: function () {
         $("#chartModel").on("shown.bs.modal", Statistics.ShowModel);
         $("body").on("change", "#yearChart", Statistics.ShowModelChartPie);
+        $("#chartModel").on("hidden.bs.modal", function () {
+            $(this).data("modal", null);
+        })
     },
 
     DrawPieChart: function (data) {

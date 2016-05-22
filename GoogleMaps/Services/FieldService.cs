@@ -115,6 +115,7 @@ namespace GoogleMaps.Services
                 _field.Area = field.Area;
                 _field.OwnerName = field.OwnerName;
                 _field.SoilID = field.SoilID;
+                _field.FieldName = field.FieldName;
                 jobContext.Entry<Field>(_field).State = EntityState.Modified;
                 jobContext.SaveChanges();
                 return true;

@@ -1,6 +1,6 @@
 ﻿/// <reference path="C:\Users\Vladimir\Desktop\GoogleMaps-2016-04-18 (1)\GoogleMaps\GoogleMaps\Views/GoogleMap/FieldInfo.cshtml" />
 InitializeGoogleMapAPI = {
-    latitude: 50.4744066,
+    latitude: 110.4744066,
     longitude: 35.183177,
     DrawingManager: null,
     MarkerManager: null,

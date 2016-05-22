@@ -163,7 +163,7 @@ var mapBounds = new OpenLayers.Bounds(-160, -74, 160, 74);
 // -- init() - MAIN INIT --
 // ------------------------
 function init() {
-    OpenLayers.Lang.setCode("ru");
+    OpenLayers. Lang.setCode("ru");
     mapBounds = new OpenLayers.Bounds(-160, -74, 160, 74);
     var options = {
         controls: [],
