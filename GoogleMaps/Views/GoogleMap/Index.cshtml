@@ -25,6 +25,7 @@
 <script src="~/Scripts/JqGrid/grid.locale-uk.js"></script>
 <script src="~/Scripts/GoogleMap/LinkGrid.js"></script>
 <link href="~/Content/ui.jqgrid-bootstrap.css" rel="stylesheet" />
+<script src="~/Scripts/xepOnline.jqPlugin.js"></script>
 
 @section Styles {
     html { height: 100% }
@@ -261,7 +262,7 @@
                         </div>
                     </div>
                     <div class="col-lg-3">
-                        <img id="imgCulture" style="float:right; display:none" width="150" height="200"/>
+                        <img id="imgCulture" style="float:right; display:none" width="150" height="200" />
                     </div>
                 </div>
             </div>
@@ -297,26 +298,43 @@
                     <div class="col-sm-9">
                         <div class="tab-content">
                             <div id="chartPi" class="tab-pane fade in active">
-                                <label>Год посева: </label>
-                                <select id="yearChart" class="dropdown" style="width:100px">
-                                    <option value="2010">2010</option>
-                                    <option value="2011">2011</option>
-                                    <option value="2012">2012</option>
-                                    <option value="2013">2013</option>
-                                    <option value="2014">2014</option>
-                                    <option value="2015">2015</option>
-                                    <option value="2016" selected>2016</option>
-                                    <option value="2017">2017</option>
-                                    <option value="2018">2018</option>
-                                    <option value="2019">2019</option>
-                                </select>
-                                <div id="piechart_3d"></div>
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <label>Год посева: </label>
+                                        <select id="yearChart" class="dropdown" style="width:100px">
+                                            <option value="2010">2010</option>
+                                            <option value="2011">2011</option>
+                                            <option value="2012">2012</option>
+                                            <option value="2013">2013</option>
+                                            <option value="2014">2014</option>
+                                            <option value="2015">2015</option>
+                                            <option value="2016" selected>2016</option>
+                                            <option value="2017">2017</option>
+                                            <option value="2018">2018</option>
+                                            <option value="2019">2019</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div id="buttons">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div id="pdf" class="col-lg-12">
+                                        <div id="piechart_3d"></div>
+                                    </div>
+                                </div>
+
                             </div>
                             <div id="barchart" class="tab-pane fade">
+                                <div id="buttons">
+                                </div>
                                 <div id="barchart_values" style="width: auto; height: 400px;"></div>
                             </div>
                             <div id="calendar" class="tab-pane fade">
                                 @Html.Action("GetJobAccauntingFilter")
+                                <div id="buttons">
+                                </div>
                                 <div id="calendar_basic" style="width: auto; height: auto;">
                                 </div>
                             </div>

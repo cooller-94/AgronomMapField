@@ -485,6 +485,7 @@
     <Content Include="Scripts\Utils\Weather\jquery.simpleWeather.js" />
     <Content Include="Scripts\Utils\Weather\jquery.simpleWeather.min.js" />
     <Content Include="Scripts\Utils\Weather\MIT-LICENSE.txt" />
+    <Content Include="Scripts\xepOnline.jqPlugin.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Scripts\Statistics\Statistics.js" />
     <Content Include="Web.config">

@@ -43,9 +43,7 @@ GoogleActions = {
 
     InitFilterCulture: function () {
         $('#Cultures').multiselect({
-            includeSelectAllOption: true,
             enableFiltering: true,
-            includeSelectAllOption: true,
             selectAllText: 'Выбрать все',
             nonSelectedText: 'Фильтр',
             allSelectedText: 'Выбраны все культуры',
@@ -157,7 +155,7 @@ GoogleActions = {
                     new google.maps.event.trigger(marker, 'click');
                     InitializeGoogleMapAPI.DrawingManager.getMap().setCenter(new google.maps.LatLng(response.data.Field.PolygonPoints[0].lat, response.data.Field.PolygonPoints[0].lng));
                 } else {
-                    GoogleActions.ShowNoty('Поле не найдено','information')
+                    GoogleActions.ShowNoty('Поле не найдено', 'information')
                 }
 
             }
@@ -171,10 +169,12 @@ GoogleActions = {
             GoogleActions.CurrentInfoWindow.close();
         }
 
-        GoogleActions.InitField(currentField)
-        GoogleActions.ChagneActiveItem(sender.target);
-        InitializeGoogleMapAPI.DrawingManager.getMap().setCenter(new google.maps.LatLng(currentField.PolygonPoints[0].lat, currentField.PolygonPoints[0].lng));
-        InitializeGoogleMapAPI.DrawingManager.getMap().setZoom(14);
+        if (currentField != null && currentField.PolygonPoints.length > 0) {
+            GoogleActions.InitField(currentField)
+            GoogleActions.ChagneActiveItem(sender.target);
+            InitializeGoogleMapAPI.DrawingManager.getMap().setCenter(new google.maps.LatLng(currentField.PolygonPoints[0].lat, currentField.PolygonPoints[0].lng));
+            InitializeGoogleMapAPI.DrawingManager.getMap().setZoom(14);
+        }
     },
 
     OnClickChangeLocation: function (sender) {
