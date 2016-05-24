@@ -63,7 +63,6 @@ GoogleActions = {
                 GoogleActions.Fields = data.Fields;
 
                 for(var field of GoogleActions.Fields) {
-                //InitializeGoogleMapAPI.DrawPolygon(field.PolygonPoints);
                     InitializeGoogleMapAPI.PolygonManager.createPolygon(field.PolygonPoints, field.Id, false);
                     GoogleActions.InitField(field);
                 }
@@ -170,7 +169,9 @@ GoogleActions = {
         }
 
         if (currentField != null && currentField.PolygonPoints.length > 0) {
-            GoogleActions.InitField(currentField)
+            GoogleActions.InitField(currentField);
+            var marker = InitializeGoogleMapAPI.MarkerManager.getMarker(GoogleActions.GetBoundField(currentField).getCenter());
+            new google.maps.event.trigger(marker, 'click');
             GoogleActions.ChagneActiveItem(sender.target);
             InitializeGoogleMapAPI.DrawingManager.getMap().setCenter(new google.maps.LatLng(currentField.PolygonPoints[0].lat, currentField.PolygonPoints[0].lng));
             InitializeGoogleMapAPI.DrawingManager.getMap().setZoom(14);
@@ -273,13 +274,8 @@ GoogleActions = {
                     GoogleActions.CurrentInfoWindow.close();
                 }
 
-                GoogleActions.CurrentInfoWindow = new google.maps.InfoWindow({
-                    content: html,
-                    maxWidth: 800
-                });
+                GoogleActions.OpenWindow(marker, html);
                 GoogleActions.ChagneActiveItem($("[type='hidden'][value = '" + fieldId + "']"))
-                GoogleActions.CurrentMarker = marker;
-                GoogleActions.CurrentInfoWindow.open(InitializeGoogleMapAPI.DrawingManager.getMap(), marker);
                 GoogleActions.CurrentFieldId = fieldId;
                 GoogleActions.OnGeneralFieldClick();
             },
@@ -287,6 +283,16 @@ GoogleActions = {
                 console.log('error')
             },
         });
+    },
+
+    OpenWindow: function (marker, html) {
+        GoogleActions.CurrentInfoWindow = new google.maps.InfoWindow({
+            content: html,
+            maxWidth: 800
+        });
+
+        GoogleActions.CurrentMarker = marker;
+        GoogleActions.CurrentInfoWindow.open(InitializeGoogleMapAPI.DrawingManager.getMap(), marker);
     },
 
     OnTabClick: function (sender) {
