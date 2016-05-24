@@ -14,8 +14,16 @@
 });
 
 
+
+
+
+
+
+
+
+
 function change_region(koatuu_district) {
-    $("#id_district").load("http://212.26.144.110/ajax/district-list",
+    $("#id_district").load("http://map.land.gov.ua/ajax/district-list",
     {
         id_region: ($("#id_region option:selected").val())
     }, function () {
@@ -27,14 +35,27 @@ function change_region(koatuu_district) {
                 $('#id_district option').removeAttr('selected');
                 $('#id_district option[rel=' + koatuu_district + ']').attr('selected', true);
             } else {
-                $.getJSON('http://212.26.144.110/kadastrova-karta/find-region', { 'koatuu': koatuu }, function (data) {
-                    if (data['status'] && parseFloat(data['data'][0]['st_xmin']) > 0) {
-                        var mapBounds = new OpenLayers.Bounds(data['data'][0]['st_xmin'], data['data'][0]['st_ymin'], data['data'][0]['st_xmax'], data['data'][0]['st_ymax']);
-                        map.zoomToExtent(mapBounds.transform(map.displayProjection, map.projection));
-                    } else {
-                        if (isset(data['msg'])) alert(data['msg']);
+
+                $.ajax({
+                    url: 'http://map.land.gov.ua/kadastrova-karta/find-region',
+                    data: { 'koatuu': koatuu },
+                    type: "GET",
+                    dataType: 'json',
+                    jsonp: 'jsonp',
+                    jsonp: false,
+                    success: function (data) {
+                        if (data['status'] && parseFloat(data['data'][0]['st_xmin']) > 0) {
+                            var mapBounds = new OpenLayers.Bounds(data['data'][0]['st_xmin'], data['data'][0]['st_ymin'], data['data'][0]['st_xmax'], data['data'][0]['st_ymax']);
+                            map.zoomToExtent(mapBounds.transform(map.displayProjection, map.projection));
+                        } else {
+                            if (isset(data['msg'])) alert(data['msg']);
+                        }
+                    },
+                    error: function (data) {
+                        console.log(data);
                     }
                 });
+
             }
         }
         else {
@@ -46,7 +67,7 @@ function change_region(koatuu_district) {
 }
 
 function change_district() {
-    $("#id_city").load("http://212.26.144.110/ajax/cities-list",
+    $("#id_city").load("http://map.land.gov.ua/ajax/cities-list",
             {
                 id_district: ($("#id_district option:selected").val())
             });
@@ -56,12 +77,23 @@ function change_district() {
 
         var koatuu = $("#id_district option:selected").attr('rel');
 
-        $.getJSON('http://212.26.144.110/kadastrova-karta/find-district', { 'koatuu': koatuu }, function (data) {
-            if (data['status'] && parseFloat(data['data'][0]['st_xmin']) > 0) {
-                var mapBounds = new OpenLayers.Bounds(data['data'][0]['st_xmin'], data['data'][0]['st_ymin'], data['data'][0]['st_xmax'], data['data'][0]['st_ymax']);
-                map.zoomToExtent(mapBounds.transform(map.displayProjection, map.projection));
-            } else {
-                if (isset(data['msg'])) alert(data['msg']);
+        $.ajax({
+            url: 'http://map.land.gov.ua/kadastrova-karta/find-district',
+            data: { 'koatuu': koatuu },
+            type: "GET",
+            dataType: 'json',
+            jsonp: 'jsonp',
+            jsonp: false,
+            success: function (data) {
+                if (data['status'] && parseFloat(data['data'][0]['st_xmin']) > 0) {
+                    var mapBounds = new OpenLayers.Bounds(data['data'][0]['st_xmin'], data['data'][0]['st_ymin'], data['data'][0]['st_xmax'], data['data'][0]['st_ymax']);
+                    map.zoomToExtent(mapBounds.transform(map.displayProjection, map.projection));
+                } else {
+                    if (isset(data['msg'])) alert(data['msg']);
+                }
+            },
+            error: function (data) {
+                console.log(data);
             }
         });
     }
@@ -112,5 +144,49 @@ function change_city() {
                 if (isset(data['msg'])) alert(data['msg']);
             }
         });
+
+        $.ajax({
+            url: 'http://map.land.gov.ua/kadastrova-karta/find-city',
+            data: { 'koatuu': koatuu },
+            type: "GET",
+            dataType: 'json',
+            jsonp: 'jsonp',
+            jsonp: false,
+            success: function (data) {
+                if (data['status'] && parseFloat(data['data'][0]['st_xmin']) > 0) {
+                    var x1 = data['data'][0]['st_xmin'];
+                    var y1 = data['data'][0]['st_ymin'];
+                    var x2 = data['data'][0]['st_xmax'];
+                    var y2 = data['data'][0]['st_ymax'];
+
+                    var point1 = new Proj4js.Point(x1, y1);
+                    var point2 = new Proj4js.Point(x2, y2);
+
+                    Proj4js.transform(src, dst, point1);
+                    Proj4js.transform(src, dst, point2);
+
+                    var new_response = point1.x + "," + point1.y + "," + point2.x + "," + point2.y;
+                    var new_bounds_res = new OpenLayers.Bounds.fromString(new_response);
+
+                    //var mapBounds = new OpenLayers.Bounds(data['data'][0]['st_xmin'], data['data'][0]['st_ymin'], data['data'][0]['st_xmax'], data['data'][0]['st_ymax']);
+                    //map.zoomToExtent( mapBounds.transform(map.displayProjection, map.projection ));
+                    map.zoomToExtent(new_bounds_res);
+
+                    var x = new_bounds_res.centerLonLat.lat;
+                    var y = new_bounds_res.centerLonLat.lon;
+
+                    map.setCenter(new OpenLayers.LonLat(y, x), 16);
+                    //var mapBounds = new OpenLayers.Bounds(data['data'][0]['st_xmin'], data['data'][0]['st_ymin'], data['data'][0]['st_xmax'], data['data'][0]['st_ymax']);
+                    //map.zoomToExtent( mapBounds.transform(map.displayProjection, map.projection ));
+                } else {
+                    if (isset(data['msg'])) alert(data['msg']);
+                }
+            },
+            error: function (data) {
+                console.log(data);
+            }
+        });
+
+
     }
 }

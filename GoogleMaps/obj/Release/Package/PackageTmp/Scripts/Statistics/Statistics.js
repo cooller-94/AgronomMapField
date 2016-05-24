@@ -25,7 +25,17 @@
         };
 
         var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
+        google.visualization.events.addListener(chart, 'ready', function () { Statistics.DownloadPdf("#piechart_3d svg") });
         chart.draw(dataToDraw, options);
+
+    },
+
+    DownloadPdf: function (selector) {
+        var svg = jQuery(selector);
+        svg.attr("xmlns", "http://www.w3.org/2000/svg");
+        svg.css('overflow', 'visible');
+        var click = "return xepOnline.Formatter.Format('pdf', {render:'download', srctype:'svg'})";
+        jQuery('#buttons').append('<button class = "btn btn-default btn-sm" style = "float:right" onclick="' + click + '">PDF</button>');
     },
 
     DrawBarChartForFieldArea: function () {
@@ -82,6 +92,7 @@
     },
 
     ShowModelChartPie: function () {
+        $("#buttons").empty();
         $.ajax({
             url: GoogleActions.baseUrl + "/GetAreaInfo",
             data: { year: $("#yearChart").val() },

@@ -43,9 +43,7 @@ GoogleActions = {
 
     InitFilterCulture: function () {
         $('#Cultures').multiselect({
-            includeSelectAllOption: true,
             enableFiltering: true,
-            includeSelectAllOption: true,
             selectAllText: 'Выбрать все',
             nonSelectedText: 'Фильтр',
             allSelectedText: 'Выбраны все культуры',
@@ -65,7 +63,6 @@ GoogleActions = {
                 GoogleActions.Fields = data.Fields;
 
                 for(var field of GoogleActions.Fields) {
-                //InitializeGoogleMapAPI.DrawPolygon(field.PolygonPoints);
                     InitializeGoogleMapAPI.PolygonManager.createPolygon(field.PolygonPoints, field.Id, false);
                     GoogleActions.InitField(field);
                 }
@@ -157,7 +154,7 @@ GoogleActions = {
                     new google.maps.event.trigger(marker, 'click');
                     InitializeGoogleMapAPI.DrawingManager.getMap().setCenter(new google.maps.LatLng(response.data.Field.PolygonPoints[0].lat, response.data.Field.PolygonPoints[0].lng));
                 } else {
-                    GoogleActions.ShowNoty('Поле не найдено','information')
+                    GoogleActions.ShowNoty('Поле не найдено', 'information')
                 }
 
             }
@@ -171,10 +168,14 @@ GoogleActions = {
             GoogleActions.CurrentInfoWindow.close();
         }
 
-        GoogleActions.InitField(currentField)
-        GoogleActions.ChagneActiveItem(sender.target);
-        InitializeGoogleMapAPI.DrawingManager.getMap().setCenter(new google.maps.LatLng(currentField.PolygonPoints[0].lat, currentField.PolygonPoints[0].lng));
-        InitializeGoogleMapAPI.DrawingManager.getMap().setZoom(14);
+        if (currentField != null && currentField.PolygonPoints.length > 0) {
+            GoogleActions.InitField(currentField);
+            var marker = InitializeGoogleMapAPI.MarkerManager.getMarker(GoogleActions.GetBoundField(currentField).getCenter());
+            new google.maps.event.trigger(marker, 'click');
+            GoogleActions.ChagneActiveItem(sender.target);
+            InitializeGoogleMapAPI.DrawingManager.getMap().setCenter(new google.maps.LatLng(currentField.PolygonPoints[0].lat, currentField.PolygonPoints[0].lng));
+            InitializeGoogleMapAPI.DrawingManager.getMap().setZoom(14);
+        }
     },
 
     OnClickChangeLocation: function (sender) {
@@ -273,13 +274,8 @@ GoogleActions = {
                     GoogleActions.CurrentInfoWindow.close();
                 }
 
-                GoogleActions.CurrentInfoWindow = new google.maps.InfoWindow({
-                    content: html,
-                    maxWidth: 800
-                });
+                GoogleActions.OpenWindow(marker, html);
                 GoogleActions.ChagneActiveItem($("[type='hidden'][value = '" + fieldId + "']"))
-                GoogleActions.CurrentMarker = marker;
-                GoogleActions.CurrentInfoWindow.open(InitializeGoogleMapAPI.DrawingManager.getMap(), marker);
                 GoogleActions.CurrentFieldId = fieldId;
                 GoogleActions.OnGeneralFieldClick();
             },
@@ -287,6 +283,16 @@ GoogleActions = {
                 console.log('error')
             },
         });
+    },
+
+    OpenWindow: function (marker, html) {
+        GoogleActions.CurrentInfoWindow = new google.maps.InfoWindow({
+            content: html,
+            maxWidth: 800
+        });
+
+        GoogleActions.CurrentMarker = marker;
+        GoogleActions.CurrentInfoWindow.open(InitializeGoogleMapAPI.DrawingManager.getMap(), marker);
     },
 
     OnTabClick: function (sender) {
@@ -421,8 +427,15 @@ GoogleActions = {
             type: "POST",
             data: { fieldId: GoogleActions.CurrentFieldId, polygon: GoogleActions.ConvertToGoogleMapsCoorditanes(GoogleActions.PolygonPath), action: FormAction.Create },
             success: function (response) {
-                alert('success');
-            }
+                $.each(GoogleActions.Fields, function (index, item) {
+                    if (item.Id == GoogleActions.CurrentFieldId) {
+                        item.PolygonPoints = GoogleActions.PolygonPath;
+                    }
+                });
+            },
+            error: function () {
+                GoogleActions.ShowNoty("Произошла ошибка", "error");
+            },
         });
 
         GoogleActions.PolygonPath = [];

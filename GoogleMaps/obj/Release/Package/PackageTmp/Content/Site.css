@@ -51,6 +51,7 @@ textarea {
 .dashboard-info {
     padding-left: 1px;
     padding-right: 1px;
+    height: 100%;
 }
 
 .fieldsList {
@@ -281,4 +282,24 @@ textarea {
 
 .cadastre {
     width: 120%;
+    height: 90%;
+}
+
+.panel-heading {
+    padding: 5px 15px;
+}
+
+.panel-footer {
+    padding: 1px 15px;
+    color: #A0A0A0;
+}
+
+.profile-img {
+    width: 96px;
+    height: 96px;
+    margin: 0 auto 10px;
+    display: block;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
 }
