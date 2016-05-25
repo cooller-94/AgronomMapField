@@ -10,8 +10,8 @@ MarkerManager.prototype = {
         this.map = map;
     },
 
-    addMarker: function (marker) {
-        this.markers.push(marker);
+    addMarker: function (marker, fieldId) {
+        this.markers.push({ marker: marker, fieldId: fieldId });
     },
 
     addMarkers: function (markers) {
@@ -26,6 +26,11 @@ MarkerManager.prototype = {
         return array[0];
     },
 
+    getMarkerByFieldId: function (fieldId) {
+        var marker = this.markers.filter(function (item, index) { return item.fieldId == fieldId })[0];
+        return marker == null ? null : marker.marker;
+    },
+
     removeMarker: function (marker) {
         var index = this.inArray(marker, this.markers), current;
         if (index > -1) {
@@ -33,6 +38,13 @@ MarkerManager.prototype = {
             current[0].setMap(null);
         }
         return marker;
+    },
+
+    removeMarkerByFieldId: function (fieldId) {
+        var removedMarker = this.getMarkerByFieldId(fieldId);
+        google.maps.event.clearListeners(removedMarker, 'click');
+        removedMarker.setMap(null);
+        this.markers = this.markers.filter(function (item, index) { return item.fieldId != fieldId });
     },
 
     clearMarkers: function () {
@@ -46,7 +58,7 @@ MarkerManager.prototype = {
         return this.markers.length;
     },
 
-    
+
     getVisibleMarkers: function () {
         var array = [];
         for (var i in this.markers) {
@@ -64,14 +76,14 @@ MarkerManager.prototype = {
         }
     },
 
-    createMarker: function (position, markImage, animation) {
+    createMarker: function (position, markImage, animation, fieldId) {
         var marker = new google.maps.Marker({
             map: this.map,
             position: position,
             icon: markImage,
             animation: animation
         });
-        this.addMarker(marker);
+        this.addMarker(marker, fieldId);
         return marker;
     },
 

@@ -149,8 +149,7 @@ GoogleActions = {
             success: function (response) {
 
                 if (response.data.Field != null) {
-                    var centerMarker = GoogleActions.GetBoundField(response.data.Field).getCenter();
-                    marker = InitializeGoogleMapAPI.MarkerManager.getMarker(centerMarker);
+                    marker = InitializeGoogleMapAPI.MarkerManager.getMarkerByFieldId(response.data.Field.Id);
                     new google.maps.event.trigger(marker, 'click');
                     InitializeGoogleMapAPI.DrawingManager.getMap().setCenter(new google.maps.LatLng(response.data.Field.PolygonPoints[0].lat, response.data.Field.PolygonPoints[0].lng));
                 } else {
@@ -169,8 +168,8 @@ GoogleActions = {
         }
 
         if (currentField != null && currentField.PolygonPoints.length > 0) {
-            GoogleActions.InitField(currentField);
-            var marker = InitializeGoogleMapAPI.MarkerManager.getMarker(GoogleActions.GetBoundField(currentField).getCenter());
+           // GoogleActions.InitField(currentField);
+            var marker = InitializeGoogleMapAPI.MarkerManager.getMarkerByFieldId(currentField.Id);
             new google.maps.event.trigger(marker, 'click');
             GoogleActions.ChagneActiveItem(sender.target);
             InitializeGoogleMapAPI.DrawingManager.getMap().setCenter(new google.maps.LatLng(currentField.PolygonPoints[0].lat, currentField.PolygonPoints[0].lng));
@@ -190,8 +189,7 @@ GoogleActions = {
             var polygon = InitializeGoogleMapAPI.PolygonManager.findPolygon(field.Id).polygon;
             GoogleActions.PolygonPath = polygon.getPath();
 
-            var center = GoogleActions.GetBoundField(field).getCenter();
-            InitializeGoogleMapAPI.DrawingManager.getMap().panTo(InitializeGoogleMapAPI.MarkerManager.getMarker(center).position);
+            InitializeGoogleMapAPI.DrawingManager.getMap().panTo(InitializeGoogleMapAPI.MarkerManager.getMarkerByFieldId(field.Id).position);
 
             google.maps.event.addListener(polygon.getPath(), "insert_at", function () {
                 var len = polygon.getPath().getLength();
@@ -242,12 +240,12 @@ GoogleActions = {
             bounds.extend(array[i]);
         }
 
-        var marker = InitializeGoogleMapAPI.MarkerManager.getMarker(bounds.getCenter());
+        var marker = InitializeGoogleMapAPI.MarkerManager.getMarkerByFieldId(field.Id)
 
         if (marker == null) {
-            InitializeGoogleMapAPI.MarkerManager.createMarker(bounds.getCenter(), new google.maps.MarkerImage(field.CultureIconLink, null, null, null, new google.maps.Size(30, 40)), google.maps.Animation.DROP);
-            marker = InitializeGoogleMapAPI.MarkerManager.getMarker(bounds.getCenter());
-            google.maps.event.addListener(marker, 'click', function () { GoogleActions.OnClickMarker(marker, field.Id) });
+            InitializeGoogleMapAPI.MarkerManager.createMarker(bounds.getCenter(), new google.maps.MarkerImage(field.CultureIconLink, null, null, null, new google.maps.Size(30, 40)), google.maps.Animation.DROP, field.Id);
+            marker = InitializeGoogleMapAPI.MarkerManager.getMarkerByFieldId(field.Id);
+            google.maps.event.addListener(marker, 'click', function () { GoogleActions.OnClickMarker(field.Id) });
         }
 
     },
@@ -261,7 +259,7 @@ GoogleActions = {
         });
     },
 
-    OnClickMarker: function (marker, fieldId) {
+    OnClickMarker: function (fieldId) {
         $.ajax({
             url: GoogleActions.baseUrl + "/GetWindowInfo",
             dataType: 'html',
@@ -273,6 +271,8 @@ GoogleActions = {
                 if (GoogleActions.CurrentInfoWindow != null) {
                     GoogleActions.CurrentInfoWindow.close();
                 }
+
+                var marker = InitializeGoogleMapAPI.MarkerManager.getMarkerByFieldId(fieldId)
 
                 GoogleActions.OpenWindow(marker, html);
                 GoogleActions.ChagneActiveItem($("[type='hidden'][value = '" + fieldId + "']"))
@@ -520,8 +520,7 @@ GoogleActions = {
 
         if (excludeFields.length > 0) {
             for (var field of excludeFields) {
-                var centerMarker = GoogleActions.GetBoundField(field).getCenter();
-                InitializeGoogleMapAPI.MarkerManager.removeMarker(InitializeGoogleMapAPI.MarkerManager.getMarker(centerMarker));
+                InitializeGoogleMapAPI.MarkerManager.removeMarkerByFieldId(field.Id);
             }
         }
     },
@@ -530,12 +529,17 @@ GoogleActions = {
         var includeFields = GoogleActions.FindFieldsByCulture(culture);
 
         if (includeFields.length > 0) {
-            for (var field of includeFields) {
-                var centerMarker = GoogleActions.GetBoundField(field).getCenter();
-                InitializeGoogleMapAPI.MarkerManager.createMarker(centerMarker, new google.maps.MarkerImage(field.CultureIconLink, null, null, null, new google.maps.Size(30, 40)), google.maps.Animation.DROP);
-                marker = InitializeGoogleMapAPI.MarkerManager.getMarker(centerMarker);
-                google.maps.event.addListener(marker, 'click', function () { GoogleActions.OnClickMarker(marker, field.Id) });
-            }
+            $.each(includeFields, function (index, field) {
+                var array = [];
+                var bounds = new google.maps.LatLngBounds();
+
+                for (var i = 0; i < field.PolygonPoints.length; i++) {
+                    array.push(new google.maps.LatLng(field.PolygonPoints[i].lat, field.PolygonPoints[i].lng));
+                    bounds.extend(array[i]);
+                }
+                InitializeGoogleMapAPI.MarkerManager.createMarker(bounds.getCenter(), new google.maps.MarkerImage(field.CultureIconLink, null, null, null, new google.maps.Size(30, 40)), google.maps.Animation.DROP, field.Id);
+                google.maps.event.addListener(InitializeGoogleMapAPI.MarkerManager.getMarkerByFieldId(field.Id), 'click', function () { GoogleActions.OnClickMarker(field.Id) });
+            })
         }
     },
 
