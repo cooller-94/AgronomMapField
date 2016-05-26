@@ -34,62 +34,60 @@
 
 <div class="container-fluid">
     <div class="row">
-        <div class="col-lg-3">
-            <h3 style="margin-top:2px">Агроном. Карты полей</h3>
-        </div>
-        <div class="col-lg-3">
-            <button type="button" class="btn btn-primary btn-sm" id="btnAdd">
-                Добавить поле
-            </button>
-            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#chartModel">
-                Анализ
-            </button>
-            @Html.DropDownList("Cultures", (List<SelectListItem>)ViewBag.Cultures, new { multiple = "multiple" })
-        </div>
-        <div class="col-lg-1">
-            <button type="button" class="btn btn-danger" id="SaveChanges" style="display:none">
-                Сохранить
-            </button>
-        </div>
-        <div class="col-lg-3">
-            <div class="form-group" style="display:inline;">
-                <div class="input-group">
-                    <input type="text" class="form-control" style="float:right" placeholder="Введите название поля">
-                    <span class="input-group-addon" id="findField">
-                        <span class="glyphicon glyphicon-search">
+        @*<nav class="navbar navbar-default navbar-fixed-top">*@
+            <div class="col-lg-3">
+                <h3 style="margin-top:2px">Агроном. Карты полей</h3>
+            </div>
+            <div class="col-lg-3">
+                <button type="button" class="btn btn-primary btn-sm" id="btnAdd">
+                    Добавить поле
+                </button>
+                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#chartModel">
+                    Анализ
+                </button>
+                @Html.DropDownList("Cultures", (List<SelectListItem>)ViewBag.Cultures, new { multiple = "multiple" })
+                <button type="button" class="btn btn-danger" id="SaveChanges" style="display:none">
+                    Сохранить
+                </button>
+            </div>
+            <div class="col-lg-3">
+                <div class="form-group" style="display:inline;">
+                    <div class="input-group" style="width:100%;float:right">
+                        <input type="text" class="form-control" style="float:right" placeholder="Введите название поля">
+                        <span class="input-group-addon" id="findField">
+                            <span class="glyphicon glyphicon-search">
+                            </span>
                         </span>
-                    </span>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col-lg-2">
-            @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+            <div class="col-lg-3">
+                @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
             {
-                @Html.AntiForgeryToken()
-            }
-            <div class="btn-group" role="group" style="float:right">
-                <button type="button" class="btn btn-small dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <span class="glyphicon glyphicon-user"></span> Пользователь <span class="caret"></span>
-                </button>
-                <ul class="dropdown-menu">
-                    <li>
-
-                        <a href="javascript:document.getElementById('logoutForm').submit()">Выйти</a>
-
-                    </li>
-                </ul>
+                    @Html.AntiForgeryToken()
+                }
+                <div class="btn-group" role="group" style="float:right">
+                    <button type="button" class="btn btn-small dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span class="glyphicon glyphicon-user"></span> Пользователь <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="javascript:document.getElementById('logoutForm').submit()">Выйти</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="btn-group" role="group" style="float:right">
+                    <button type="button" class="btn btn-small dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span class="glyphicon glyphicon-cog"></span> Настройки <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="#" data-toggle="modal" data-target="#iconListGrid">Маркеры</a>
+                        </li>
+                    </ul>
+                </div>
             </div>
-            <div class="btn-group" role="group" style="float:right">
-                <button type="button" class="btn btn-small dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <span class="glyphicon glyphicon-cog"></span> Настройки <span class="caret"></span>
-                </button>
-                <ul class="dropdown-menu">
-                    <li>
-                        <a href="#" data-toggle="modal" data-target="#iconListGrid">Маркеры</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
+        @*</nav>*@
     </div>
     <div class="row">
         <div class="col-lg-3 dashboard-info">
@@ -276,7 +274,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">Аналіз</h4>
+                <h4 class="modal-title" id="myModalLabel">Анализ</h4>
             </div>
             <div class="modal-body" id="chart">
                 <div class="row">
@@ -321,7 +319,7 @@
                                 </div>
                                 <div class="row">
                                     <div id="pdf" class="col-lg-12">
-                                        <div id="piechart_3d"></div>
+                                        <div id="piechart_3d" style="width:100%"></div>
                                     </div>
                                 </div>
 
@@ -329,7 +327,7 @@
                             <div id="barchart" class="tab-pane fade">
                                 <div id="buttons">
                                 </div>
-                                <div id="barchart_values" style="width: auto; height: 400px;"></div>
+                                <div id="barchart_values"  style="width: 900px; height: 500px;"></div>
                             </div>
                             <div id="calendar" class="tab-pane fade">
                                 @Html.Action("GetJobAccauntingFilter")

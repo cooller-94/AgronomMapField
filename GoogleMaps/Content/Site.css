@@ -303,3 +303,16 @@ textarea {
     -webkit-border-radius: 50%;
     border-radius: 50%;
 }
+
+
+#accordion {
+    height: 100%;
+    overflow-y: auto;
+}
+
+#barchart {
+    overflow-x: scroll;
+    overflow-y: hidden;
+    width: 100%;
+    height: 550px;
+}

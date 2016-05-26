@@ -85,16 +85,44 @@ GoogleActions = {
     OnSuccesSaveField: function (response) {
         if (response.data.IsSuccess == true) {
             GoogleActions.ShowNoty("Данные успешно добавленны", "success");
+            GoogleActions.CurrentFieldId = response.data.FieldId;
             $("#fillFieldModal").modal('hide');
-            if (response.data.FieldId != null) {
-                GoogleActions.CurrentFieldId = response.data.FieldId;
-                $("#selectFieldModal").modal('show');
+            if (response.data.Type == "Edit") {
+                GoogleActions.LoadField(GoogleActions.CurrentFieldId, function (field) {
+                    for (var i = 0; i < GoogleActions.Fields.length; i++) {
+                        if (GoogleActions.Fields[i].Id == field.Id) {
+                            GoogleActions.Fields[i] = field;
+                            break;
+                        }
+                    }
+
+                    GoogleActions.RenderFieldsTemplate();
+                });
+            } else {
+                GoogleActions.LoadField(GoogleActions.CurrentFieldId, function (field) {
+                    $("#selectFieldModal").modal('show');
+                    GoogleActions.Fields.push(field);
+                    GoogleActions.RenderFieldsTemplate();
+                });
             }
-            GoogleActions.LoadFields();
         }
         else {
             GoogleActions.ShowNoty("Произошла ошибка", "error");
         }
+    },
+
+    LoadField: function (fieldId, callback) {
+        $.ajax({
+            url: GoogleActions.baseUrl + "/LoadField",
+            data: { id: GoogleActions.CurrentFieldId },
+            type: 'GET',
+            success: function (data) {
+                callback(data.Field);
+            },
+            error: function (data) {
+                console.log(data);
+            }
+        });
     },
 
     OnFailureSaveField: function (data) {
@@ -168,7 +196,7 @@ GoogleActions = {
         }
 
         if (currentField != null && currentField.PolygonPoints.length > 0) {
-           // GoogleActions.InitField(currentField);
+            // GoogleActions.InitField(currentField);
             var marker = InitializeGoogleMapAPI.MarkerManager.getMarkerByFieldId(currentField.Id);
             new google.maps.event.trigger(marker, 'click');
             GoogleActions.ChagneActiveItem(sender.target);
@@ -410,7 +438,7 @@ GoogleActions = {
 
     },
 
-    SaveMap: function (array) {
+    SaveMap: function () {
         var array = [];
         for (var i = 0; i < GoogleActions.PolygonPath.length; i++) {
             var point = { X: GoogleActions.PolygonPath[i].lng, Y: GoogleActions.PolygonPath[i].lat }
@@ -418,8 +446,8 @@ GoogleActions = {
             array.push(new google.maps.LatLng(result.Latitude, result.Longitude))
         }
 
-        InitializeGoogleMapAPI.DrawPolygon(array);
-        InitializeGoogleMapAPI.DrawingManager.getMap().setZoom(10);
+        //InitializeGoogleMapAPI.DrawPolygon(array);
+        InitializeGoogleMapAPI.DrawingManager.getMap().setZoom(15);
         InitializeGoogleMapAPI.DrawingManager.getMap().panTo(array[0]);
 
         $.ajax({
@@ -427,18 +455,34 @@ GoogleActions = {
             type: "POST",
             data: { fieldId: GoogleActions.CurrentFieldId, polygon: GoogleActions.ConvertToGoogleMapsCoorditanes(GoogleActions.PolygonPath), action: FormAction.Create },
             success: function (response) {
+                var polygonPath = GoogleActions.ConvertToGoogleMapsCoorditanes(GoogleActions.PolygonPath);
+                var array = [];
+                var bounds = new google.maps.LatLngBounds();
+                var field;
+
                 $.each(GoogleActions.Fields, function (index, item) {
                     if (item.Id == GoogleActions.CurrentFieldId) {
-                        item.PolygonPoints = GoogleActions.PolygonPath;
+                        item.PolygonPoints = GoogleActions.ConvertToGoogleMapsCoorditanes(GoogleActions.PolygonPath);
+                        field = item;
+                        InitializeGoogleMapAPI.PolygonManager.createPolygon(polygonPath, GoogleActions.CurrentFieldId, false);
+
+                        for (var i = 0; i < polygonPath.length; i++) {
+                            array.push(new google.maps.LatLng(polygonPath[i].lat, polygonPath[i].lng));
+                            bounds.extend(array[i]);
+                        }
+
+                        InitializeGoogleMapAPI.MarkerManager.createMarker(bounds.getCenter(), new google.maps.MarkerImage(field.CultureIconLink, null, null, null, new google.maps.Size(30, 40)), google.maps.Animation.DROP, field.Id);
+                        google.maps.event.addListener(InitializeGoogleMapAPI.MarkerManager.getMarkerByFieldId(field.Id), 'click', function () { GoogleActions.OnClickMarker(field.Id) });
+                        return;
                     }
                 });
+
+                GoogleActions.PolygonPath = [];
             },
             error: function () {
                 GoogleActions.ShowNoty("Произошла ошибка", "error");
             },
         });
-
-        GoogleActions.PolygonPath = [];
     },
 
     OnClickDeleteField: function (sender) {
@@ -456,9 +500,19 @@ GoogleActions = {
             success: function (response) {
                 if (response.data.IsSuccess) {
                     GoogleActions.ShowNoty("Поле успешно удалено", "success");
+                    var isHasPolygon = GoogleActions.Fields.filter(function (item, index) {
+                        return item.Id == fieldId && item.PolygonPoints.length > 0;
+                    }).length > 0;
+
                     GoogleActions.Fields = GoogleActions.Fields.filter(function (item, index) {
                         return item.Id != fieldId;
                     });
+
+                    if (isHasPolygon) {
+                        InitializeGoogleMapAPI.PolygonManager.removePolygon(fieldId);
+                        InitializeGoogleMapAPI.MarkerManager.removeMarkerByFieldId(fieldId);
+                    }
+
                     GoogleActions.RenderFieldsTemplate();
                 } else {
                     GoogleActions.ShowNoty("При удалении произошла ошибка", "error");

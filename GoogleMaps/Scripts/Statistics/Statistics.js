@@ -27,6 +27,8 @@
         var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
         google.visualization.events.addListener(chart, 'ready', function () { Statistics.DownloadPdf("#piechart_3d svg") });
         chart.draw(dataToDraw, options);
+        $("#piechart_3d svg").css("width", "90%");
+        $("#piechart_3d svg").css("overflow", "hidden");
 
     },
 
@@ -45,27 +47,29 @@
             data.push([item.FieldTitle, item.Area, "blue"]);
         }
 
-        var dataToDraw = google.visualization.arrayToDataTable(data);
-
-        var view = new google.visualization.DataView(dataToDraw);
-        view.setColumns([0, 1,
-                         {
-                             calc: "stringify",
-                             sourceColumn: 1,
-                             type: "string",
-                             role: "annotation"
-                         },
-                         2]);
+        
+        var dataToDraw = new google.visualization.arrayToDataTable(data);
 
         var options = {
-            title: "Площади полей",
-            width: 600,
-            height: 400,
-            bar: { groupWidth: "95%" },
-            legend: { position: "none" },
+            title: 'Площади полей',
+            width: 900,
+            height:600,
+            legend: { position: 'none' },
+            chart: {
+                title: 'Площади полей',
+                subtitle: 'popularity by percentage'
+            },
+            bars: 'horizontal',
+            axes: {
+                x: {
+                    0: { side: 'top', label: 'Percentage' } 
+                }
+            },
+            bar: { groupWidth: "90%" }
         };
+
         var chart = new google.visualization.BarChart(document.getElementById("barchart_values"));
-        chart.draw(view, options);
+        chart.draw(dataToDraw, options);
     },
 
     DrawCalendarChart: function (jobs) {

@@ -57,13 +57,13 @@ namespace GoogleMaps.Controllers
                 case FormAction.Create:
                     if (fieldService.Create(field, out fieldId))
                     {
-                        return this.GenerateJson(new { IsSuccess = true, FieldId = fieldId });
+                        return this.GenerateJson(new { IsSuccess = true, FieldId = fieldId, Type = "Create" });
                     }
                     break;
                 case FormAction.Update:
                     if (fieldService.Edit(field))
                     {
-                        return this.GenerateJson(new { IsSuccess = true });
+                        return this.GenerateJson(new { IsSuccess = true, Type = "Edit", FieldId = field.FieldID });
                     }
                     break;
                 default: break;
