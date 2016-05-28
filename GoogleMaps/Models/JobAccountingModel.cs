@@ -11,13 +11,15 @@ namespace GoogleMaps.Models
         public String Field { get; set; }
 
         [Display(Name = "Дата")]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}")]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime Date { get; set; }
 
-        [Display(Name = "Количество")]
+        [Display(Name = "Количество, шт.")]
+        [DisplayFormat(DataFormatString = "{0:0.00}")]
         public Int32 Quantity { get; set; }
 
-        [Display(Name = "Обработання плащадь")]
+        [Display(Name = "Обработання плащадь, га.")]
+        [DisplayFormat(DataFormatString = "{0:0.00}")]
         public Double Square { get; set; }
 
         [Display(Name = "Вид работы")]

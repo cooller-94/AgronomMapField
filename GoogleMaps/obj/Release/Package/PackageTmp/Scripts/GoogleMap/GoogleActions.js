@@ -111,7 +111,7 @@ GoogleActions = {
         }
     },
 
-    LoadField:function(fieldId, callback){
+    LoadField: function (fieldId, callback) {
         $.ajax({
             url: GoogleActions.baseUrl + "/LoadField",
             data: { id: GoogleActions.CurrentFieldId },
@@ -446,7 +446,7 @@ GoogleActions = {
             array.push(new google.maps.LatLng(result.Latitude, result.Longitude))
         }
 
-        InitializeGoogleMapAPI.DrawPolygon(array);
+        //InitializeGoogleMapAPI.DrawPolygon(array);
         InitializeGoogleMapAPI.DrawingManager.getMap().setZoom(15);
         InitializeGoogleMapAPI.DrawingManager.getMap().panTo(array[0]);
 
@@ -455,9 +455,25 @@ GoogleActions = {
             type: "POST",
             data: { fieldId: GoogleActions.CurrentFieldId, polygon: GoogleActions.ConvertToGoogleMapsCoorditanes(GoogleActions.PolygonPath), action: FormAction.Create },
             success: function (response) {
+                var polygonPath = GoogleActions.ConvertToGoogleMapsCoorditanes(GoogleActions.PolygonPath);
+                var array = [];
+                var bounds = new google.maps.LatLngBounds();
+                var field;
+
                 $.each(GoogleActions.Fields, function (index, item) {
                     if (item.Id == GoogleActions.CurrentFieldId) {
-                        item.PolygonPoints = GoogleActions.PolygonPath;
+                        item.PolygonPoints = GoogleActions.ConvertToGoogleMapsCoorditanes(GoogleActions.PolygonPath);
+                        field = item;
+                        InitializeGoogleMapAPI.PolygonManager.createPolygon(polygonPath, GoogleActions.CurrentFieldId, false);
+
+                        for (var i = 0; i < polygonPath.length; i++) {
+                            array.push(new google.maps.LatLng(polygonPath[i].lat, polygonPath[i].lng));
+                            bounds.extend(array[i]);
+                        }
+
+                        InitializeGoogleMapAPI.MarkerManager.createMarker(bounds.getCenter(), new google.maps.MarkerImage(field.CultureIconLink, null, null, null, new google.maps.Size(30, 40)), google.maps.Animation.DROP, field.Id);
+                        google.maps.event.addListener(InitializeGoogleMapAPI.MarkerManager.getMarkerByFieldId(field.Id), 'click', function () { GoogleActions.OnClickMarker(field.Id) });
+                        return;
                     }
                 });
 
@@ -484,11 +500,19 @@ GoogleActions = {
             success: function (response) {
                 if (response.data.IsSuccess) {
                     GoogleActions.ShowNoty("Поле успешно удалено", "success");
+                    var isHasPolygon = GoogleActions.Fields.filter(function (item, index) {
+                        return item.Id == fieldId && item.PolygonPoints.length > 0;
+                    }).length > 0;
+
                     GoogleActions.Fields = GoogleActions.Fields.filter(function (item, index) {
                         return item.Id != fieldId;
                     });
-                    InitializeGoogleMapAPI.PolygonManager.removePolygon(fieldId);
-                    InitializeGoogleMapAPI.MarkerManager.removeMarkerByFieldId(fieldId);
+
+                    if (isHasPolygon) {
+                        InitializeGoogleMapAPI.PolygonManager.removePolygon(fieldId);
+                        InitializeGoogleMapAPI.MarkerManager.removeMarkerByFieldId(fieldId);
+                    }
+
                     GoogleActions.RenderFieldsTemplate();
                 } else {
                     GoogleActions.ShowNoty("При удалении произошла ошибка", "error");

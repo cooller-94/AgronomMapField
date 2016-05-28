@@ -42,8 +42,14 @@
 
     DrawBarChartForFieldArea: function () {
         var data = [];
-        data.push(["Field", "Area", { role: "style" }]);
-        for (var item of GoogleActions.Fields) {
+        data.push(["Поле", "Площадь", { role: "style" }]);
+
+        var sortedFields = GoogleActions.Fields.sort(function (a, b) {
+            if (a.Area > b.Area) return 1;
+            if (a.Area < b.Area) return -1;
+        });
+
+        for (var item of sortedFields) {
             data.push([item.FieldTitle, item.Area, "blue"]);
         }
 

@@ -5,12 +5,34 @@
     {
         <input type="hidden" name="FieldId" class="FieldId" />
         <fieldset class="filter-option">
-            <label for="StartYear">Стартовая дата</label>
-            <input type="number" name="StartYear" id="StartYear"/>
+            <label for="StartYear">Начальнай год</label>
+            <select class="dropdown" name="StartYear" id="StartYear" style="width:100px">
+                <option value="2010">2010</option>
+                <option value="2011">2011</option>
+                <option value="2012">2012</option>
+                <option value="2013">2013</option>
+                <option value="2014">2014</option>
+                <option value="2015" selected>2015</option>
+                <option value="2016">2016</option>
+                <option value="2017">2017</option>
+                <option value="2018">2018</option>
+                <option value="2019">2019</option>
+            </select>
         </fieldset>
         <fieldset class="filter-option">
-            <label for="EndYear">Стартовая дата</label>
-            <input type="number" name="EndYear" id="EndDate"/>
+            <label for="EndYear">Конечный год</label>
+            <select class="dropdown" name="EndYear" id="EndDate" style="width:100px">
+                <option value="2010">2010</option>
+                <option value="2011">2011</option>
+                <option value="2012">2012</option>
+                <option value="2013">2013</option>
+                <option value="2014">2014</option>
+                <option value="2015">2015</option>
+                <option value="2016" selected>2016</option>
+                <option value="2017">2017</option>
+                <option value="2018">2018</option>
+                <option value="2019">2019</option>
+            </select>
         </fieldset>
         <div class="filter-submit">
             <input type="submit" id="filterGo" value="Применить" />

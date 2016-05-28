@@ -310,9 +310,17 @@ textarea {
     overflow-y: auto;
 }
 
-#barchart {
+#barchart, #calendar {
     overflow-x: scroll;
     overflow-y: hidden;
     width: 100%;
     height: 550px;
+}
+
+#barchart {
+    margin-top: -40px;
+}
+
+.number {
+    text-align: right;
 }

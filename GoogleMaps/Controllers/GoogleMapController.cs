@@ -40,6 +40,7 @@ namespace GoogleMaps.Controllers
 
             ViewBag.Cities = Cities;
             ViewBag.Cultures = CultureHelper.GetCultureValues();
+            (ViewBag.Cultures as List<SelectListItem>).Insert(0, new SelectListItem() { Text = "Выбрать все", Value = "-1", Selected = false });
 
             return View();
         }

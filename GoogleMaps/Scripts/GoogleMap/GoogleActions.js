@@ -50,7 +50,7 @@ GoogleActions = {
             selectAllName: 'selectAll',
             onChange: GoogleActions.OnChangeCultureFilter
         });
-        $(".multiselect-container").find("[type='checkbox']").prop("checked", true)
+        $(".multiselect-container").find("[type='checkbox']").not(":eq(0)").prop("checked", true)
     },
 
     LoadFields: function () {
@@ -575,6 +575,7 @@ GoogleActions = {
         if (excludeFields.length > 0) {
             for (var field of excludeFields) {
                 InitializeGoogleMapAPI.MarkerManager.removeMarkerByFieldId(field.Id);
+                InitializeGoogleMapAPI.PolygonManager.removePolygon(field.Id);
             }
         }
     },
@@ -593,14 +594,23 @@ GoogleActions = {
                 }
                 InitializeGoogleMapAPI.MarkerManager.createMarker(bounds.getCenter(), new google.maps.MarkerImage(field.CultureIconLink, null, null, null, new google.maps.Size(30, 40)), google.maps.Animation.DROP, field.Id);
                 google.maps.event.addListener(InitializeGoogleMapAPI.MarkerManager.getMarkerByFieldId(field.Id), 'click', function () { GoogleActions.OnClickMarker(field.Id) });
+                InitializeGoogleMapAPI.PolygonManager.createPolygon(field.PolygonPoints, field.Id, false);
             })
         }
     },
 
     OnChangeCultureFilter: function (option, checked) {
+        if ($(option).text().indexOf("Выбрать") != -1) {
+            $.each($(".multiselect-group").nextAll(), function (index, item) {
+                $(item).find("input[type='checkbox']").prop("checked", checked);
+                $(item).find("input[type='checkbox']").change();
+            });
+        }
+
         if (!checked) {
             GoogleActions.HideFieldMarker($(option).text());
-        } else {
+        }
+        else {
             GoogleActions.ShowFieldMarker($(option).text());
         }
     },
