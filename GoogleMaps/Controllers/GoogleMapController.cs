@@ -17,11 +17,20 @@ namespace GoogleMaps.Controllers
     [Authorize]
     public class GoogleMapController : Controller
     {
-        private FieldService fieldService = new FieldService();
-        private JobAccauntingService jobService = new JobAccauntingService();
-        private JobPlanningService jobPlanningService = new JobPlanningService();
-        private SoilService soilService = new SoilService();
-        private CultureLinkService linkService = new CultureLinkService();
+        private readonly IFieldService fieldService;
+        private readonly IJobAccountingService jobService;
+        private readonly IJobPlanningService jobPlanningService;
+        private readonly ISoilService soilService;
+        private readonly ICultureIconService linkService;
+
+        public GoogleMapController(IFieldService fService, IJobAccountingService jaService, IJobPlanningService jpService, ICultureIconService ciService, ISoilService sService)
+        {
+            this.fieldService = fService;
+            this.jobService = jaService;
+            this.jobPlanningService = jpService;
+            this.soilService = sService;
+            this.linkService = ciService;
+        }
 
         // GET: GoogleMap
         public ActionResult Index()

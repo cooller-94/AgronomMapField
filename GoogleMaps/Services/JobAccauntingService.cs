@@ -7,7 +7,7 @@ using System.Web;
 
 namespace GoogleMaps.Services
 {
-    public class JobAccauntingService
+    public class JobAccauntingService : IJobAccountingService
     {
         private JobAccauntingContext jobContext = new JobAccauntingContext();
 

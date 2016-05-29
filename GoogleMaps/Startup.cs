@@ -1,5 +1,7 @@
 ﻿using Microsoft.Owin;
 using Owin;
+using Microsoft.Framework.DependencyInjection;
+using GoogleMaps.Services;
 
 [assembly: OwinStartupAttribute(typeof(GoogleMaps.Startup))]
 namespace GoogleMaps
@@ -9,6 +11,7 @@ namespace GoogleMaps
         public void Configuration(IAppBuilder app)
         {
             ConfigureAuth(app);
+            
         }
     }
 }

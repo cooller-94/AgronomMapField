@@ -324,3 +324,11 @@ textarea {
 .number {
     text-align: right;
 }
+
+#barchart .buttons{
+        float: right;
+    top: 60px;
+    position: fixed;
+    right: 20px;
+    z-index: 100;
+}

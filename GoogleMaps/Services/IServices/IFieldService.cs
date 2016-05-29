@@ -11,10 +11,13 @@ namespace GoogleMaps.Services
 {
     public interface IFieldService
     {
-        //Boolean Create(AgrField field, out Int32? fieldId);
+        bool AddLocation(int fieldId, List<Point> polygon);
+        Boolean EditLocation(Int32 fieldId, List<Point> newPolygon);
         Boolean Create(Field field, out Int32? fieldId);
-        Boolean AddLocation(Int32 fieldId, List<Point> polygon);
-        //List<AgrField> GetFields();
-        //AgrField GetField(Int32 id);
+        Boolean Delete(Int32 fieldId);
+        Boolean Edit(Field field);
+        List<Field> GetFields();
+        Field GetField(Int32 id);
+        Field GetField(String fieldName);
     }
 }

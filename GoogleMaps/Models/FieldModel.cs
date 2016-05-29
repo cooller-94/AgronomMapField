@@ -17,7 +17,7 @@ namespace GoogleMaps.Models
 
         public FormAction Action { get; set; }
 
-        [Display(Name = "Площадь")]
+        [Display(Name = "Площадь, га.")]
         [Required]
         [Range(0,99999)]
         [DisplayFormat(DataFormatString = "{0:0.00}")]

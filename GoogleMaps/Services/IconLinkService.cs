@@ -8,7 +8,7 @@ using System.Data.Entity;
 
 namespace GoogleMaps.Services
 {
-    public class CultureLinkService
+    public class CultureLinkService : ICultureIconService
     {
         private JobAccauntingContext jobContext = new JobAccauntingContext();
 

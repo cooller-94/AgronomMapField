@@ -9,7 +9,7 @@ using System.Data.Entity;
 
 namespace GoogleMaps.Services
 {
-    public class FieldService
+    public class FieldService : IFieldService
     {
         private JobAccauntingContext jobContext = new JobAccauntingContext();
 

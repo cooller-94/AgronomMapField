@@ -219,3 +219,21 @@ C:\Users\LocalAdmin\Documents\Diploma\AgronomMapField\GoogleMaps\bin\jQueryTmpl.
 C:\Users\LocalAdmin\Documents\Diploma\AgronomMapField\GoogleMaps\bin\jQueryTmpl.Mvc.xml
 C:\Users\LocalAdmin\Documents\Diploma\AgronomMapField\GoogleMaps\obj\Debug\GoogleMaps.dll
 C:\Users\LocalAdmin\Documents\Diploma\AgronomMapField\GoogleMaps\obj\Debug\GoogleMaps.pdb
+D:\Users\Vladimir\Google Диск\University\Diplom\Project\GoogleMaps_new\GoogleMaps\bin\Microsoft.Framework.DependencyInjection.Abstractions.dll
+D:\Users\Vladimir\Google Диск\University\Diplom\Project\GoogleMaps_new\GoogleMaps\bin\Microsoft.Framework.DependencyInjection.Abstractions.xml
+D:\Users\Vladimir\Google Диск\University\Diplom\Project\GoogleMaps_new\GoogleMaps\bin\Microsoft.Practices.ServiceLocation.dll
+D:\Users\Vladimir\Google Диск\University\Diplom\Project\GoogleMaps_new\GoogleMaps\bin\Microsoft.Practices.Unity.Configuration.dll
+D:\Users\Vladimir\Google Диск\University\Diplom\Project\GoogleMaps_new\GoogleMaps\bin\Microsoft.Practices.Unity.dll
+D:\Users\Vladimir\Google Диск\University\Diplom\Project\GoogleMaps_new\GoogleMaps\bin\Microsoft.Practices.Unity.Interception.Configuration.dll
+D:\Users\Vladimir\Google Диск\University\Diplom\Project\GoogleMaps_new\GoogleMaps\bin\Microsoft.Practices.Unity.Interception.dll
+D:\Users\Vladimir\Google Диск\University\Diplom\Project\GoogleMaps_new\GoogleMaps\bin\Microsoft.Practices.Unity.Mvc.dll
+D:\Users\Vladimir\Google Диск\University\Diplom\Project\GoogleMaps_new\GoogleMaps\bin\Microsoft.Practices.Unity.RegistrationByConvention.dll
+D:\Users\Vladimir\Google Диск\University\Diplom\Project\GoogleMaps_new\GoogleMaps\bin\WebActivatorEx.dll
+D:\Users\Vladimir\Google Диск\University\Diplom\Project\GoogleMaps_new\GoogleMaps\bin\Microsoft.Practices.ServiceLocation.pdb
+D:\Users\Vladimir\Google Диск\University\Diplom\Project\GoogleMaps_new\GoogleMaps\bin\Microsoft.Practices.ServiceLocation.xml
+D:\Users\Vladimir\Google Диск\University\Diplom\Project\GoogleMaps_new\GoogleMaps\bin\Microsoft.Practices.Unity.xml
+D:\Users\Vladimir\Google Диск\University\Diplom\Project\GoogleMaps_new\GoogleMaps\bin\Microsoft.Practices.Unity.Configuration.xml
+D:\Users\Vladimir\Google Диск\University\Diplom\Project\GoogleMaps_new\GoogleMaps\bin\Microsoft.Practices.Unity.Interception.xml
+D:\Users\Vladimir\Google Диск\University\Diplom\Project\GoogleMaps_new\GoogleMaps\bin\Microsoft.Practices.Unity.Interception.Configuration.xml
+D:\Users\Vladimir\Google Диск\University\Diplom\Project\GoogleMaps_new\GoogleMaps\bin\Microsoft.Practices.Unity.Mvc.xml
+D:\Users\Vladimir\Google Диск\University\Diplom\Project\GoogleMaps_new\GoogleMaps\bin\Microsoft.Practices.Unity.RegistrationByConvention.xml

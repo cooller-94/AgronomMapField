@@ -6,7 +6,7 @@ using System.Web;
 
 namespace GoogleMaps.Services
 {
-    public class CultureService
+    public class CultureService : ICultureService
     {
         private JobAccauntingContext jobContext = new JobAccauntingContext();
 

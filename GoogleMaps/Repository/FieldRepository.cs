@@ -19,7 +19,7 @@ namespace GoogleMaps.Repository
             FieldModel fieldModel = new FieldModel();
             fieldModel.Id = field.FieldID;
             fieldModel.FieldTitle = field.FieldName;
-            fieldModel.Area = field.Area.HasValue ? field.Area.Value : 0;
+            fieldModel.Area = field.Area.HasValue ? Math.Round(field.Area.Value, 2) : 0;
             fieldModel.Owner = field?.OwnerName ?? String.Empty;
             fieldModel.SoildId = field.Soil.SoilID;
             fieldModel.PolygonPoints = new List<Point>();

@@ -25,19 +25,19 @@
         };
 
         var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
-        google.visualization.events.addListener(chart, 'ready', function () { Statistics.DownloadPdf("#piechart_3d svg") });
+        google.visualization.events.addListener(chart, 'ready', function () { Statistics.DownloadPdf("#piechart_3d svg",0,'pdfChart') });
         chart.draw(dataToDraw, options);
         $("#piechart_3d svg").css("width", "90%");
         $("#piechart_3d svg").css("overflow", "hidden");
 
     },
 
-    DownloadPdf: function (selector) {
+    DownloadPdf: function (selector, number, basePdfSelector) {
         var svg = jQuery(selector);
         svg.attr("xmlns", "http://www.w3.org/2000/svg");
         svg.css('overflow', 'visible');
-        var click = "return xepOnline.Formatter.Format('pdf', {render:'download', srctype:'svg'})";
-        jQuery('#buttons').append('<button class = "btn btn-default btn-sm" style = "float:right" onclick="' + click + '">PDF</button>');
+        var click = "return xepOnline.Formatter.Format('" + basePdfSelector + "', {render:'download', srctype:'svg'})";
+        $(".buttons").eq(number).append('<button class = "btn btn-default btn-sm" style = "float:right" onclick="' + click + '">PDF</button>');
     },
 
     DrawBarChartForFieldArea: function () {
@@ -74,8 +74,9 @@
             bar: { groupWidth: "90%" }
         };
 
-        var chart = new google.visualization.BarChart(document.getElementById("barchart_values"));
-        chart.draw(dataToDraw, options);
+        var chartBar = new google.visualization.BarChart(document.getElementById("barchart_values"));
+        new google.visualization.events.addListener(chartBar, 'ready', function () { Statistics.DownloadPdf("#barchart_values svg",1,'pdfBar') });
+        chartBar.draw(dataToDraw, options);
     },
 
     DrawCalendarChart: function (jobs) {
@@ -102,7 +103,7 @@
     },
 
     ShowModelChartPie: function () {
-        $("#buttons").empty();
+        $(".buttons").empty();
         $.ajax({
             url: GoogleActions.baseUrl + "/GetAreaInfo",
             data: { year: $("#yearChart").val() },
